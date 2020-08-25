@@ -20,7 +20,7 @@ function App() {
       </header> */}
       <Navbar />
       <div className="container my-5">
-        {/* <PIE /> */}
+        <PIE />
         <Budget />
       </div>
     </div>

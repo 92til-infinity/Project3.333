@@ -1,11 +1,10 @@
-var React = require('react');
-var Component = React.Component;
-var CanvasJSReact = require('./canvasjs.react');
-var CanvasJS = CanvasJSReact.CanvasJS;
+import React, { Component } from 'react';
+import CanvasJSReact from '../assets/canvasjs.react';
+//var CanvasJSReact = require('./canvasjs.react');
+// import CanvasJS from '../assets/canvasjs.min';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-
-class PIE extends Component {
+class Pie extends Component {
     render() {
         const options = {
             exportEnabled: true,
@@ -22,19 +21,18 @@ class PIE extends Component {
                 indexLabelFontSize: 16,
                 indexLabel: "{label} - {y}%",
                 dataPoints: [
-                    { y: 18, label: "Direct" },
-                    { y: 49, label: "Organic Search" },
-                    { y: 9, label: "Paid Search" },
-                    { y: 5, label: "Referral" },
-                    { y: 19, label: "Social" }
-                    // need to figure how to relate bidget input to the 'y' input/variable
+                    { y: 18, label: "alex" },
+                    { y: 49, label: "Yoda" },
+                    { y: 9, label: "ryan" },
+                    { y: 5, label: "scott" },
+                    { y: 19, label: "anthony" }
                 ]
             }]
         }
         return (
             <div>
                 <CanvasJSChart options={options}
-                    onRef={ref => this.chart = ref}
+                /* onRef={ref => this.chart = ref} */
                 />
                 {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
             </div>
@@ -42,4 +40,4 @@ class PIE extends Component {
     }
 }
 
-export default PIE                  
+export default Pie;
