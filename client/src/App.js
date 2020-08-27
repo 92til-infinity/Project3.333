@@ -2,8 +2,9 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Navbar from "./navbar";
-import Budget from './budget/Budget';
-import PIE from './components/Pie';
+// import Budget from './budget/Budget';
+// import PIE from './components/Pie';
+import BudgetIndex from "./Pages/budgetIndex"
 
 
 
@@ -20,8 +21,7 @@ function App() {
       </header> */}
       <Navbar />
       <div className="container my-5">
-        <PIE />
-        <Budget />
+        <BudgetIndex />
       </div>
     </div>
   );
