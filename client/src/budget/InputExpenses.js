@@ -57,6 +57,8 @@ class InputExpenses extends Component {
                                     <option value="Food">Food</option>
                                     <option value="Fun">Fun</option>
                                     <option value="Rent">Rent</option>
+                                    <option value="School">School</option>
+                                    <option value="Transport">Transport</option>
                                 </select>
                                 <button onClick={this.addExpenses} className="btn btn-dark btn-block mt-3">Submit</button>
                             </form>
