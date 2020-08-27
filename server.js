@@ -21,7 +21,12 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactcms",
 );
 mongoose.connect(
     process.env.MONGODB_URI || "mongodb://localhost/reactBudgets",
-    { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+    }
 );
 
 
