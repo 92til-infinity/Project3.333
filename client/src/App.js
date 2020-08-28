@@ -1,14 +1,12 @@
-import React from 'react';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 import Navbar from "./navbar";
 // import Budget from './budget/Budget';
 // import PIE from './components/Pie';
-import BudgetIndex from "./Pages/budgetIndex"
-
-
-
-
+import BudgetIndex from "./Pages/budgetIndex";
+import Schedule from "./Pages/Schedule";
 
 function App() {
   return (
@@ -20,8 +18,14 @@ function App() {
         </p>
       </header> */}
       <Navbar />
+
       <div className="container my-5">
-        <BudgetIndex />
+        <Router>
+          <Switch>
+            <Route path="/budget" component={BudgetIndex} />
+            <Route path="/schedule" component={Schedule} />
+          </Switch>
+        </Router>
       </div>
     </div>
   );
