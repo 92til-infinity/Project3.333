@@ -1,43 +1,63 @@
-import React from "react";
-import shortid from "shortid";
+import React, { useState, useEffect, useRef } from 'react'
+import '../App.css';
 
-export default class TodoForm extends React.Component {
-    state = {
-        text: ""
+function TodoForm(props) {
+    const [input, setInput] = useState(props.edit ? props.edit.value : "");
+
+
+    const inputRef = useRef(null);
+    useEffect(() => {
+        inputRef.current.focus()
+    })
+
+    const handleChange = event => {
+        setInput(event.target.value);
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault();
+
+        props.onSubmit({
+            id: Math.floor(Math.random() * 10000),
+            text: input
+        })
+        setInput("");
     };
 
 
-    handleChange = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
-    handleSubmit = event => {
-        event.preventDefault();
-        //submit form, pass to todolist
-        this.props.onSubmit({
-            id: shortid.generate(),
-            text: this.state.text,
-            complete: false
-        });
-        this.setState({
-            text: ""
-        })
-
-    }
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit} >
-                <input
-                    name="text"
-                    value={this.state.text}
-                    onChange={this.handleChange}
-                    placeholder="todo..."
-                />
-                <button onClick={this.handleSubmit}>Add todo</button>
-            </form>
-        )
-    }
+    return (
+        <form onSubmit={handleSubmit} className='todo-form'>
+            {props.edit ? (
+                <>
+                    <input
+                        placeholder='Update your item'
+                        value={input}
+                        onChange={handleChange}
+                        name='text'
+                        ref={inputRef}
+                        className='todo-input edit'
+                    />
+                    <button onClick={handleSubmit} className='todo-button edit'>
+                        Update
+              </button>
+                </>
+            ) : (
+                    <>
+                        <input
+                            placeholder='Add a todo'
+                            value={input}
+                            onChange={handleChange}
+                            name='text'
+                            className='todo-input'
+                            ref={inputRef}
+                        />
+                        <button onClick={handleSubmit} className='todo-button'>
+                            Add todo
+              </button>
+                    </>
+                )}
+        </form>
+    );
 }
 
+export default TodoForm;
