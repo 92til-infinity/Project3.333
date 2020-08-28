@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from "./navbar";
 import Budget from './budget/Budget';
 import PIE from './components/Pie';
+import TodoForm from './components/TodoForm';
 
 
 
@@ -22,6 +23,7 @@ function App() {
       <div className="container my-5">
         <PIE />
         <Budget />
+        <TodoForm />
       </div>
     </div>
   );
