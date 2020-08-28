@@ -10,7 +10,7 @@ const BalanceDisplay = () => {
                     value.expenses.reduce((acc, curr) => {
                         acc += curr.amount
                         return acc
-                    }, 0)) : 0;
+                    }, 0)) : [];
 
                 return (
                     <div className="row">
