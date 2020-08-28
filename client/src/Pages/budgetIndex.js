@@ -1,7 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 // import './App.css';
-import Navbar from "../navbar";
+// import Navbar from "../navbar";
 import Budget from '../budget/Budget';
 // import PIE from '../components/Pie';
 import { BudgetProvider } from '../store';

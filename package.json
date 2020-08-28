@@ -24,8 +24,10 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
+    "mdbreact": "git+https://oauth2:Ead_nCCzu8T61TJsZvfK@git.mdbootstrap.com/mdb/react/re-pro.git",
     "mongoose": "^5.3.16",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "serve": "^11.3.2"
   }
 }
