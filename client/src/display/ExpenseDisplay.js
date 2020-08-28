@@ -22,7 +22,7 @@ class ExpenseDisplay extends Component {
                                     console.log(expense);
                                     return (
                                         <tr key={index}>
-                                            <td>{expense.title}</td>
+                                            <td>{expense.expenseTitle}</td>
                                             <td>{expense.amount}</td>
                                             <td>{expense.category}</td>
                                         </tr>

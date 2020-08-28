@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const db = require("../models/budgetDB");
+const db = require("../models");
 
 // This file empties the Books collection and inserts the books below
 
@@ -9,7 +9,7 @@ mongoose.connect(
 
 const BudgetSeed = [{
     amount: 3.50,
-    title: "Starbucks",
+    expenseTitle: "Starbucks",
     category: "Food"
 }
 ];
