@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BudgetConsumer } from '../store';
-
+import API from "../utils/API";
 
 class InputExpenses extends Component {
     state = {
@@ -28,6 +28,7 @@ class InputExpenses extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+
     }
 
 
@@ -35,10 +36,10 @@ class InputExpenses extends Component {
         this.setState({
             expenses: [
                 ...this.state.expenses,
-                { title: this.state.expenseTitle, amount: this.state.amount, category: this.state.category }
+                { expenseTitle: this.state.expenseTitle, amount: this.state.amount, category: this.state.category }
             ]
         })
-
+        API.addExpense({ expenseTitle: this.state.expenseTitle, amount: this.state.amount, category: this.state.category });
     }
     render() {
         return (
@@ -54,6 +55,7 @@ class InputExpenses extends Component {
                                 <input onChange={this.handleInput} value={this.state.amount} className="form-control" name="amount" />
                                 <label>Category</label>
                                 <select onChange={this.handleInput} value={this.state.category} className="form-control" name="category">
+                                    {/* <option value="">ADD PLACEHOLDER</option> */}
                                     <option value="Food">Food</option>
                                     <option value="Fun">Fun</option>
                                     <option value="Rent">Rent</option>
