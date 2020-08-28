@@ -11,6 +11,7 @@ class ExpenseDisplay extends Component {
                         <tr>
                             <th>title</th>
                             <th>amount</th>
+                            <th>category</th>
                         </tr>
                     </thead>
                     <BudgetConsumer>
@@ -18,16 +19,18 @@ class ExpenseDisplay extends Component {
                             console.log(value)
                             const expensesList = value.expenses.length > 0 ? (
                                 value.expenses.map((expense, index) => {
+                                    console.log(expense);
                                     return (
                                         <tr key={index}>
-                                            <td>{expense.title}</td>
+                                            <td>{expense.expenseTitle}</td>
                                             <td>{expense.amount}</td>
+                                            <td>{expense.category}</td>
                                         </tr>
                                     )
                                 })
                             ) : (
                                     <tr>
-                                        <td>Listed Expenses</td>
+
                                     </tr>
                                 )
                             return <tbody>{expensesList}</tbody>

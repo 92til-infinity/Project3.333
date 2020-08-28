@@ -14,7 +14,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 expenses: action.expenses
-            }
+            };
+        case "category+":
+            return {
+                ...state,
+                category: action.category
+            };
         default:
             return state
     }
@@ -23,6 +28,7 @@ const reducer = (state, action) => {
 class BudgetProvider extends Component {
     state = {
         budget: '',
+        category: '',
         expenses: [
 
             // { title: 'Rent', amount: 500 },

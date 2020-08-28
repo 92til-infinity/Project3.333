@@ -10,9 +10,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css'; import
 
 ReactDOM.render(
   <React.StrictMode>
-    <BudgetProvider>
-      <App />
-    </BudgetProvider>
+    {/* <BudgetProvider> */}
+    <App />
+    {/* </BudgetProvider> */}
 
   </React.StrictMode>,
   document.getElementById('root')

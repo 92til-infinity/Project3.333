@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { BudgetConsumer } from '../store';
-
+import API from "../utils/API";
 
 class InputExpenses extends Component {
     state = {
         expenses: [],
         expenseTitle: '',
-        amount: ''
+        amount: '',
+        category: ''
     }
 
     handleInput = (e) => {
@@ -20,19 +21,25 @@ class InputExpenses extends Component {
             type: "expenses+",
             expenses: this.state.expenses
         })
+        dispatch({
+            type: "category+",
+            category: this.state.category
+        })
         this.setState({
             [e.target.name]: e.target.value
         })
+
     }
+
 
     addExpenses = () => {
         this.setState({
             expenses: [
                 ...this.state.expenses,
-                { title: this.state.expenseTitle, amount: this.state.amount }
+                { expenseTitle: this.state.expenseTitle, amount: this.state.amount, category: this.state.category }
             ]
         })
-
+        API.addExpense({ expenseTitle: this.state.expenseTitle, amount: this.state.amount, category: this.state.category });
     }
     render() {
         return (
@@ -46,6 +53,15 @@ class InputExpenses extends Component {
                                 <input onChange={this.handleInput} value={this.state.expenseTitle} className="form-control" name="expenseTitle" />
                                 <label>Amount</label>
                                 <input onChange={this.handleInput} value={this.state.amount} className="form-control" name="amount" />
+                                <label>Category</label>
+                                <select onChange={this.handleInput} value={this.state.category} className="form-control" name="category">
+                                    {/* <option value="">ADD PLACEHOLDER</option> */}
+                                    <option value="Food">Food</option>
+                                    <option value="Fun">Fun</option>
+                                    <option value="Rent">Rent</option>
+                                    <option value="School">School</option>
+                                    <option value="Transport">Transport</option>
+                                </select>
                                 <button onClick={this.addExpenses} className="btn btn-dark btn-block mt-3">Submit</button>
                             </form>
 

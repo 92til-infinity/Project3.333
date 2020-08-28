@@ -2,7 +2,8 @@ import React from 'react';
 import InputBudget from './InputBudget';
 import InputExpenses from './InputExpenses'
 import BudgetDisplay from '../display/BudgetDisplay';
-
+// mix of Extend Component and Redux throughout, made more sense for me when building and in general
+// --Scott
 
 const Budget = () => {
     return (
