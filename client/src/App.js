@@ -5,8 +5,9 @@ import "./App.css";
 import Navbar from "./navbar";
 // import Budget from './budget/Budget';
 // import PIE from './components/Pie';
-import BudgetIndex from "./Pages/budgetIndex";
+import BudgetIndex from "./Pages/BudgetIndex";
 import Schedule from "./Pages/Schedule";
+import TodoList from "./Pages/TodoList";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Switch>
             <Route path="/budget" component={BudgetIndex} />
             <Route path="/schedule" component={Schedule} />
+            <Route path="/todo" component={TodoList} />
           </Switch>
         </Router>
       </div>
