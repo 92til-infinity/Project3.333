@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -14,14 +14,14 @@ import {
   MDBBtn,
   MDBView,
   MDBContainer,
-  MDBFormInline,
   MDBAnimation,
-} from "mdbreact";
-import "./style.css";
-import teacher from "../../assets/images/teacher.png";
-import logoWhite from "../../assets/images/logo-white.png";
-import correctWhite from "../../assets/images/correct-white.png";
-import Features from "../Features";
+} from 'mdbreact';
+import './style.css';
+import '../../assets/font/stylesheet.css';
+import teacher from '../../assets/images/teacher.png';
+import logoWhite from '../../assets/images/logo-white.png';
+import correctWhite from '../../assets/images/correct-white.png';
+import Features from '../Features';
 
 class LandingPage extends React.Component {
   state = {
@@ -36,11 +36,11 @@ class LandingPage extends React.Component {
   };
 
   componentDidMount() {
-    document.querySelector("nav").style.height = "65px";
+    document.querySelector('nav').style.height = '65px';
   }
 
   componentWillUnmount() {
-    document.querySelector("nav").style.height = "auto";
+    document.querySelector('nav').style.height = 'auto';
   }
 
   render() {
@@ -48,20 +48,20 @@ class LandingPage extends React.Component {
 
     const overlay = (
       <div
-        id="sidenav-overlay"
-        style={{ backgroundColor: "transparent" }}
+        id='sidenav-overlay'
+        style={{ backgroundColor: 'transparent' }}
         onClick={this.handleTogglerClick}
       />
     );
     return (
-      <div id="apppage">
+      <div id='apppage'>
         <Router>
           <div>
             <MDBNavbar
-              color="primary-color"
+              color='primary-color'
               dark
-              expand="md"
-              fixed="top"
+              expand='md'
+              fixed='top'
               scrolling
               transparent
             >
@@ -69,29 +69,53 @@ class LandingPage extends React.Component {
                 <MDBNavbarBrand>
                   <img
                     src={correctWhite}
-                    alt="checkmark"
-                    style={{ width: "45px", height: "45px" }}
+                    alt='checkmark'
+                    style={{ width: '45px', height: '45px' }}
                   />
                 </MDBNavbarBrand>
                 <MDBNavbarToggler onClick={this.handleTogglerClick} />
                 <MDBCollapse isOpen={collapsed} navbar>
                   <MDBNavbarNav left>
                     <MDBNavItem active>
-                      <MDBNavLink to="#!">Home</MDBNavLink>
+                      <MDBNavLink
+                        to='#!'
+                        style={{ fontFamily: 'kollektifregular' }}
+                      >
+                        Home
+                      </MDBNavLink>
                     </MDBNavItem>
                     <MDBNavItem>
-                      <MDBNavLink to="#!">About</MDBNavLink>
+                      <MDBNavLink
+                        to='#!'
+                        style={{ fontFamily: 'kollektifregular' }}
+                      >
+                        About
+                      </MDBNavLink>
                     </MDBNavItem>
                     <MDBNavItem>
-                      <MDBNavLink to="#!">Support</MDBNavLink>
+                      <MDBNavLink
+                        to='#!'
+                        style={{ fontFamily: 'kollektifregular' }}
+                      >
+                        Support
+                      </MDBNavLink>
                     </MDBNavItem>
                   </MDBNavbarNav>
                   <MDBNavbarNav right>
                     <MDBNavItem>
-                      <MDBBtn outline color="white">
+                      <MDBBtn
+                        outline
+                        color='white'
+                        style={{ fontFamily: 'kollektifregular' }}
+                      >
                         Log In
                       </MDBBtn>
-                      <MDBBtn color="white">Sign Up</MDBBtn>
+                      <MDBBtn
+                        color='white'
+                        style={{ fontFamily: 'kollektifregular' }}
+                      >
+                        Sign Up
+                      </MDBBtn>
                       {/* <MDBFormInline waves>
                         <div className='md-form my-0'>
                           <input
@@ -111,44 +135,51 @@ class LandingPage extends React.Component {
           </div>
         </Router>
         <MDBView>
-          <MDBMask className="white-text gradient" />
+          <MDBMask className='white-text gradient' />
           <MDBContainer
-            style={{ height: "100%", width: "100%", paddingTop: "10rem" }}
-            className="d-flex justify-content-center white-text align-items-center"
+            style={{ height: '100%', width: '100%', paddingTop: '10rem' }}
+            className='d-flex justify-content-center white-text align-items-center'
           >
             <MDBRow>
-              <MDBCol md="6" className="text-center text-md-left mt-xl-5 mb-5">
-                <MDBAnimation type="fadeInLeft" delay=".3s">
+              <MDBCol md='6' className='text-center text-md-left mt-xl-5 mb-5'>
+                <MDBAnimation type='fadeInLeft' delay='.3s'>
                   <img
                     src={logoWhite}
-                    alt="logo"
-                    className="img-fluid"
-                    style={{ width: "394px", height: "150px" }}
+                    alt='logo'
+                    className='img-fluid'
+                    style={{ width: '400px', height: '150px' }}
                   />
 
                   {/* <h1 className='h1-responsive font-weight-bold mt-sm-5'>
                     Make purchases with our app
                   </h1> */}
-                  <hr className="hr-light" />
-                  <h4 className="mb-4">
+                  <hr className='hr-light' />
+                  <h4
+                    className='mb-4'
+                    style={{ fontFamily: 'kollektifregular' }}
+                  >
                     We know how important it is to keep your student life in
                     check. Our budget tracker, lists and homework calendar keep
                     you on track to graduate.
                   </h4>
                   {/* <MDBBtn color='white'>Download</MDBBtn> */}
-                  <MDBBtn outline color="white">
+                  <MDBBtn
+                    outline
+                    color='white'
+                    style={{ fontFamily: 'kollektifregular' }}
+                  >
                     Learn More
                   </MDBBtn>
                 </MDBAnimation>
               </MDBCol>
 
-              <MDBCol md="6" xl="5" className="mt-xl-5">
-                <MDBAnimation type="fadeInRight" delay=".3s">
+              <MDBCol md='6' xl='5' className='mt-xl-5'>
+                <MDBAnimation type='fadeInRight' delay='.3s'>
                   <img
                     src={teacher}
-                    alt="teaching icon"
-                    className="img-fluid"
-                    style={{ width: "380px", height: "380px" }}
+                    alt='teaching icon'
+                    className='img-fluid'
+                    style={{ width: '380px', height: '380px' }}
                   />
                 </MDBAnimation>
               </MDBCol>
@@ -156,8 +187,8 @@ class LandingPage extends React.Component {
           </MDBContainer>
         </MDBView>
         <MDBContainer>
-          <MDBRow className="py-5">
-            <MDBCol md="12" className="text-center">
+          <MDBRow className='py-5'>
+            <MDBCol md='12' className='text-center'>
               <Features />
               {/* <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -172,15 +203,15 @@ class LandingPage extends React.Component {
           </MDBRow>
         </MDBContainer>
         <div
-          className="footer-copyright text-center text-white py-3"
-          style={{ backgroundColor: "#4285f4" }}
+          className='footer-copyright text-center text-white py-3'
+          style={{ backgroundColor: '#4285f4', fontFamily: 'kollektifregular' }}
         >
           <MDBContainer fluid>
-            &copy; {new Date().getFullYear()} Copyright{" "}
+            &copy; {new Date().getFullYear()} Copyright{' '}
             <img
               src={logoWhite}
-              alt="logo"
-              style={{ width: "80px", height: "30px", marginBottom: "5px" }}
+              alt='logo'
+              style={{ width: '80px', height: '30px', marginBottom: '5px' }}
             />
           </MDBContainer>
         </div>
