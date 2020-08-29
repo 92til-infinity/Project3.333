@@ -7,6 +7,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.20.0",
+    "mdbreact": "git+https://oauth2:Ead_nCCzu8T61TJsZvfK@git.mdbootstrap.com/mdb/react/re-pro.git",
     "react": "^16.13.1",
     "react-calendar": "^3.1.0",
     "react-dom": "^16.13.1",
