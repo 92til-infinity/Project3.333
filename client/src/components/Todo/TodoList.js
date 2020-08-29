@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "../Navbar";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 
@@ -42,6 +43,7 @@ function TodoList() {
 
   return (
     <div>
+      <Navbar />
       <h1>What's the plan today?</h1>
       <TodoForm onSubmit={addTodo} />
       <Todo

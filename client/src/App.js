@@ -2,10 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import logo from './logo.svg';
 import "./App.css";
-import Navbar from "./navbar";
 // import Budget from './budget/Budget';
 // import PIE from './components/Pie';
-import BudgetIndex from "./Pages/budgetIndex";
+import LandingPage from "./components/LandingPage";
+import BudgetIndex from "./Pages/BudgetIndex";
 import Schedule from "./Pages/Schedule";
 import TodoList from "./components/Todo/TodoList";
 
@@ -18,17 +18,15 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
       </header> */}
-      <Navbar />
 
-      <div className="container my-5">
-        <Router>
-          <Switch>
-            <Route path="/budget" component={BudgetIndex} />
-            <Route path="/schedule" component={Schedule} />
-            <Route path="/todo" component={TodoList} />
-          </Switch>
-        </Router>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/budget" component={BudgetIndex} />
+          <Route path="/schedule" component={Schedule} />
+          <Route path="/todo" component={TodoList} />
+        </Switch>
+      </Router>
     </div>
   );
 }
