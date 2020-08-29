@@ -5,9 +5,9 @@ import "./App.css";
 import Navbar from "./navbar";
 // import Budget from './budget/Budget';
 // import PIE from './components/Pie';
-import BudgetIndex from "./Pages/BudgetIndex";
+import BudgetIndex from "./Pages/budgetIndex";
 import Schedule from "./Pages/Schedule";
-import TodoList from "./Pages/TodoList";
+import TodoList from "./components/Todo/TodoList";
 
 function App() {
   return (
