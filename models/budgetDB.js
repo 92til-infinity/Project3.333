@@ -6,12 +6,12 @@ const budgetSchema = new Schema({
         type: String,
         required: true
     },
-    // url string for thumbnail image
+    // amount of the budget item in. no dollar
     amount: {
         type: Number,
         default: ""
     },
-    // url for recipe web page - unique index
+    //selected from the drop down menu. drop downs control input better
     category: {
         type: String,
         default: "",

@@ -22,7 +22,17 @@ function TodoForm(props) {
             text: input
         })
         setInput("");
-    };
+    }
+
+    // const addTodoListItem = () => {
+    //     this.setState({
+    //         expenses: [
+    //             ...this.state.Todo,
+    //             { id: this.state.id, text: this.state.text }
+    //         ]
+    //     })
+    //     API.addExpense({ id: this.state.id, text: this.state.text });
+    // }
 
 
     return (
