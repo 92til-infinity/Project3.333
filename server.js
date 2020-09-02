@@ -15,13 +15,11 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 // console.log(routes);
 app.use(routes);
-
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 app.get("/", (req, res) => res.send("API Running"));
 
 // Connect to the Mongo DB
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactcms",
-//     { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
-// );
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/reactBudgets",
   {
