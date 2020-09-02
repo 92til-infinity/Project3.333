@@ -1,3 +1,5 @@
 module.exports = {
-    Budget: require("./budgetDB")
+  Budget: require("./budgetDB"),
+  User: require("./User"),
+  Unit: require("./Unit"),
 };
