@@ -1,39 +1,45 @@
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
-  firstname: {
+const UnitSchema = new mongoose.Schema({
+  title: {
     type: String,
     required: true,
   },
-  lastname: {
+  teacher: {
     type: String,
+  },
+  startdate: {
+    type: Date,
     required: true,
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
+  enddate: {
+    type: Date,
     required: true,
   },
-  role: {
-    type: String,
-    enum: ["Admin", "Teacher", "Student"],
-    default: "Student",
+  days: {
+    type: [String],
+    enum: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ],
   },
-  classes: {
+  starttime: {
+    type: String,
+  },
+  endtime: {
+    type: String,
+  },
+  enrolled: {
     type: [String],
   },
-  activities: {
-    type: [String],
-  },
-  budget: {
-    type: String,
-  },
-  todos: {
-    type: [String],
+  archive: {
+    type: Boolean,
+    default: false,
   },
   homework: [
     {
@@ -48,10 +54,6 @@ const UserSchema = new mongoose.Schema({
       details: {
         type: String,
       },
-      completed: {
-        type: Boolean,
-        default: false,
-      },
     },
   ],
   date: {
@@ -60,4 +62,4 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-module.exports = User = mongoose.model("user", UserSchema);
+module.exports = Unit = mongoose.model("unit", UnitSchema);

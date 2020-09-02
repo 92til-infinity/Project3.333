@@ -17,6 +17,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/units", require("./routes/api/units"));
 app.get("/", (req, res) => res.send("API Running"));
 
 // Connect to the Mongo DB
