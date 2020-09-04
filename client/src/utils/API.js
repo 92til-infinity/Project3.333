@@ -4,8 +4,9 @@ import axios from "axios";
 // It accepts a "query" or term to search the recipe api for
 export default {
     addExpense: function (expenses) {
-        console.log(expenses);
+        // console.log(expenses);
         return axios.post("/api/reactBudgets", expenses);
 
-    }
+    },
+
 };
