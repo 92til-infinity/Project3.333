@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
-
+import axios from "axios";
 import "../../App.css";
 
 function TodoList() {
@@ -14,6 +14,10 @@ function TodoList() {
     }
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
+    console.log(todo);
+    // above console works
+    // below posst works, but the value isnt set in robo3t and the 422 error is thrown from the Api route
+    return axios.post("/api/reactTodos", todo);
   };
 
   const updateTodo = (todoId, newValue) => {
@@ -23,6 +27,7 @@ function TodoList() {
     setTodos((prev) =>
       prev.map((item) => (item.id === todoId ? newValue : item))
     );
+    return axios.post("/api/reactBudgets", newValue);
   };
 
   const removeTodo = (id) => {

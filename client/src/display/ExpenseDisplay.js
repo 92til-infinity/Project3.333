@@ -16,10 +16,10 @@ class ExpenseDisplay extends Component {
                     </thead>
                     <BudgetConsumer>
                         {value => {
-                            console.log(value)
+
                             const expensesList = value.expenses.length > 0 ? (
                                 value.expenses.map((expense, index) => {
-                                    console.log(expense);
+
                                     return (
                                         <tr key={index}>
                                             <td>{expense.expenseTitle}</td>
