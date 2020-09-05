@@ -29,6 +29,7 @@
     "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.3.16",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "serve": "^11.3.2"
   }
 }
