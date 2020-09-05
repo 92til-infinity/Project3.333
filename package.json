@@ -1,5 +1,5 @@
 {
-  "name": "app3",
+  "name": "study-check",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -7,13 +7,12 @@
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
-    "seed": "node scripts/seedDB.js",
-    "install": "cd client && npm install",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
-  "author": "",
+  "author": "Scott Glover, Alexandra Noto, Anthony Simone, and Ryan Skog",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.0",

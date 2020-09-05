@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../../config/middleware/auth");
 const { check, validationResult } = require("express-validator");
 
 const Unit = require("../../models/Unit");
+const User = require("../../models/User");
 
 // @route   GET api/units
 // @desc    Get a list of all classes
@@ -19,14 +21,11 @@ router.get("/", async (req, res) => {
 
 // @route   POST api/units
 // @desc    Create a class listing
-// @access  Public
+// @access  Private
 router.post(
   "/",
   [
     check("title", "Class title is required")
-      .not()
-      .isEmpty(),
-    check("teacher", "Teacher is required for this class")
       .not()
       .isEmpty(),
     check("startdate", "Provide a valid start date for this class")
@@ -70,7 +69,7 @@ router.post(
       await unit.save();
       res.json(unit);
     } catch (error) {
-      console.error(err.message);
+      console.error(error.message);
       res.status(500).send("Server Error");
     }
   }
@@ -91,7 +90,7 @@ router.get("/homework/:id", async (req, res) => {
 
 // @route   PUT api/units/homework/:id
 // @desc    Add homework to a class
-// @access  Public
+// @access  Private
 router.put(
   "/homework/:id",
   [
@@ -127,5 +126,30 @@ router.put(
     }
   }
 );
+
+// @route   PUT api/units/enroll/:id/:userid
+// @desc    Add a user to a class AND a class to a user
+// @access  Private
+router.put("/enroll/:id/:userid", async (req, res) => {
+  try {
+    const unit = await Unit.findById(req.params.id);
+    unit.enrolled.push(req.params.userid);
+    await unit.save();
+    res.json(unit);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+
+  try {
+    const user = await User.findById(req.params.userid);
+    user.classes.push(req.params.id);
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;

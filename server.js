@@ -1,21 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Define middleware here
+// Define middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 // Add routes, both API and view
 // console.log(routes);
 app.use(routes);
-app.use("/api/users", require("./routes/api/users"));
-app.use("/api/auth", require("./routes/api/auth"));
-app.use("/api/units", require("./routes/api/units"));
-app.get("/", (req, res) => res.send("API Running"));
+app.use("/api/users", require("./routes/API/users"));
+app.use("/api/auth", require("./routes/API/auth"));
+app.use("/api/units", require("./routes/API/units"));
+app.use("/api/todo", require("./routes/API/todo"));
 
 // Connect to the Mongo DB
 mongoose.connect(
@@ -28,13 +28,18 @@ mongoose.connect(
   }
 );
 
-// Serve up static assets (usually on heroku)
+// Serve up static assets for deployment
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+  // Set static folder
+  app.use(express.static(path.join(__dirname, "client/build")));
+  // The "catchall" handler:  for any request that doesn't
+  // match one above, send back React's index.html file
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
 
 // Start the API server
-app.listen(PORT, function () {
+app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
