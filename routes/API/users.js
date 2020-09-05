@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../../config/middleware/auth");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
@@ -80,5 +81,52 @@ router.post(
     }
   }
 );
+
+// @route   GET api/users/:id
+// @desc    Get a user by id
+// @access  Public
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   GET api/users/:search/:id
+// @desc    Get a user's homework, classes, budget, todos, or activities by id
+// @access  Public
+router.get("/:search/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const searchTerm = req.params.search;
+
+    switch (searchTerm) {
+      case "homework":
+        res.json(user.homework);
+        break;
+      case "classes":
+        res.json(user.classes);
+        break;
+      case "activities":
+        res.json(user.activities);
+        break;
+      case "budget":
+        res.json(user.budget);
+        break;
+      case "todos":
+        res.json(user.todos);
+        break;
+      default:
+        res.json(user);
+        break;
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
