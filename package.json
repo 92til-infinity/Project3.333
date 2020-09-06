@@ -17,14 +17,23 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "author": "",
+  "author": "Scott Glover, Alexandra Noto, Anthony Simone, and Ryan Skog",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.0",
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "dotenv": "^8.2.0",
     "express": "^4.16.3",
-    "if-env": "^1.0.4"
+    "express-validator": "^6.6.1",
+    "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.3.16",
+    "request": "^2.88.2",
+    "serve": "^11.3.2"
   }
 }
