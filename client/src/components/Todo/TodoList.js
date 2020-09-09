@@ -3,7 +3,7 @@ import Navbar from "../Navbar";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import axios from "axios";
-import "../../App.css";
+import "./Todo.css";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -17,7 +17,7 @@ function TodoList() {
     console.log(todo);
     // above console works
     // below posst works, but the value isnt set in robo3t and the 422 error is thrown from the Api route
-    return axios.post("/api/reactTodos", todo);
+    return axios.post("/api/todo", todo);
   };
 
   const updateTodo = (todoId, newValue) => {
