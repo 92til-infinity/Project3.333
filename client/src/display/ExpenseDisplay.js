@@ -30,7 +30,7 @@ class ExpenseDisplay extends Component {
                                 })
                             ) : (
                                     <tr>
-
+                                        <td>No Listed Expenses Yet</td>
                                     </tr>
                                 )
                             return <tbody>{expensesList}</tbody>
