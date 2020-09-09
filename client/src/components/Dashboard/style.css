@@ -1,0 +1,38 @@
+.scrollbar-container {
+  background: -moz-linear-gradient(
+    45deg,
+    rgba(42, 27, 161, 0.7),
+    rgba(29, 210, 177, 0.7) 100%
+  ) !important;
+  background: -webkit-linear-gradient(
+    45deg,
+    rgba(42, 27, 161, 0.7),
+    rgba(29, 210, 177, 0.7) 100%
+  ) !important;
+  background: -webkit-gradient(
+    linear,
+    45deg,
+    from(rgba(42, 27, 161, 0.7)),
+    to(rgba(29, 210, 177, 0.7))
+  ) !important;
+  background: -o-linear-gradient(
+    45deg,
+    rgba(42, 27, 161, 0.7),
+    rgba(29, 210, 177, 0.7) 100%
+  ) !important;
+  background: linear-gradient(
+    45deg,
+    rgba(42, 27, 161, 0.7),
+    rgba(29, 210, 177, 0.7) 100%
+  ) !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-height: 100vh;
+}
+
+.sideNavLink,
+.collapsible-header {
+  font-family: 'kollektifregular';
+  font-size: 24px;
+}
