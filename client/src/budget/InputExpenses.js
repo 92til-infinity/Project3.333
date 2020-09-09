@@ -55,7 +55,7 @@ class InputExpenses extends Component {
                                 <input onChange={this.handleInput} value={this.state.amount} className="form-control" name="amount" />
                                 <label>Category</label>
                                 <select onChange={this.handleInput} value={this.state.category} className="form-control" name="category">
-                                    {/* <option value="">ADD PLACEHOLDER</option> */}
+                                    <option value="">please select one below...</option>
                                     <option value="Food">Food</option>
                                     <option value="Fun">Fun</option>
                                     <option value="Rent">Rent</option>
