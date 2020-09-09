@@ -1,9 +1,8 @@
-import React from "react";
-import Calendar from "../components/Calendar";
-import Day from "../components/Day";
-import Navbar from "../components/Navbar";
+import React from 'react';
+import Calendar from '../Calendar';
+import Day from '../Day';
 
-class Schedule extends React.Component {
+class CalendarPage extends React.Component {
   state = {
     date: new Date(),
   };
@@ -13,7 +12,6 @@ class Schedule extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
         <Calendar date={this.state.date} onChange={this.onChange} />
         <br />
         <Day date={this.state.date} />
@@ -28,4 +26,4 @@ class Schedule extends React.Component {
   }
 }
 
-export default Schedule;
+export default CalendarPage;

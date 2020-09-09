@@ -1,5 +1,5 @@
 import React from 'react';
-import Chat from '../Chat';
+import ChatPage from '../ChatPage';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import {
   MDBInput,
@@ -228,7 +228,7 @@ class Dashboard extends React.Component {
               style={{ height: 800, width: '100%' }}
               className='m-0'
             >
-              {this.state.showChat && <Chat />}
+              {/* {this.state.showChat && <ChatPage />} */}
             </MDBContainer>
           </main>
         </div>

@@ -13,7 +13,7 @@ import {
 } from 'mdbreact';
 import './style.css';
 
-class Chat extends Component {
+class ChatPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -224,4 +224,4 @@ const ChatMessage = ({ message: { author, avatar, when, message } }) => (
   </li>
 );
 
-export default Chat;
+export default ChatPage;
