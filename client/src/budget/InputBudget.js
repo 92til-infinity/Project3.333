@@ -27,10 +27,9 @@ class InputBudget extends Component {
                     return (
                         <div className="card card-body mb-3">
                             <label>Budget</label>
-                            <form className="form-inline">
-                                <input onChange={this.handleInput} value={this.state.budget} className="form-control mr-2" type="number" />
-                                <button onClick={this.handleSubmit.bind(this, dispatch)} className="btn btn-dark btn-block">submit</button>
-
+                            <form>
+                                <input onChange={this.handleInput} value={this.state.budget} className="form-control mb-3" type="number" />
+                                <button onClick={this.handleSubmit.bind(this, dispatch)} className="btn btn-dark btn-block mb-3">submit</button>
                             </form>
                         </div>
                     )

@@ -8,9 +8,10 @@ const BalanceDisplay = () => {
             {value => {
                 const totalExpense = value.expenses.length > 0 ? (
                     value.expenses.reduce((acc, curr) => {
-                        acc += curr.amount
+                        acc += parseInt(curr.amount)
                         return acc
                     }, 0)) : 0;
+                // totalExpense takes the current amount from your expenses.amount from state and adds to the new input as an object. need parse int to make it an integer
 
                 return (
                     <div className="row">
