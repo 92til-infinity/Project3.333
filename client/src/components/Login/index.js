@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import setAuthToken from "../utils/setAuthToken";
+import setAuthToken from "../../utils/setAuthToken";
 
 const Login = ({ isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -40,16 +40,16 @@ const Login = ({ isAuthenticated }) => {
         isAuthenticated: true,
         token: localStorage.getItem("token"),
       });
-    } catch (err) {
+    } catch (error) {
       localStorage.removeItem("token");
       setFormData({ ...formData, isAuthenticated: false, token: null });
-      console.error(err.response.data);
+      console.error(error.response.data);
     }
   };
 
   // Redirect if logged in
   if (formData.isAuthenticated) {
-    return <Redirect to="/todo" />;
+    return <Redirect to="/dash" />;
   }
 
   return (
