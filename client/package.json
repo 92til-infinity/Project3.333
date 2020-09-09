@@ -13,7 +13,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
-    "mdbreact": "^4.27.0",
+    "mdbreact": "git+https://oauth2:Ead_nCCzu8T61TJsZvfK@git.mdbootstrap.com/mdb/react/re-pro.git",
     "react": "^16.13.1",
     "react-calendar": "^3.1.0",
     "react-dom": "^16.13.1",
@@ -23,8 +23,7 @@
     "serve": "^11.3.2"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

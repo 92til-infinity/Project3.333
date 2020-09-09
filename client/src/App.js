@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage';
 import BudgetIndex from './Pages/budgetIndex';
 import Schedule from './Pages/Schedule';
 import TodoList from './components/Todo/TodoList';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/' component={LandingPage} />
+          <Route exact path='/dash' component={Dashboard} />
           <Route path='/budget' component={BudgetIndex} />
           <Route path='/schedule' component={Schedule} />
           <Route path='/todo' component={TodoList} />
