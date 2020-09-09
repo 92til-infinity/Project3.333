@@ -1,0 +1,31 @@
+.chat-room .friend-list .list-group-item {
+  margin-bottom: 0;
+  border: 0;
+  border-bottom: 1px solid;
+}
+
+.chat-room .friend-list .list-group-item:last-of-type {
+  border-bottom: 0;
+}
+
+.chat-room .friend-list .list-group-item.active {
+  background-color: #eeeeee;
+}
+
+.chat-room .avatar {
+  height: 3rem;
+  width: 3rem;
+}
+
+.chat-room .chat-message:nth-of-type(even) {
+  flex-direction: row-reverse;
+}
+
+.chat-room .scrollable-friends-list {
+  height: 570px;
+}
+
+.chat-room .scrollable-chat {
+  height: 510px;
+  padding-bottom: 15px;
+}
