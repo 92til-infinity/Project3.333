@@ -7,14 +7,13 @@ import {
   MDBModalHeader,
   MDBModalFooter,
 } from 'mdbreact';
-import './style.css';
-import SignUpForm from '../SignUpForm';
+import LoginForm from '../LoginForm';
 
-class SignUpModal extends Component {
+class LoginModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal14: props.toggle,
+      modal20: props.toggle,
     };
   }
 
@@ -28,10 +27,10 @@ class SignUpModal extends Component {
   render() {
     return (
       <MDBContainer>
-        <MDBModal isOpen={this.state.modal14} toggle={this.toggle(14)} centered>
-          <MDBModalHeader toggle={this.toggle(14)}>Sign Up</MDBModalHeader>
+        <MDBModal isOpen={this.state.modal20} toggle={this.toggle(20)} centered>
+          <MDBModalHeader toggle={this.toggle(20)}>Login</MDBModalHeader>
           <MDBModalBody>
-            <SignUpForm />
+            <LoginForm />
           </MDBModalBody>
         </MDBModal>
       </MDBContainer>
@@ -39,4 +38,4 @@ class SignUpModal extends Component {
   }
 }
 
-export default SignUpModal;
+export default LoginModal;
