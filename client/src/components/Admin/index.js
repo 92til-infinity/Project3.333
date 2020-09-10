@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Select from "react-select";
 
 const Admin = () => {
   const [userData, setUserData] = useState({
@@ -29,6 +30,16 @@ const Admin = () => {
     starttime,
     endtime,
   } = classData;
+
+  const daysOfWeek = [
+    { value: "Sunday", label: "Sunday", id: 7 },
+    { value: "Monday", label: "Monday", id: 1 },
+    { value: "Tuesday", label: "Tuesday", id: 2 },
+    { value: "Wednesday", label: "Wednesday", id: 3 },
+    { value: "Thursday", label: "Thursday", id: 4 },
+    { value: "Friday", label: "Friday", id: 5 },
+    { value: "Saturday", label: "Saturday", id: 6 },
+  ];
 
   const onUserChange = (e) =>
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -64,35 +75,11 @@ const Admin = () => {
     }
   };
 
-  const onClassSubmit = async (e) => {
+  const onDaysChange = async (e) => {
     e.preventDefault();
-    const unit = {
-      title,
-      teacher,
-      startdate,
-      enddate,
-      days,
-      starttime,
-      endtime,
-    };
-
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      setClassData({
-        ...classData,
-      });
-      const body = JSON.stringify(unit);
-      await axios.post("/api/units", body, config).then((res) => {
-        console.log(res);
-      });
-    } catch (error) {
-      console.error(error.response.data);
-    }
   };
+
+  const onClassSubmit = (e) => {};
 
   return (
     <>
@@ -156,7 +143,7 @@ const Admin = () => {
         </div>
         <input type="submit" className="btn btn-primary" value="Add User" />
       </form>
-      {/* <br />
+      <br />
       <br />
       <br />
       <br />
@@ -169,7 +156,7 @@ const Admin = () => {
             placeholder="Class title..."
             name="title"
             value={title}
-            onChange={(e) => onClassChange(e)}
+            onChange={(e) => onDaysChange(e)}
           />
         </div>
         <div className="form-group">
@@ -185,64 +172,49 @@ const Admin = () => {
         <div className="form-group">
           <label>Start Date: </label>
           <input
-            type="startdate"
-            placeholder="Email Address"
+            type="date"
             name="startdate"
-            value={startdate}
+            value={classData.startdate}
             onChange={(e) => onClassChange(e)}
           />
         </div>
         <div className="form-group">
           <label>End Date: </label>
           <input
-            type="enddate"
-            placeholder="Password"
+            type="date"
             name="enddate"
-            value={enddate}
+            value={classData.enddate}
             onChange={(e) => onClassChange(e)}
           />
         </div>
         <div className="form-group">
-          <label>Days (Hold CTRL for multiple selections...): </label>
-          <select
-            value={classData.days}
-            type="days"
-            placeholder="Hold down CTRL for multiple selections..."
+          <label>Days: </label>
+          <Select
+            options={daysOfWeek}
             name="days"
             onChange={(e) => onClassChange(e)}
-            multiple
-          >
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-          </select>
+          />
         </div>
         <div className="form-group">
           <label>Start Time: </label>
           <input
-            type="starttime"
-            placeholder="Password"
+            type="time"
             name="starttime"
-            value={starttime}
+            value={classData.starttime}
             onChange={(e) => onClassChange(e)}
           />
         </div>
         <div className="form-group">
           <label>End Time: </label>
           <input
-            type="endtime"
-            placeholder="Password"
+            type="time"
             name="endtime"
-            value={endtime}
+            value={classData.endtime}
             onChange={(e) => onClassChange(e)}
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Add Class" />
-      </form> */}
+      </form>
     </>
   );
 };
