@@ -8,6 +8,32 @@ const { check, validationResult } = require("express-validator");
 
 const User = require("../../models/User");
 
+// @route   GET api/users
+// @desc    Get a list of all users
+// @access  Public
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   GET api/users/:role
+// @desc    Get a list of all users by role
+// @access  Public
+router.get("/:role", async (req, res) => {
+  try {
+    const users = await User.find({ role: req.params.role });
+    res.json(users);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // @route   POST api/users
 // @desc    Register user
 // @access  Public
