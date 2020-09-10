@@ -44,6 +44,13 @@ function CreateUser() {
     resetData();
   };
 
+  const isEnabled =
+    firstname.length > 0 &&
+    lastname.length > 0 &&
+    email.length > 0 &&
+    password.length > 0 &&
+    role.length > 0;
+
   const resetData = () => {
     setUserData({
       firstname: "",
@@ -108,12 +115,18 @@ function CreateUser() {
             name="role"
             onChange={(e) => onUserChange(e)}
           >
+            <option value="">Select a role...</option>
             <option value="Student">Student</option>
             <option value="Teacher">Teacher</option>
             <option value="Admin">Admin</option>
           </select>
         </div>
-        <input type="submit" className="btn btn-primary" value="Add User" />
+        <input
+          type="submit"
+          className="btn btn-primary"
+          disabled={!isEnabled}
+          value="Add User"
+        />
       </form>
     </>
   );

@@ -23,13 +23,13 @@ function CreateClass(props) {
   } = classData;
 
   const daysOfWeek = [
-    { value: "Sunday", label: "Sunday", id: 7 },
-    { value: "Monday", label: "Monday", id: 1 },
-    { value: "Tuesday", label: "Tuesday", id: 2 },
-    { value: "Wednesday", label: "Wednesday", id: 3 },
-    { value: "Thursday", label: "Thursday", id: 4 },
-    { value: "Friday", label: "Friday", id: 5 },
-    { value: "Saturday", label: "Saturday", id: 6 },
+    { value: "Sunday", key: "Sunday", id: 7 },
+    { value: "Monday", key: "Monday", id: 1 },
+    { value: "Tuesday", key: "Tuesday", id: 2 },
+    { value: "Wednesday", key: "Wednesday", id: 3 },
+    { value: "Thursday", key: "Thursday", id: 4 },
+    { value: "Friday", key: "Friday", id: 5 },
+    { value: "Saturday", key: "Saturday", id: 6 },
   ];
 
   const onClassChange = (e) =>
@@ -69,6 +69,13 @@ function CreateClass(props) {
     }
   };
 
+  const isEnabled =
+    title.length > 0 &&
+    teacher.length > 0 &&
+    startdate.length > 0 &&
+    enddate.length > 0 &&
+    days.length > 0;
+
   return (
     <>
       <p className="lead">Create a Class</p>
@@ -92,7 +99,7 @@ function CreateClass(props) {
           >
             <option value="">Select a teacher...</option>
             {props.teachers.map((teach) => (
-              <option value={teach._id}>
+              <option key={teach._id} value={teach._id}>
                 {teach.lastname}, {teach.firstname}
               </option>
             ))}
@@ -125,7 +132,9 @@ function CreateClass(props) {
           >
             <option value="">Which days will class occur...</option>
             {daysOfWeek.map((day) => (
-              <option value={day.value}>{day.value}</option>
+              <option key={day.key} value={day.value}>
+                {day.value}
+              </option>
             ))}
           </select>
         </div>
@@ -147,7 +156,12 @@ function CreateClass(props) {
             onChange={(e) => onClassChange(e)}
           />
         </div>
-        <input type="submit" className="btn btn-primary" value="Add Class" />
+        <input
+          type="submit"
+          className="btn btn-primary"
+          disabled={!isEnabled}
+          value="Add Class"
+        />
       </form>
     </>
   );

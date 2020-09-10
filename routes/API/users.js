@@ -108,12 +108,13 @@ router.post(
   }
 );
 
-// @route   GET api/users/:id
+// @route   GET api/users/id/:id
 // @desc    Get a user by id
 // @access  Public
-router.get("/:id", async (req, res) => {
+router.get("/id/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    console.log(user);
     res.json(user);
   } catch (error) {
     console.error(error.message);
@@ -149,6 +150,21 @@ router.get("/:search/:id", async (req, res) => {
         res.json(user);
         break;
     }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   PUT api/users/enroll/:id/:userid
+// @desc    Add a user to a class AND a class to a user
+// @access  Private
+router.put("/enroll/:id/:userid", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userid);
+    user.classes.push(req.params.id);
+    await user.save();
+    res.json(user);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");

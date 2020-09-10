@@ -9,6 +9,10 @@ export default {
     return axios.post("/api/reactBudgets", expenses);
   },
 
+  getUser: function(id) {
+    return axios.get("/api/users/id/" + id);
+  },
+
   getUsers: function(role) {
     return axios.get("/api/users/" + role);
   },
@@ -17,7 +21,11 @@ export default {
     return axios.get("/api/units");
   },
 
-  enroll: function(classId, userId) {
+  enrollClass: function(classId, userId) {
     return axios.put(`/api/units/enroll/${classId}/${userId}`);
+  },
+
+  enrollUser: function(classId, userId) {
+    return axios.put(`/api/users/enroll/${classId}/${userId}`);
   },
 };
