@@ -19,6 +19,7 @@ import Admin from "./components/Admin";
 // import SignUpPage from './components/SignUp';
 import SignUpModal from "./components/SignUpModal";
 
+
 function App() {
   const [userState, setUserState] = useState({
     _id: "",
@@ -51,6 +52,7 @@ function App() {
       <div className="App">
         <Router>
           <Switch>
+
             <Route exact path="/" component={LandingPage} />
             <Route path="/admin" component={Admin} />
             <Route path="/login" component={Login} />
@@ -60,6 +62,7 @@ function App() {
             <Route path="/schedule" component={CalendarPage} />
             <Route path="/todo" component={TodoPage} />
             <Route path="/chat" component={ChatPage} />
+
           </Switch>
         </Router>
       </div>

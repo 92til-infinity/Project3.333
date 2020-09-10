@@ -10,6 +10,7 @@ const Features = () => {
     <section className='text-center my-5'>
       <h2
         className='h1-responsive font-weight-bold my-5'
+        id='firstFeature'
         style={{ fontFamily: 'kollektifregular' }}
       >
         Why use StudyCheck?
