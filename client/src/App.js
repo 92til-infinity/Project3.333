@@ -51,8 +51,6 @@ function App() {
         <Router>
           <Switch>
             <Route exact path='/' component={LandingPage} />
-            {/* <Route path="/login" component={Login} /> */}
-            <Route path='/signup' component={SignUpModal} />
             <Route path='/dash' component={Dashboard} />
             <Route path='/budget' component={BudgetPage} />
             <Route path='/schedule' component={CalendarPage} />
