@@ -1,13 +1,15 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
-import setAuthToken from "../../utils/setAuthToken";
+//Just logic for LoginForm Component, copied into LoginForm
+
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import setAuthToken from '../../utils/setAuthToken';
 
 const Login = ({ isAuthenticated }) => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const { email, password } = formData;
@@ -26,22 +28,22 @@ const Login = ({ isAuthenticated }) => {
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       };
       const body = JSON.stringify(user);
-      const res = await axios.post("/api/auth", body, config);
+      const res = await axios.post('/api/auth', body, config);
       if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem('token', res.data.token);
       }
       setAuthToken(localStorage.token);
       setFormData({
         ...formData,
         isAuthenticated: true,
-        token: localStorage.getItem("token"),
+        token: localStorage.getItem('token'),
       });
     } catch (error) {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
       setFormData({ ...formData, isAuthenticated: false, token: null });
       console.error(error.response.data);
     }
@@ -49,37 +51,8 @@ const Login = ({ isAuthenticated }) => {
 
   // Redirect if logged in
   if (formData.isAuthenticated) {
-    return <Redirect to="/dash" />;
+    return <Redirect to='/dash' />;
   }
-
-  return (
-    <>
-      <h1 className="large text-primary">Sign In</h1>
-      <p className="lead">Sign Into Your Account</p>
-      <form className="form" onSubmit={(e) => onSubmit(e)}>
-        <div className="form-group">
-          <input
-            type="email"
-            placeholder="Email Address"
-            name="email"
-            value={email}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={(e) => onChange(e)}
-            minLength="6"
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Login" />
-      </form>
-    </>
-  );
 };
 
 Login.propTypes = {
