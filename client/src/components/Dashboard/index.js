@@ -1,6 +1,9 @@
-import React from "react";
-import ChatPage from "../ChatPage";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import React from 'react';
+import ChatPage from '../ChatPage';
+import TodoPage from '../TodoPage';
+import CalendarPage from '../CalendarPage';
+import BudgetPage from '../BudgetPage';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import {
   MDBInput,
   MDBNavbar,
@@ -29,6 +32,9 @@ class Dashboard extends React.Component {
       breakWidth: 1300,
       windowWidth: 0,
       showChat: false,
+      showTodo: false,
+      showCalendar: false,
+      showBudget: false
     };
   }
 
@@ -53,11 +59,45 @@ class Dashboard extends React.Component {
   };
 
   handleChatClick = () => {
-    console.log("working");
+    console.log('working from nav cat');
     this.setState({
       showChat: true,
+      showBudget: false,
+      showCalendar: false,
+      showTodo: false
     });
   };
+
+  handleTodoClick = () => {
+    console.log('working from nav cat');
+    this.setState({
+      showChat: false,
+      showBudget: false,
+      showCalendar: false,
+      showTodo: true
+    });
+  };
+
+  handleCalendarClick = () => {
+    console.log('working from nav cat');
+    this.setState({
+      showChat: false,
+      showBudget: false,
+      showCalendar: true,
+      showTodo: false
+    });
+  };
+
+  handleBudgetClick = () => {
+    console.log('working from nav cat');
+    this.setState({
+      showChat: false,
+      showBudget: true,
+      showCalendar: false,
+      showTodo: false
+    });
+  };
+
 
   handleSignOutClick = () => {
     localStorage.removeItem("token");
@@ -128,44 +168,60 @@ class Dashboard extends React.Component {
               }}
             /> */}
             <MDBSideNavNav>
-              <Link to="/budget">
-                <MDBSideNavCat
+              <MDBSideNavItem
+                name='Budget'
+                id='submit-blog-cat'
+                icon='dollar-sign'
+                className='sideNavLink'
+              >
+                <div
                   name="Budget"
-                  id="submit-blog-cat"
-                  icon="dollar-sign"
-                  className="sideNavLink"
+                  onClick={this.handleBudgetClick}
                 >
-                  {/* <MDBSideNavItem class='sideNavLink'>Overview</MDBSideNavItem>
-                <MDBSideNavItem class='sideNavLink'>
-                  Create a New Budget
-                </MDBSideNavItem> */}
-                </MDBSideNavCat>
-              </Link>
-              <Link to="/calendar">
-                <MDBSideNavCat
-                  iconRegular
-                  name="Calendar"
-                  id="instruction-cat"
-                  icon="calendar"
-                  className="sideNavLink"
-                />
-              </Link>
-              <Link to="/todo">
-                <MDBSideNavCat
-                  name="To Do"
-                  id="about-cat"
-                  icon="list"
-                  className="sideNavLink"
-                />
-              </Link>
+                  Budget
+                </div>
+              </MDBSideNavItem>
+              <MDBSideNavItem
+                iconRegular
+                name='Calendar'
+                id='instruction-cat'
+                icon='calendar'
+                className='sideNavLink'
+              >
+                <div
+                  name="Calender"
+                  onClick={this.handleCalendarClick}
+                >
+                  Calendar
+                </div>
+              </MDBSideNavItem>
+              <MDBSideNavItem
+                name='To Do'
+                id='about-cat'
+                icon='list'
+                className='sideNavLink'
+              >
+                <div
+                  name="Todo"
+                  onClick={this.handleTodoClick}
+                >
+                  Todo
+                </div>
+              </MDBSideNavItem>
 
-              <MDBSideNavCat
-                name="Chat"
-                id="contact-me-cat"
-                icon="comment"
-                className="sideNavLink"
-                onClick={this.handleChatClick}
-              />
+              <MDBSideNavItem
+                name='Chat'
+                id='contact-me-cat'
+                icon='comment'
+                className='sideNavLink'
+              >
+                <div
+                  name="Chat"
+                  onClick={this.handleChatClick}
+                >
+                  Chat
+                </div>
+              </MDBSideNavItem>
             </MDBSideNavNav>
           </MDBSideNav>
           <MDBNavbar style={navStyle} double expand="md" fixed="top" scrolling>
@@ -239,6 +295,21 @@ class Dashboard extends React.Component {
               className="m-0"
             >
               {/* {this.state.showChat && <ChatPage />} */}
+              {this.state.showChat &&
+                <ChatPage />
+              }
+
+              {this.state.showTodo &&
+                <TodoPage />
+              }
+
+              {this.state.showCalendar &&
+                <CalendarPage />
+              }
+
+              {this.state.showBudget &&
+                <BudgetPage />
+              }
             </MDBContainer>
           </main>
         </div>

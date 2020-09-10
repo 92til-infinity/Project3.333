@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TodoForm from '../TodoForm';
 import Todo from '../Todo';
 import axios from 'axios';
-import '../../App.css';
+import "../Todo/Todo.css";
 
 function TodoPage() {
   const [todos, setTodos] = useState([]);
