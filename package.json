@@ -18,7 +18,7 @@
   "author": "Scott Glover, Alexandra Noto, Anthony Simone, and Ryan Skog",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^4.1.0",
+    "concurrently": "^4.1.2",
     "nodemon": "^1.18.7"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.3.16",
     "react-iframe": "^1.8.0",
+    "react-scripts": "^3.4.3",
     "request": "^2.88.2",
     "serve": "^11.3.2"
   }
