@@ -140,16 +140,6 @@ router.put("/enroll/:id/:userid", async (req, res) => {
     console.error(error.message);
     res.status(500).send("Server Error");
   }
-
-  try {
-    const user = await User.findById(req.params.userid);
-    user.classes.push(req.params.id);
-    await user.save();
-    res.json(user);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Server Error");
-  }
 });
 
 module.exports = router;

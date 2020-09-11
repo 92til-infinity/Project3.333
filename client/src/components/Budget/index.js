@@ -2,7 +2,8 @@ import React from 'react';
 import InputBudget from '../BudgetInput';
 import InputExpenses from '../ExpenseInput';
 import BudgetDisplay from '../BudgetDisplay';
-import AtlasDisplay from '..//AtlasDisplay';
+import ExpenseDisplay from '../ExpenseDisplay';
+import AtlasDisplay from '../AtlasDisplay';
 // mix of Extend Component and Redux throughout, made more sense for me when building and in general
 // --Scott
 
@@ -20,6 +21,8 @@ const Budget = () => {
         <div className='col-lg-8'>
           <h2>Display Budget</h2>
           <BudgetDisplay />
+          <h2>Display Expenses</h2>
+          <ExpenseDisplay />
         </div>
       </div>
     </div>

@@ -63,10 +63,10 @@ const LoginForm = ({ isAuthenticated }) => {
                 label='Type your email'
                 icon='envelope'
                 group
-                type='email'
                 validate
                 error='wrong'
                 success='right'
+                name='email'
                 value={email}
                 onChange={(e) => onChange(e)}
               />
@@ -74,8 +74,8 @@ const LoginForm = ({ isAuthenticated }) => {
                 label='Type your password'
                 icon='lock'
                 group
-                type='password'
                 validate
+                name='password'
                 value={password}
                 onChange={(e) => onChange(e)}
                 minLength='6'
@@ -92,7 +92,7 @@ const LoginForm = ({ isAuthenticated }) => {
     </MDBContainer>
   );
 };
-
+//hi
 LoginForm.propTypes = {
   isAuthenticated: PropTypes.bool,
 };
