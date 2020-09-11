@@ -5,7 +5,6 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
-
 body {
   background: linear-gradient(
     90deg,
@@ -13,6 +12,7 @@ body {
     rgba(100, 115, 255, 1) 100%
   );
 }
+
 .todo-app {
   display: flex;
   flex-direction: column;

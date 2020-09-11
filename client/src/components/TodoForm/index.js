@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "../Todo/Todo.css";
+import "../Todo/style.css";
 
 function TodoForm(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : "");
@@ -10,6 +10,7 @@ function TodoForm(props) {
     const [date, setDate] = useState({
         startDate: new Date()
     })
+
 
     const handleDateChange = date => {
         setDate({

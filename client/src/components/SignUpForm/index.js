@@ -1,13 +1,13 @@
 import React from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
+import './style.css';
 
-const SignUp = () => {
+const SignUpForm = () => {
   return (
     <MDBContainer>
-      <MDBRow>
-        <MDBCol md='6'>
+      <MDBRow className='text-left'>
+        <MDBCol md='12'>
           <form>
-            <p className='h5 text-center mb-4'>Sign up</p>
             <div className='grey-text'>
               <MDBInput
                 label='Your name'
@@ -54,4 +54,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpForm;
