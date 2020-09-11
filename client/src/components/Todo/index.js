@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import TodoForm from '../TodoForm';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
-import '../../App.css';
+import "./Todo.css";
 
-function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
+function Todo({ todos, completeTodo, removeTodo, updateTodo, date }) {
   const [edit, setEdit] = useState({
     id: null,
     value: '',
