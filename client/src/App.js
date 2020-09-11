@@ -14,10 +14,6 @@ import BudgetPage from "./components/BudgetPage";
 import CalendarPage from "./components/CalendarPage";
 import TodoPage from "./components/TodoPage";
 import ChatPage from "./components/ChatPage";
-import Login from "./components/Login";
-import Admin from "./components/Admin";
-// import SignUpPage from './components/SignUp';
-import SignUpModal from "./components/SignUpModal";
 
 function App() {
   const [userState, setUserState] = useState({
@@ -55,9 +51,6 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Route path="/admin" component={Admin} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={SignUpModal} />
             <Route path="/dash" component={Dashboard} />
             <Route path="/budget" component={BudgetPage} />
             <Route path="/schedule" component={CalendarPage} />
