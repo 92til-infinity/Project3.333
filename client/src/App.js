@@ -15,6 +15,8 @@ import CalendarPage from "./components/CalendarPage";
 import TodoPage from "./components/TodoPage";
 import ChatPage from "./components/ChatPage";
 import Admin from "./components/Admin";
+// import SignUpPage from './components/SignUp';
+import SignUpModal from "./components/SignUpModal";
 
 function App() {
   const [userState, setUserState] = useState({
