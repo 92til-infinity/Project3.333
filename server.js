@@ -28,6 +28,9 @@ mongoose.connect(
     useFindAndModify: false,
   }
 );
+mongoose.connection.on('connected', () => {
+  console.log('connected to Mongoose')
+})
 
 // Serve up static assets for deployment
 if (process.env.NODE_ENV === 'production') {
