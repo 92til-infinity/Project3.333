@@ -8,7 +8,7 @@ const BudgetDisplay = () => {
         const totalExpense =
           value.expenses.length > 0
             ? value.expenses.reduce((acc, curr) => {
-                acc += curr.amount;
+                acc += parseInt(curr.amount);
                 return acc;
               }, 0)
             : 0;
