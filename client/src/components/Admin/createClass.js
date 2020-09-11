@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Select from "react-select";
 
 function CreateClass(props) {
   const [classData, setClassData] = useState({
@@ -23,20 +24,20 @@ function CreateClass(props) {
   } = classData;
 
   const daysOfWeek = [
-    { value: "Sunday", key: "Sunday", id: 7 },
-    { value: "Monday", key: "Monday", id: 1 },
-    { value: "Tuesday", key: "Tuesday", id: 2 },
-    { value: "Wednesday", key: "Wednesday", id: 3 },
-    { value: "Thursday", key: "Thursday", id: 4 },
-    { value: "Friday", key: "Friday", id: 5 },
-    { value: "Saturday", key: "Saturday", id: 6 },
+    { value: "Sunday", label: "Sunday", id: 7 },
+    { value: "Monday", label: "Monday", id: 1 },
+    { value: "Tuesday", label: "Tuesday", id: 2 },
+    { value: "Wednesday", label: "Wednesday", id: 3 },
+    { value: "Thursday", label: "Thursday", id: 4 },
+    { value: "Friday", label: "Friday", id: 5 },
+    { value: "Saturday", label: "Saturday", id: 6 },
   ];
 
   const onClassChange = (e) =>
     setClassData({ ...classData, [e.target.name]: e.target.value });
 
-  const onDaysChange = async (e) => {
-    e.preventDefault();
+  const onDaysChange = async (value) => {
+    setClassData({ ...classData, days: value });
   };
 
   const onClassSubmit = async (e) => {
@@ -125,18 +126,12 @@ function CreateClass(props) {
         </div>
         <div className="form-group">
           <label>Days: </label>
-          <select
+          <Select
+            isMulti
             options={daysOfWeek}
             name="days"
-            onChange={(e) => onClassChange(e)}
-          >
-            <option value="">Which days will class occur...</option>
-            {daysOfWeek.map((day) => (
-              <option key={day.key} value={day.value}>
-                {day.value}
-              </option>
-            ))}
-          </select>
+            onChange={(e) => onDaysChange(e)}
+          />
         </div>
         <div className="form-group">
           <label>Start Time: </label>

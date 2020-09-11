@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import setAuthToken from "../../utils/setAuthToken";
+import UserContext from "../../utils/UserContext";
 
 const Login = ({ isAuthenticated }) => {
+  const { setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,8 +33,8 @@ const Login = ({ isAuthenticated }) => {
       };
       const body = JSON.stringify(user);
       const res = await axios.post("/api/auth", body, config);
-      if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
+      if (res.data.user.token) {
+        localStorage.setItem("token", res.data.user.token);
       }
       setAuthToken(localStorage.token);
       setFormData({
@@ -40,6 +42,7 @@ const Login = ({ isAuthenticated }) => {
         isAuthenticated: true,
         token: localStorage.getItem("token"),
       });
+      setUser(res.data.user);
     } catch (error) {
       localStorage.removeItem("token");
       setFormData({ ...formData, isAuthenticated: false, token: null });

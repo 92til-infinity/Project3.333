@@ -5,7 +5,7 @@ import UserContext from "../../utils/UserContext";
 
 function CalendarPage() {
   const [date, setDate] = useState({ date: new Date() });
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const onChange = (date) => setDate({ date });
 

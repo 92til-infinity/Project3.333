@@ -26,6 +26,9 @@ function App() {
     lastname: "",
     email: "",
     role: "",
+    date: "",
+    token: "",
+    todos: [],
     classes: [],
     activities: [],
     homework: [],
@@ -39,7 +42,7 @@ function App() {
 
     try {
       axios.get("/api/auth").then((res) => {
-        setUserState(res);
+        setUserState(res.data);
       });
     } catch (error) {
       console.error(error.response.data);
@@ -47,7 +50,7 @@ function App() {
   }, []);
 
   return (
-    <UserContext.Provider value={userState}>
+    <UserContext.Provider value={{ user: userState, setUser: setUserState }}>
       <div className="App">
         <Router>
           <Switch>
