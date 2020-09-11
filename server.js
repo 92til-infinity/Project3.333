@@ -34,8 +34,10 @@ mongoose.connect(
     useFindAndModify: false,
   }
 );
+
 mongoose.connection.on("connected", () => {
   console.log("connected to Mongoose");
+
 });
 
 // Start the API server
