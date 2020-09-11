@@ -12,9 +12,11 @@ const User = require("../../models/User");
 // @desc    Get user information
 // @access  Public
 router.get("/", auth, async (req, res) => {
+  console.log(req.user);
   try {
     // Send back user information except for the password
     const user = await User.findById(req.user.id).select("-password");
+    console.log(user);
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -72,8 +74,14 @@ router.post(
         config.get("jwtSecret"),
         { expiresIn: 3600 },
         (err, token) => {
+          const safeUser = {
+            ...user._doc,
+            password: undefined,
+            token,
+          };
+
           if (err) throw err;
-          res.json({ token });
+          res.json({ user: safeUser });
         }
       );
     } catch (err) {

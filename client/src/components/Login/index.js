@@ -1,11 +1,12 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import setAuthToken from "../../utils/setAuthToken";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
+import UserContext from "../../utils/UserContext";
 
-const LoginForm = ({ isAuthenticated }) => {
+const Login = ({ isAuthenticated }) => {
+  const { setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -32,8 +33,8 @@ const LoginForm = ({ isAuthenticated }) => {
       };
       const body = JSON.stringify(user);
       const res = await axios.post("/api/auth", body, config);
-      if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
+      if (res.data.user.token) {
+        localStorage.setItem("token", res.data.user.token);
       }
       setAuthToken(localStorage.token);
       setFormData({
@@ -41,6 +42,7 @@ const LoginForm = ({ isAuthenticated }) => {
         isAuthenticated: true,
         token: localStorage.getItem("token"),
       });
+      setUser(res.data.user);
     } catch (error) {
       localStorage.removeItem("token");
       setFormData({ ...formData, isAuthenticated: false, token: null });
@@ -54,46 +56,36 @@ const LoginForm = ({ isAuthenticated }) => {
   }
 
   return (
-    <MDBContainer>
-      <MDBRow className="text-left">
-        <MDBCol md="12">
-          <form className="form" onSubmit={(e) => onSubmit(e)}>
-            <div className="grey-text">
-              <MDBInput
-                label="Type your email"
-                icon="envelope"
-                group
-                validate
-                error="wrong"
-                success="right"
-                name="email"
-                value={email}
-                onChange={(e) => onChange(e)}
-              />
-              <MDBInput
-                label="Type your password"
-                icon="lock"
-                group
-                validate
-                name="password"
-                value={password}
-                onChange={(e) => onChange(e)}
-                minLength="6"
-              />
-            </div>
-            <div className="text-center">
-              <MDBBtn type="submit" value="Login">
-                Login
-              </MDBBtn>
-            </div>
-          </form>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+    <>
+      <h1 className="large text-primary">Sign In</h1>
+      <p className="lead">Sign Into Your Account</p>
+      <form className="form" onSubmit={(e) => onSubmit(e)}>
+        <div className="form-group">
+          <input
+            type="email"
+            placeholder="Email Address"
+            name="email"
+            value={email}
+            onChange={(e) => onChange(e)}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={(e) => onChange(e)}
+            minLength="6"
+          />
+        </div>
+        <input type="submit" className="btn btn-primary" value="Login" />
+      </form>
+    </>
   );
 };
 
-LoginForm.propTypes = {
+Login.propTypes = {
   isAuthenticated: PropTypes.bool,
 };
 
@@ -101,4 +93,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default (mapStateToProps, LoginForm);
+export default (mapStateToProps, Login);
