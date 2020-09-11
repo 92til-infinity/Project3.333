@@ -14,6 +14,7 @@ import BudgetPage from "./components/BudgetPage";
 import CalendarPage from "./components/CalendarPage";
 import TodoPage from "./components/TodoPage";
 import ChatPage from "./components/ChatPage";
+import Admin from "./components/Admin";
 
 function App() {
   const [userState, setUserState] = useState({
@@ -56,6 +57,7 @@ function App() {
             <Route path="/schedule" component={CalendarPage} />
             <Route path="/todo" component={TodoPage} />
             <Route path="/chat" component={ChatPage} />
+            <Route path="/admin" component={Admin} />
           </Switch>
         </Router>
       </div>
