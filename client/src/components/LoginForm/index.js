@@ -63,7 +63,7 @@ const LoginForm = ({ isAuthenticated }) => {
                 label='Type your email'
                 icon='envelope'
                 group
-                type='email'
+                name='email'
                 validate
                 error='wrong'
                 success='right'
@@ -74,7 +74,7 @@ const LoginForm = ({ isAuthenticated }) => {
                 label='Type your password'
                 icon='lock'
                 group
-                type='password'
+                name='password'
                 validate
                 value={password}
                 onChange={(e) => onChange(e)}
