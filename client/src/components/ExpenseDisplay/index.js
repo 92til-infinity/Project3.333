@@ -15,6 +15,7 @@ class ExpenseDisplay extends Component {
           </thead>
           <BudgetConsumer>
             {(value) => {
+              console.log(value.expenses);
               const expensesList =
                 value.expenses.length > 0 ? (
                   value.expenses.map((expense, index) => {
@@ -27,8 +28,8 @@ class ExpenseDisplay extends Component {
                     );
                   })
                 ) : (
-                  <tr></tr>
-                );
+                    <tr></tr>
+                  );
               return <tbody>{expensesList}</tbody>;
             }}
           </BudgetConsumer>
