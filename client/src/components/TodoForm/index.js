@@ -10,6 +10,7 @@ function TodoForm(props) {
     const [date, setDate] = useState({
         startDate: new Date()
     })
+    const [dateOpen, setDateOpen] = useState(false);
 
 
     const handleDateChange = date => {
@@ -23,6 +24,7 @@ function TodoForm(props) {
         e.preventDefault();
         setShowDate(true);
         setTodoEnable(false);
+        setDateOpen(true);
     }
 
     const inputRef = useRef(null);
@@ -41,17 +43,6 @@ function TodoForm(props) {
             text: input,
             date: date
         })
-        //if statement to chekc if everyhting is filled out
-        // if (todoEnable && date) {
-        //     props.
-        // }
-
-        // if (!todoEnable && date) {
-        //     props.onSubmit({
-        //         id: Math.floor(Math.random() * 10000),
-        //         text: input
-        //     })
-        // }
         setTodoEnable(true);
         setShowDate(false);
         setInput("");
@@ -84,11 +75,14 @@ function TodoForm(props) {
                             className='todo-input'
                             ref={inputRef}
                         />
-                        <button
-                            onClick={handleDoDate}
-                            className='due-date-button'>
-                            Due Date
+                        <label>
+                            <button
+                                onClick={handleDoDate}
+                                className='due-date-button'>
+                                Due Date
                         </button>
+                            {showDate && <DatePicker dateOpen={dateOpen} onClick={handleDateChange} />}
+                        </label>
                         <button
                             disabled={todoEnable}
                             onClick={handleSubmit}
@@ -97,12 +91,12 @@ function TodoForm(props) {
                         </button>
                     </>
                 )}
-            <label>
-                {/* <div className="date-error">
+            {/* <label>
+                <div className="date-error">
 
-                </div> */}
-                {showDate && <DatePicker />}
-            </label>
+                </div>
+                {showDate && <DatePicker dateOpen={dateOpen} onClick={handleDateChange} />}
+            </label> */}
         </form>
     );
 }
