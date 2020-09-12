@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import DatePicker from '../DatePicker'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "../Todo/style.css";
-
 
 function TodoForm(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : "");
@@ -10,6 +10,7 @@ function TodoForm(props) {
     const [date, setDate] = useState({
         startDate: new Date()
     })
+
     const [dateOpen, setDateOpen] = useState(false);
 
 
@@ -43,6 +44,17 @@ function TodoForm(props) {
             text: input,
             date: date
         })
+        //if statement to chekc if everyhting is filled out
+        // if (todoEnable && date) {
+        //     props.
+        // }
+
+        // if (!todoEnable && date) {
+        //     props.onSubmit({
+        //         id: Math.floor(Math.random() * 10000),
+        //         text: input
+        //     })
+        // }
         setTodoEnable(true);
         setShowDate(false);
         setInput("");
@@ -80,8 +92,20 @@ function TodoForm(props) {
                                 onClick={handleDoDate}
                                 className='due-date-button'>
                                 Due Date
-                        </button>
-                            {showDate && <DatePicker dateOpen={dateOpen} onClick={handleDateChange} />}
+                                {showDate &&
+                                    <DatePicker
+                                        open={dateOpen}
+                                        onClickOutside={() => setDateOpen(false)}
+                                        selected={date.startDate}
+                                        onChange={handleDateChange}
+                                        value={date}
+                                        popperModifiers={{
+                                            enabled: true
+                                        }}
+                                    />
+                                }
+                            </button>
+
                         </label>
                         <button
                             disabled={todoEnable}
@@ -91,12 +115,11 @@ function TodoForm(props) {
                         </button>
                     </>
                 )}
-            {/* <label>
+            <label>
                 <div className="date-error">
 
                 </div>
-                {showDate && <DatePicker dateOpen={dateOpen} onClick={handleDateChange} />}
-            </label> */}
+            </label>
         </form>
     );
 }
