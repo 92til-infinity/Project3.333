@@ -26,7 +26,7 @@ function TodoPage() {
     setTodos((prev) =>
       prev.map((item) => (item.id === todoId ? newValue : item))
     );
-    return axios.post('/api/reactBudgets', newValue);
+    return axios.post('/api/reactTodos', newValue);
   };
 
   const removeTodo = (id) => {
