@@ -46,15 +46,17 @@ function TodoPage() {
   };
 
   return (
-    <div>
-      <h1>What's the plan today?</h1>
-      <TodoForm onSubmit={addTodo} />
-      <Todo
-        todos={todos}
-        completeTodo={completeTodo}
-        removeTodo={removeTodo}
-        updateTodo={updateTodo}
-      />
+    <div className="body">
+      <div>
+        <h1 style={{ color: "black" }}>What's the plan today?</h1>
+        <TodoForm onSubmit={addTodo} />
+        <Todo
+          todos={todos}
+          completeTodo={completeTodo}
+          removeTodo={removeTodo}
+          updateTodo={updateTodo}
+        />
+      </div>
     </div>
   );
 }
