@@ -16,6 +16,10 @@ export default {
     return axios.get("/api/users/" + role);
   },
 
+  getUnit: function(id) {
+    return axios.get("/api/units/" + id);
+  },
+
   getUnits: function() {
     return axios.get("/api/units");
   },

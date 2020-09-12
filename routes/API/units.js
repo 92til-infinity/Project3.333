@@ -19,6 +19,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// @route   GET api/units/:id
+// @desc    Get a unit by id
+// @access  Public
+router.get("/:id", async (req, res) => {
+  try {
+    const unit = await Unit.findById(req.params.id);
+    console.log(unit);
+    res.json(unit);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // @route   POST api/units
 // @desc    Create a class listing
 // @access  Private
