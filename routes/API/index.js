@@ -12,10 +12,10 @@ router.use("/auth", authRoutes);
 router.use("/users", usersRoutes);
 
 // Budget Routes
-router.use("/budget", budgetRoutes);
+router.use("/reactBudgets", budgetRoutes);
 
 // Todo Routes
-router.use("/todo", todoRoutes);
+router.use("/reactTodos", todoRoutes);
 
 // Units Routes
 router.use("/units", unitsRoutes);
