@@ -1,8 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Select from "react-select";
-// import { getOptionValue, getOptionLabel } from "react-select/src/builtins";
-// import { mapReduce } from "../../../../models/User";
 
 function CreateClass(props) {
   const [classData, setClassData] = useState({

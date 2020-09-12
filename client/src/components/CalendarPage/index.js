@@ -9,6 +9,8 @@ function CalendarPage() {
 
   const onChange = (date) => setDate({ date });
 
+  console.log(user.classes);
+
   return (
     <div>
       <h1>Hello {user.firstname}</h1>
