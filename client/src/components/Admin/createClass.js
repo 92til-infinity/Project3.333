@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Select from "react-select";
+// import { getOptionValue, getOptionLabel } from "react-select/src/builtins";
+// import { mapReduce } from "../../../../models/User";
 
 function CreateClass(props) {
   const [classData, setClassData] = useState({
@@ -36,12 +38,15 @@ function CreateClass(props) {
   const onClassChange = (e) =>
     setClassData({ ...classData, [e.target.name]: e.target.value });
 
-  const onDaysChange = async (value) => {
-    setClassData({ ...classData, days: value });
+  const onDaysChange = (value) => {
+    // Pull out just the value from each day object
+    const displayValue = value.map((day) => day.value);
+    setClassData({ ...classData, days: displayValue });
   };
 
   const onClassSubmit = async (e) => {
     e.preventDefault();
+
     const unit = {
       title,
       teacher,
