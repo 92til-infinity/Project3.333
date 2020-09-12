@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import API from "../../utils/API";
 import Calendar from "../Calendar";
 import Day from "../Day";
 import UserContext from "../../utils/UserContext";

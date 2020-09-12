@@ -145,3 +145,11 @@ h1 {
 .edit-icon {
   color: #fff;
 }
+
+.react-datepicker__input-container {
+  display: none !important;
+}
+
+.react-datepicker__triangle {
+  display: none !important;
+}
