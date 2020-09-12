@@ -30,7 +30,7 @@ class InputExpenses extends Component {
     });
   };
 
-  addExpenses = () => {
+  addExpense = () => {
     this.setState({
       expenses: [
         ...this.state.expenses,
@@ -84,7 +84,7 @@ class InputExpenses extends Component {
                   <option value='Transport'>Transport</option>
                 </select>
                 <button
-                  onClick={this.addExpenses}
+                  onClick={this.addExpense}
                   className='btn btn-dark btn-block mt-3'
                 >
                   Submit
