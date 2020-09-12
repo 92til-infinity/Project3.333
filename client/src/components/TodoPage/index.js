@@ -16,7 +16,7 @@ function TodoPage() {
     console.log(todo);
     // above console works
     // below posst works, but the value isnt set in robo3t and the 422 error is thrown from the Api route
-    return axios.post('/api/reactTodos', todo);
+    return axios.post('/api/todos', todo);
   };
 
   const updateTodo = (todoId, newValue) => {
@@ -26,7 +26,7 @@ function TodoPage() {
     setTodos((prev) =>
       prev.map((item) => (item.id === todoId ? newValue : item))
     );
-    return axios.post('/api/reactBudgets', newValue);
+    return axios.post('/api/todos', newValue);
   };
 
   const removeTodo = (id) => {
@@ -46,15 +46,17 @@ function TodoPage() {
   };
 
   return (
-    <div>
-      <h1>What's the plan today?</h1>
-      <TodoForm onSubmit={addTodo} />
-      <Todo
-        todos={todos}
-        completeTodo={completeTodo}
-        removeTodo={removeTodo}
-        updateTodo={updateTodo}
-      />
+    <div className="body">
+      <div>
+        <h1 style={{ color: "black" }}>What's the plan today?</h1>
+        <TodoForm onSubmit={addTodo} />
+        <Todo
+          todos={todos}
+          completeTodo={completeTodo}
+          removeTodo={removeTodo}
+          updateTodo={updateTodo}
+        />
+      </div>
     </div>
   );
 }

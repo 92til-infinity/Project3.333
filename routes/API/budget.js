@@ -12,11 +12,6 @@ router.route("/").post((req, res) => {
       res.status(422).end();
     });
 
-  // db.Todo.create(
-  //     req.body
-  // )
-  //     .then(todo => res.json(todo))
-  //     .catch(err => { console.log(err); res.status(422).end() });
 });
 
 module.exports = router;

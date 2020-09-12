@@ -30,17 +30,7 @@ class InputExpenses extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    // dispatch({
-    //   type: 'expenses+',
-    //   expenses: this.state.expenses,
-    // });
-    // dispatch({
-    //   type: 'category+',
-    //   category: this.state.category,
-    // });
-    // this.setState({
-    //   [e.target.name]: e.target.value,
-    // });
+
   };
 
   addExpense = () => {

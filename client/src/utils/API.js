@@ -5,7 +5,7 @@ import { RiEjectFill } from "react-icons/ri";
 // It accepts a "query" or term to search the recipe api for
 export default {
   addExpense: function(expenses) {
-    return axios.post("/api/budget", expenses);
+    return axios.post("/api/budgets", expenses);
   },
 
   getUser: function(id) {
