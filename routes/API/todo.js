@@ -3,7 +3,7 @@ const auth = require("../../config/middleware/auth");
 const db = require("../../models");
 const Todo = require("../../models/todoDB");
 
-// router.route("/reactTodos", auth).post((req, res) => {
+// router.route("/todos", auth).post((req, res) => {
 
 //   console.log(req.body);
 //   db.Todo.create(req.body)
