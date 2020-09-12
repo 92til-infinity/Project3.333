@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from '../DatePicker'
 import "../Todo/style.css";
+
 
 function TodoForm(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : "");
@@ -98,16 +98,10 @@ function TodoForm(props) {
                     </>
                 )}
             <label>
-                <div className="date-error">
+                {/* <div className="date-error">
 
-                </div>
-                {showDate &&
-                    <DatePicker
-                        selected={date.startDate}
-                        onChange={handleDateChange}
-                        value={date}
-                    />
-                }
+                </div> */}
+                {showDate && <DatePicker />}
             </label>
         </form>
     );
