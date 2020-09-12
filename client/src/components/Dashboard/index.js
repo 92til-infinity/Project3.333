@@ -3,6 +3,7 @@ import ChatPage from "../ChatPage";
 import TodoPage from "../TodoPage";
 import CalendarPage from "../CalendarPage";
 import BudgetPage from "../BudgetPage";
+import UserContext from "../../utils/UserContext";
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import {
   MDBInput,
@@ -25,6 +26,8 @@ import logoWhite from "../../assets/images/logo-white.png";
 import "./style.css";
 
 class Dashboard extends React.Component {
+  static contextType = UserContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -100,10 +103,11 @@ class Dashboard extends React.Component {
 
   handleSignOutClick = () => {
     localStorage.removeItem("token");
-    // <Redirect to="login" />;
   };
 
   render() {
+    const { user } = this.context;
+
     const navStyle = {
       paddingLeft:
         this.state.windowWidth > this.state.breakWidth ? "210px" : "16px",
@@ -231,7 +235,8 @@ class Dashboard extends React.Component {
                 className="d-none d-md-inline"
                 style={{ paddingTop: 5 }}
               >
-                Student Dashboard
+                {/* Student Dashboard */}
+                {user.firstname} {user.lastname}'s Dashboard
               </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right style={specialCaseNavbarStyles}>
@@ -262,10 +267,7 @@ class Dashboard extends React.Component {
                   <MDBDropdownMenu right>
                     <MDBDropdownItem href="#!">Profile</MDBDropdownItem>
                     <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
-                    <MDBDropdownItem
-                      href="/login"
-                      onClick={this.handleSignOutClick}
-                    >
+                    <MDBDropdownItem href="/" onClick={this.handleSignOutClick}>
                       Sign Out
                     </MDBDropdownItem>
                     {/* <MDBDropdownItem href='#!'>

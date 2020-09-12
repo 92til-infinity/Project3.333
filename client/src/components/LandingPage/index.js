@@ -112,7 +112,7 @@ class LandingPage extends React.Component {
                     </MDBNavItem>
                     <MDBNavItem>
                       <MDBNavLink
-                        to='#!'
+                        to='/budget'
                         style={{ fontFamily: 'kollektifregular' }}
                       >
                         Support
