@@ -12,7 +12,7 @@ router.use("/auth", authRoutes);
 router.use("/users", usersRoutes);
 
 // Budget Routes
-router.use("/budget", budgetRoutes);
+router.use("/budgets", budgetRoutes);
 
 // Todo Routes
 router.use("/todos", todoRoutes);
