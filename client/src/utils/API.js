@@ -7,7 +7,7 @@ export default {
   addExpense: function (expenses) {
     console.log(expenses);
     console.log("API.js line 9")
-    return axios.post("/api/budgetss", expenses);
+    return axios.post("/api/budgets", expenses);
   },
 
   getUser: function (id) {
