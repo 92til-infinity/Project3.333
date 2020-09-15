@@ -1,0 +1,59 @@
+{
+  "name": "mdb-full-calendar",
+  "version": "4.26.1",
+  "description": "MDBootstrap plugin with material design full page calendar",
+  "author": "MDBootstrap team",
+  "license": "SEE LICENSE IN <License.pdf>",
+  "main": "dist/mdb-react-calendar.js",
+  "module": "dist/mdb-react-calendar.esm.js",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "date-fns": "^1.30.1",
+    "mdbreact": "^4.27.0",
+    "prop-types": "^15.7.2",
+    "react-draggable": "^3.2.1",
+    "uuid": "^3.3.2"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "html-entities": "^1.2.1",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "rollup": "^1.2.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-replace": "^2.1.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "scripts": {
+    "build": "yarn run rollup -c",
+    "webpack": "webpack-dev-server --watch",
+    "start": "yarn run webpack"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
