@@ -41,14 +41,13 @@ class CalendarPage extends Component {
 
   render() {
     const arrOfObjects = [
-      { color: 'elegant-color', title: 'Test', dark: true },
-      { color: 'danger-color', title: 'Test1', dark: false },
-      { color: 'warning-color', title: 'Meeting', dark: false },
-      { color: 'success-color', title: 'Home', dark: false },
-      { color: 'info-color', title: 'Lunch', dark: false },
-      { color: 'default-color', title: 'Something', dark: false },
-      { color: 'primary-color', title: 'Pool', dark: false },
-      { color: 'secondary-color', title: 'Footbal', dark: true },
+      { color: 'danger-color', title: 'Homework', dark: false },
+      { color: 'warning-color', title: 'Class', dark: false },
+      { color: 'success-color', title: 'Meeting', dark: false },
+      { color: 'info-color', title: 'Home', dark: false },
+      { color: 'default-color', title: 'Lunch', dark: false },
+      { color: 'primary-color', title: 'Exam', dark: false },
+      { color: 'secondary-color', title: 'Quiz', dark: true },
     ];
 
     return (
