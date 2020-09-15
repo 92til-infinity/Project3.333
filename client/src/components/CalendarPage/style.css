@@ -1,0 +1,15 @@
+h1 {
+  color: black;
+}
+
+.cal-display {
+  position: relative;
+}
+
+.react-calendar {
+  margin: auto;
+}
+
+.add-item {
+  margin-bottom: 20px;
+}

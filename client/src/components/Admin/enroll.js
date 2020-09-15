@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import API from "../../utils/API";
-import axios from "axios";
 
 function Enroll(props) {
   const [enroll, setEnroll] = useState({});
@@ -18,7 +17,7 @@ function Enroll(props) {
     // await axios.get(`/api/users/${userId}`).then((res) => console.log(res));
 
     for (let i = 0; i < user.data.classes.length; i++) {
-      if (user.data.classes[i] == unitId) {
+      if (user.data.classes[i] === unitId) {
         alert("User is already enrolled in this class");
         return;
       }

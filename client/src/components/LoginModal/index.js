@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   MDBContainer,
   MDBBtn,
@@ -6,19 +6,19 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
-} from 'mdbreact';
-import LoginForm from '../LoginForm';
+} from "mdbreact";
+import LoginForm from "../LoginForm";
 
 class LoginModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal20: props.toggle,
+      modal20: props.isOpen,
     };
   }
 
   toggle = (nr) => () => {
-    let modalNumber = 'modal' + nr;
+    let modalNumber = "modal" + nr;
     this.setState({
       [modalNumber]: !this.state[modalNumber],
     });
@@ -27,10 +27,10 @@ class LoginModal extends Component {
   render() {
     return (
       <MDBContainer>
-        <MDBModal isOpen={this.state.modal20} toggle={this.toggle(20)} centered>
+        <MDBModal isOpen={this.state.modal20} centered>
           <MDBModalHeader toggle={this.toggle(20)}>Login</MDBModalHeader>
           <MDBModalBody>
-            <LoginForm />
+            <LoginForm toggle={this.props.toggle} />
           </MDBModalBody>
         </MDBModal>
       </MDBContainer>

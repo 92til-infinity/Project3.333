@@ -1,13 +1,20 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './App.css';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import "./App.css";
+
 
 // Utilities and Context
 import setAuthToken from './utils/setAuthToken';
 import UserContext from './utils/UserContext';
 
 // Components
+
 import LandingPage from './components/LandingPage';
 import SupportPage from './components/SupportPage';
 import Dashboard from './components/Dashboard';
@@ -16,6 +23,7 @@ import CalendarPage from './components/CalendarPage';
 import TodoPage from './components/TodoPage';
 import ChatPage from './components/ChatPage';
 import Admin from './components/Admin';
+
 
 function App() {
   const [userState, setUserState] = useState({

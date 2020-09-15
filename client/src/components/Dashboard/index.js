@@ -4,7 +4,7 @@ import TodoPage from "../TodoPage";
 import CalendarPage from "../CalendarPage";
 import BudgetPage from "../BudgetPage";
 import UserContext from "../../utils/UserContext";
-import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import {
   MDBInput,
   MDBNavbar,
