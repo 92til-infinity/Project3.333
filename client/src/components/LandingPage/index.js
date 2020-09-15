@@ -1,5 +1,6 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, withRouter } from 'react-router-dom';
+
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -115,8 +116,10 @@ class LandingPage extends React.Component {
                     </MDBNavItem>
                     <MDBNavItem>
                       <MDBNavLink
-                        to="/budget"
-                        style={{ fontFamily: "kollektifregular" }}
+
+                        to='/support'
+                        style={{ fontFamily: 'kollektifregular' }}
+
                       >
                         Support
                       </MDBNavLink>
@@ -164,10 +167,9 @@ class LandingPage extends React.Component {
                     style={{ width: "400px", height: "150px" }}
                   />
 
-                  {/* <h1 className='h1-responsive font-weight-bold mt-sm-5'>
-                    Make purchases with our app
-                  </h1> */}
-                  <hr className="hr-light" />
+
+                  <hr className='hr-light' />
+
                   <h4
                     className="mb-4"
                     style={{ fontFamily: "kollektifregular" }}
@@ -227,4 +229,4 @@ class LandingPage extends React.Component {
   }
 }
 
-export default LandingPage;
+export default withRouter(LandingPage);

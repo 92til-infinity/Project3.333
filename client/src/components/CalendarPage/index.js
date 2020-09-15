@@ -209,6 +209,7 @@ class CalendarPage extends Component {
 
   render() {
     const arrOfObjects = [
+
       { color: "elegant-color", title: "Test", dark: true },
       { color: "danger-color", title: "Homework Due", dark: false },
       { color: "warning-color", title: "Meeting", dark: false },
@@ -217,6 +218,7 @@ class CalendarPage extends Component {
       { color: "default-color", title: "Activity", dark: false },
       { color: "primary-color", title: "Appointment", dark: false },
       { color: "info-color", title: "Class", dark: true },
+
     ];
 
     return (
