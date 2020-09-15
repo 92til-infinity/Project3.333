@@ -24,6 +24,10 @@ export default {
     return axios.get("/api/units");
   },
 
+  getUnitsBetween: function(date) {
+    return axios.get("/api/units/between", date);
+  },
+
   enrollClass: function(classId, userId) {
     return axios.put(`/api/units/enroll/${classId}/${userId}`);
   },

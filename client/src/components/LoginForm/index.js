@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -6,12 +6,17 @@ import setAuthToken from "../../utils/setAuthToken";
 import UserContext from "../../utils/UserContext";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
 
-const LoginForm = ({ isAuthenticated }) => {
+const LoginForm = ({ toggle, isAuthenticated }) => {
   const { setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  // useEffect(function redirect() {
+  //   if (formData.isAuthenticated)
+  //     return window.setTimeout(() => <Redirect to={"/dash"} />, 1000);
+  // }, []);
 
   const { email, password } = formData;
 
@@ -45,6 +50,8 @@ const LoginForm = ({ isAuthenticated }) => {
         token: localStorage.getItem("token"),
       });
       setUser(res.data.user);
+      // Closes modal
+      toggle();
     } catch (error) {
       localStorage.removeItem("token");
       setFormData({ ...formData, isAuthenticated: false, token: null });
@@ -89,6 +96,7 @@ const LoginForm = ({ isAuthenticated }) => {
               <MDBBtn type="submit" value="Login">
                 Login
               </MDBBtn>
+              {/* {formData.isAuthenticated && <Redirect to="/dash" />} */}
             </div>
           </form>
         </MDBCol>
@@ -96,13 +104,5 @@ const LoginForm = ({ isAuthenticated }) => {
     </MDBContainer>
   );
 };
-//hi
-LoginForm.propTypes = {
-  isAuthenticated: PropTypes.bool,
-};
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default (mapStateToProps, LoginForm);
+export default LoginForm;

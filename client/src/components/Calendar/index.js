@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css";
 function Calendar(props) {
   return (
     <div>
-      <ReactCalendar onChange={props.onChange} value={props.date} />
+      <ReactCalendar onClickDay={props.onClickDay} value={props.date} />
     </div>
   );
 }

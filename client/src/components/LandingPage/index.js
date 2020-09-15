@@ -73,7 +73,10 @@ class LandingPage extends React.Component {
               <SignUpModal toggle={this.state.showSignUpModal} />
             )}
             {this.state.showLoginModal && (
-              <LoginModal toggle={this.state.showLoginModal} />
+              <LoginModal
+                toggle={this.onLoginClick}
+                isOpen={this.state.showLoginModal}
+              />
             )}
             <MDBNavbar
               color="primary-color"

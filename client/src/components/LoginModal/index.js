@@ -13,8 +13,7 @@ class LoginModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal20: props.toggle,
-      showModal: true,
+      modal20: props.isOpen,
     };
   }
 
@@ -28,10 +27,10 @@ class LoginModal extends Component {
   render() {
     return (
       <MDBContainer>
-        <MDBModal isOpen={this.state.modal20} toggle={this.toggle(20)} centered>
+        <MDBModal isOpen={this.state.modal20} centered>
           <MDBModalHeader toggle={this.toggle(20)}>Login</MDBModalHeader>
           <MDBModalBody>
-            <LoginForm />
+            <LoginForm toggle={this.props.toggle} />
           </MDBModalBody>
         </MDBModal>
       </MDBContainer>

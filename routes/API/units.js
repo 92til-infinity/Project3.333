@@ -25,8 +25,24 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const unit = await Unit.findById(req.params.id);
-    console.log(unit);
     res.json(unit);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   GET api/units/between
+// @desc    Get a unit taking in a min. start date and max. end date
+// @access  Public
+router.get("/between", async (req, res) => {
+  try {
+    const date = req.body;
+    const units = await Unit.find.and([
+      { startDate: { $gte: date } },
+      { endDate: { $lte: date } },
+    ]);
+    res.json(units);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
