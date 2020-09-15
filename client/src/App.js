@@ -1,13 +1,12 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
-import "./App.css";
-
+} from 'react-router-dom';
+import './App.css';
 
 // Utilities and Context
 import setAuthToken from './utils/setAuthToken';
@@ -17,13 +16,13 @@ import UserContext from './utils/UserContext';
 
 import LandingPage from './components/LandingPage';
 import SupportPage from './components/SupportPage';
+import AboutPage from './components/AboutPage';
 import Dashboard from './components/Dashboard';
 import BudgetPage from './components/BudgetPage';
 import CalendarPage from './components/CalendarPage';
 import TodoPage from './components/TodoPage';
 import ChatPage from './components/ChatPage';
 import Admin from './components/Admin';
-
 
 function App() {
   const [userState, setUserState] = useState({
@@ -62,6 +61,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={LandingPage} />
             <Route path='/dash' component={Dashboard} />
+            <Route path='/about' component={AboutPage} />
             <Route path='/support' component={SupportPage} />
             <Route path='/budget' component={BudgetPage} />
             <Route path='/schedule' component={CalendarPage} />

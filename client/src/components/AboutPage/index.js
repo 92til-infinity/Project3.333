@@ -16,14 +16,15 @@ import {
   MDBContainer,
   MDBAnimation,
 } from 'mdbreact';
+
 import '../../assets/font/stylesheet.css';
 import logoWhite from '../../assets/images/logo-white.png';
 import correctWhite from '../../assets/images/correct-white.png';
-import SupportPanels from '../SupportPanels';
+import AboutSection from '../AboutSection';
 import SignUpModal from '../SignUpModal/index';
 import LoginModal from '../LoginModal/index';
 
-class SupportPage extends React.Component {
+class AboutPage extends React.Component {
   state = {
     collapsed: false,
     showSignUpModal: false,
@@ -99,7 +100,7 @@ class SupportPage extends React.Component {
                         Home
                       </MDBNavLink>
                     </MDBNavItem>
-                    <MDBNavItem>
+                    <MDBNavItem active>
                       <MDBNavLink
                         to='/about'
                         style={{ fontFamily: 'kollektifregular' }}
@@ -107,7 +108,7 @@ class SupportPage extends React.Component {
                         About
                       </MDBNavLink>
                     </MDBNavItem>
-                    <MDBNavItem active>
+                    <MDBNavItem>
                       <MDBNavLink
                         to='/support'
                         style={{ fontFamily: 'kollektifregular' }}
@@ -154,7 +155,7 @@ class SupportPage extends React.Component {
                   className='h1-responsive text-center font-weight-bold'
                   style={{ color: '#ffffff' }}
                 >
-                  What can we help you with?
+                  About StudyCheck
                 </h1>
               </MDBCol>
             </MDBRow>
@@ -163,7 +164,7 @@ class SupportPage extends React.Component {
           <MDBContainer>
             <MDBRow>
               <MDBCol md='12' className='text-center py-5'>
-                <SupportPanels />
+                {/* <AboutSection /> */}
               </MDBCol>
             </MDBRow>
           </MDBContainer>
@@ -187,4 +188,4 @@ class SupportPage extends React.Component {
   }
 }
 
-export default SupportPage;
+export default AboutPage;
