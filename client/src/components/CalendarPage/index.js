@@ -17,25 +17,6 @@ class CalendarPage extends Component {
         link: true,
         to: 'test',
       },
-      {
-        id: 'task2',
-        title: 'Today',
-        startDate: new Date().setDate(2),
-        endDate: new Date().setDate(15),
-        color: 'info',
-        link: true,
-        to: 'test1',
-      },
-      {
-        id: 'task3',
-        title: 'Task name',
-        startDate: new Date().setDate(2),
-        endDate: new Date().setDate(15),
-        color: 'warning',
-        dark: true,
-        link: true,
-        to: 'test2',
-      },
     ],
   };
 

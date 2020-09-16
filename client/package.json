@@ -13,6 +13,8 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
+    "intro.js": "^2.9.3",
+    "intro.js-react": "^0.2.0",
     "mdb-react-calendar": "./package",
     "mdbreact": "git+https://oauth2:Ead_nCCzu8T61TJsZvfK@git.mdbootstrap.com/mdb/react/re-pro.git",
     "react": "^16.13.1",

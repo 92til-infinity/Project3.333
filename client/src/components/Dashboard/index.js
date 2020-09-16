@@ -105,6 +105,7 @@ class Dashboard extends React.Component {
     localStorage.removeItem("token");
   };
 
+
   render() {
     const { user } = this.context;
 
@@ -176,7 +177,7 @@ class Dashboard extends React.Component {
                 name="Budget"
                 id="submit-blog-cat"
                 icon="dollar-sign"
-                className="sideNavLink"
+                className="sideNavLink firstEl"
               >
                 <div name="Budget" onClick={this.handleBudgetClick}>
                   Budget
@@ -187,7 +188,7 @@ class Dashboard extends React.Component {
                 name="Calendar"
                 id="instruction-cat"
                 icon="calendar"
-                className="sideNavLink"
+                className="sideNavLink secondEl"
               >
                 <div name="Calender" onClick={this.handleCalendarClick}>
                   Calendar
