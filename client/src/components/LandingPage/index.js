@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import {
   MDBNavbar,
@@ -20,7 +20,7 @@ import {
 } from 'mdbreact';
 import './style.css';
 import '../../assets/font/stylesheet.css';
-import graduation from '../../assets/images/graduation.png';
+import calendar from '../../assets/images/calendar.png';
 import logoWhite from '../../assets/images/logo-white.png';
 import correctWhite from '../../assets/images/correct-white.png';
 import Features from '../Features';
@@ -100,7 +100,7 @@ class LandingPage extends React.Component {
                   <MDBNavbarNav left>
                     <MDBNavItem active>
                       <MDBNavLink
-                        to='#!'
+                        to='/'
                         style={{ fontFamily: 'kollektifregular' }}
                       >
                         Home
@@ -108,7 +108,7 @@ class LandingPage extends React.Component {
                     </MDBNavItem>
                     <MDBNavItem>
                       <MDBNavLink
-                        to='#!'
+                        to='/about'
                         style={{ fontFamily: 'kollektifregular' }}
                       >
                         About
@@ -191,8 +191,8 @@ class LandingPage extends React.Component {
               <MDBCol md='6' xl='5' className='mt-xl-5'>
                 <MDBAnimation type='fadeInRight' delay='.3s'>
                   <img
-                    src={graduation}
-                    alt='grad cap'
+                    src={calendar}
+                    alt='school icon'
                     className='img-fluid'
                     style={{
                       width: '380px',

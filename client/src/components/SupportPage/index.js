@@ -15,6 +15,7 @@ import {
   MDBView,
   MDBContainer,
   MDBAnimation,
+  MDBSmoothScroll,
 } from 'mdbreact';
 import '../../assets/font/stylesheet.css';
 import logoWhite from '../../assets/images/logo-white.png';
@@ -163,6 +164,12 @@ class SupportPage extends React.Component {
           <MDBContainer>
             <MDBRow>
               <MDBCol md='12' className='text-center py-5'>
+                <h3 className='h3-responsive text-center my-4 pb-5'>
+                  <span className='font-weight-bold'>
+                    Click on a topic below
+                  </span>{' '}
+                  to get the support you need.
+                </h3>
                 <SupportPanels />
               </MDBCol>
             </MDBRow>
