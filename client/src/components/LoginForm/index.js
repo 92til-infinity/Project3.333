@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
-import setAuthToken from "../../utils/setAuthToken";
-import UserContext from "../../utils/UserContext";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
-const LoginForm = ({ isAuthenticated }) => {
+import setAuthToken from '../../utils/setAuthToken';
+import UserContext from '../../utils/UserContext';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+
+const LoginForm = ({ toggle, isAuthenticated }) => {
   const { setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
     email: '',
@@ -21,6 +21,7 @@ const LoginForm = ({ isAuthenticated }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const user = {
       email,
       password,
@@ -34,9 +35,9 @@ const LoginForm = ({ isAuthenticated }) => {
       };
       const body = JSON.stringify(user);
 
-      const res = await axios.post("/api/auth", body, config);
+      const res = await axios.post('/api/auth', body, config);
       if (res.data.user.token) {
-        localStorage.setItem("token", res.data.user.token);
+        localStorage.setItem('token', res.data.user.token);
       }
       setAuthToken(localStorage.token);
       setFormData({
@@ -45,16 +46,19 @@ const LoginForm = ({ isAuthenticated }) => {
         token: localStorage.getItem('token'),
       });
       setUser(res.data.user);
+      // Closes modal
+      toggle();
     } catch (error) {
       localStorage.removeItem('token');
       setFormData({ ...formData, isAuthenticated: false, token: null });
-      console.error(error.response.data);
+      console.error(error);
     }
   };
-
   // Redirect if logged in
+  const history = useHistory();
   if (formData.isAuthenticated) {
-    return <Redirect to='/dash' />;
+    history.push('/dash');
+    history.go(0);
   }
 
   return (
@@ -96,13 +100,5 @@ const LoginForm = ({ isAuthenticated }) => {
     </MDBContainer>
   );
 };
-//hi
-LoginForm.propTypes = {
-  isAuthenticated: PropTypes.bool,
-};
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default (mapStateToProps, LoginForm);
+export default LoginForm;

@@ -6,6 +6,7 @@ function CreateClass(props) {
   const [classData, setClassData] = useState({
     title: "",
     teacher: "",
+    teacherid: "",
     startdate: "",
     enddate: "",
     days: [],
@@ -16,6 +17,7 @@ function CreateClass(props) {
   const {
     title,
     teacher,
+    teacherid,
     startdate,
     enddate,
     days,
@@ -36,12 +38,27 @@ function CreateClass(props) {
   const onClassChange = (e) =>
     setClassData({ ...classData, [e.target.name]: e.target.value });
 
-  const onDaysChange = async (value) => {
-    setClassData({ ...classData, days: value });
+  const onTeacherChange = (e) => {
+    // Find the selected teacher from the array of available teachers
+    const teacher = props.teachers.find((teacher) => {
+      return teacher._id === e.target.value;
+    });
+    setClassData({
+      ...classData,
+      teacherid: e.target.value,
+      teacher: `${teacher.firstname} ${teacher.lastname}`,
+    });
+  };
+
+  const onDaysChange = (value) => {
+    // Pull out just the value from each day object
+    const displayValue = value.map((day) => day.id);
+    setClassData({ ...classData, days: displayValue });
   };
 
   const onClassSubmit = async (e) => {
     e.preventDefault();
+
     const unit = {
       title,
       teacher,
@@ -63,7 +80,7 @@ function CreateClass(props) {
       });
       const body = JSON.stringify(unit);
       await axios.post("/api/units", body, config).then((res) => {
-        console.log(res);
+        // console.log(res);
       });
     } catch (error) {
       console.error(error.response.data);
@@ -94,9 +111,9 @@ function CreateClass(props) {
         <div className="form-group">
           <label>Teacher: </label>
           <select
-            name="teacher"
-            value={teacher}
-            onChange={(e) => onClassChange(e)}
+            name="teacherid"
+            value={teacherid}
+            onChange={(e) => onTeacherChange(e)}
           >
             <option value="">Select a teacher...</option>
             {props.teachers.map((teach) => (

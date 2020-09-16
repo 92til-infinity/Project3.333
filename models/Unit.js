@@ -9,6 +9,9 @@ const UnitSchema = new mongoose.Schema(
     teacher: {
       type: String,
     },
+    teacherid: {
+      type: String,
+    },
     startdate: {
       type: Date,
       required: true,
@@ -18,16 +21,7 @@ const UnitSchema = new mongoose.Schema(
       required: true,
     },
     days: {
-      type: [String],
-      enum: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
+      type: [Number],
     },
     starttime: {
       type: String,

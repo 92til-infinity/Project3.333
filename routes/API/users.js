@@ -114,7 +114,6 @@ router.post(
 router.get("/id/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    console.log(user);
     res.json(user);
   } catch (error) {
     console.error(error.message);
