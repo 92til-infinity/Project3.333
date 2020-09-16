@@ -80,7 +80,7 @@ function CreateClass(props) {
       });
       const body = JSON.stringify(unit);
       await axios.post("/api/units", body, config).then((res) => {
-        console.log(res);
+        // console.log(res);
       });
     } catch (error) {
       console.error(error.response.data);

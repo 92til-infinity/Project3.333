@@ -4,6 +4,11 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
 import setAuthToken from "../../utils/setAuthToken";
+import axios from "axios";
+import React, { useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
+import "./style.css";
 
 const SignUpForm = ({ toggle, isAuthenticated }) => {
   const { setUser } = React.useContext(UserContext);
@@ -13,7 +18,7 @@ const SignUpForm = ({ toggle, isAuthenticated }) => {
     email: "",
     password: "",
   });
-
+  const history = useHistory();
   const { firstname, lastname, email, password } = userData;
 
   const onUserChange = (e) =>
@@ -56,6 +61,7 @@ const SignUpForm = ({ toggle, isAuthenticated }) => {
       setUserData({ ...userData, isAuthenticated: false, token: null });
       console.error(error);
     }
+    return history.push("/dash");
   };
 
   return (
@@ -105,6 +111,7 @@ const SignUpForm = ({ toggle, isAuthenticated }) => {
                 name="password"
                 validate
                 onChange={(e) => onUserChange(e)}
+                minLength="6"
               />
             </div>
             <div className="text-center">

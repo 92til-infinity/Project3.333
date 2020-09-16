@@ -24,18 +24,19 @@ class BudgetInput extends Component {
         {(value) => {
           const { dispatch } = value;
           return (
-            <div className='card card-body mb-3'>
+            <div className='card card-body'>
               <label>Budget</label>
-              <form className='form-inline'>
+              <form>
                 <input
                   onChange={this.handleInput}
                   value={this.state.budget}
-                  className='form-control mr-2'
+                  className='form-control'
                   type='number'
                 />
+                <br></br>
                 <button
                   onClick={this.handleSubmit.bind(this, dispatch)}
-                  className='btn btn-dark btn-block'
+                  className='btn btn-dark btn-block '
                 >
                   submit
                 </button>

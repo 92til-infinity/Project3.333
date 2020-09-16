@@ -36,7 +36,7 @@ function CreateUser() {
       });
       const body = JSON.stringify(user);
       await axios.post("/api/users", body, config).then((res) => {
-        console.log(res);
+        // console.log(res);
       });
     } catch (error) {
       console.error(error.response.data);

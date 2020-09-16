@@ -82,6 +82,7 @@ const LoginForm = ({ toggle, isAuthenticated }) => {
                 label='Type your password'
                 icon='lock'
                 group
+                type='password'
                 validate
                 name='password'
                 value={password}
