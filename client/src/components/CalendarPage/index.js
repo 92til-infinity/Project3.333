@@ -121,18 +121,22 @@ class CalendarPage extends Component {
   }
 
   componentDidUpdate(_, prevState) {
-    if (this.state.classes.length !== prevState.classes.length) {
-      this.populate();
+    let user = this.context;
+    if (this.state.classes !== prevState.classes) {
+      if (user.user.activities.length === 0) {
+        this.populate();
+      } else if (user.user.activities.length > 0) {
+        this.setState({ tasks: user.user.activities });
+      }
     }
   }
 
   onChange = async (e) => {
-    // Event is just an array of state.tasks
+    let user = this.context;
+    // Setting new task list (e) to state, context, and database
+    user.setUser({ ...user, activities: e });
+    this.setState({ tasks: e });
     await API.setActivities(e);
-    // console.log(e);
-
-    // On each change, clear activites database and rewrite to activites database
-    // on mount, if activities is empty, run populate, otherwise set state to activities
   };
 
   // Load classes and store in state to avoid constant API calls
@@ -146,7 +150,6 @@ class CalendarPage extends Component {
       const classes = values.map(({ data }) => data);
       this.setState({ classes: classes });
     });
-    // this.setState({ classes: classArray });
   };
 
   populate = () => {

@@ -120,9 +120,11 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { assignment, duedate, details } = req.body;
+    const { assignment, duedate, details, unitId, unitName } = req.body;
 
     const newHomework = {
+      unitId,
+      unitName,
       assignment,
       duedate,
       details,
