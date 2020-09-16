@@ -156,12 +156,35 @@ router.get("/:search/:id", async (req, res) => {
 });
 
 // @route   PUT api/users/enroll/:id/:userid
-// @desc    Add a user to a class AND a class to a user
+// @desc    Add a class to a user
 // @access  Private
 router.put("/enroll/:id/:userid", async (req, res) => {
   try {
     const user = await User.findById(req.params.userid);
     user.classes.push(req.params.id);
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   PUT api/users/activities
+// @desc    Rewrite a user's activities
+// @access  Private
+router.put("/activities", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    // user.updateOne(
+    //   { id: user.id },
+    //   { $set: { activities: [] } },
+    //   { overwrite: true }
+    // );
+    user.activities = req.body;
+    // user.update({ $pullAll: { activities: {} } });
+
+    // user.activities.addToSet(req.body);
     await user.save();
     res.json(user);
   } catch (error) {

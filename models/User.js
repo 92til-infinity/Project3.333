@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema(
       type: [String],
     },
     activities: {
-      type: [String],
+      type: [Object],
     },
     budget: {
       type: String,

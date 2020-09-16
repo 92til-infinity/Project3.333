@@ -103,19 +103,9 @@
 
 import React, { Component } from "react";
 import MDBFullCalendar from "mdb-react-calendar";
-import {
-  addHours,
-  addDays,
-  addWeeks,
-  startOfWeek,
-  getDay,
-  parseISO,
-} from "date-fns";
+import { addHours, addDays, addWeeks, startOfWeek, getDay } from "date-fns";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
-import convertDay from "../../utils/dateConversions";
-
-const today = new Date();
 
 class CalendarPage extends Component {
   static contextType = UserContext;
@@ -125,33 +115,38 @@ class CalendarPage extends Component {
     tasks: [],
   };
 
-  componentWillMount() {}
-
   componentDidMount() {
     const user = this.context;
     this.getClassInfo(user.user.classes);
-    setTimeout(() => {
-      this.populate();
-    }, 500);
   }
 
-  onClickDay = (date) => {
-    console.log(date);
-    let user = this.context;
-    // const dateArray = date.toString().split(" ");
-    // const dayInt = convertDay(dateArray[0]);
-    // setDate({ date, day: dayInt });
-    // isToday(date, userClasses);
+  componentDidUpdate(_, prevState) {
+    if (this.state.classes.length !== prevState.classes.length) {
+      this.populate();
+    }
+  }
+
+  onChange = async (e) => {
+    // Event is just an array of state.tasks
+    await API.setActivities(e);
+    // console.log(e);
+
+    // On each change, clear activites database and rewrite to activites database
+    // on mount, if activities is empty, run populate, otherwise set state to activities
   };
 
   // Load classes and store in state to avoid constant API calls
   getClassInfo = (unitList) => {
     const classArray = [];
-    unitList.forEach(async (unit) => {
-      const unitInfo = await API.getUnit(unit);
-      classArray.push(unitInfo.data);
+    unitList.forEach((unit) => {
+      const unitInfo = API.getUnit(unit);
+      classArray.push(unitInfo);
     });
-    this.setState({ classes: classArray });
+    Promise.all(classArray).then((values) => {
+      const classes = values.map(({ data }) => data);
+      this.setState({ classes: classes });
+    });
+    // this.setState({ classes: classArray });
   };
 
   populate = () => {
@@ -177,7 +172,6 @@ class CalendarPage extends Component {
           if (dayInt === classes[i].days[j]) {
             let repeat = start;
             while (repeat < end) {
-              console.log("Whiling away...");
               const startInts = classes[i].starttime.split(":");
               const endInts = classes[i].endtime.split(":");
               const classInstance = {
@@ -189,7 +183,7 @@ class CalendarPage extends Component {
                   0
                 ),
                 endDate: new Date(repeat).setHours(endInts[0], endInts[1], 0),
-                color: "primary",
+                color: "info",
                 dark: true,
                 link: true,
                 to: "test",
@@ -209,7 +203,6 @@ class CalendarPage extends Component {
 
   render() {
     const arrOfObjects = [
-
       { color: "elegant-color", title: "Test", dark: true },
       { color: "danger-color", title: "Homework Due", dark: false },
       { color: "warning-color", title: "Meeting", dark: false },
@@ -218,7 +211,6 @@ class CalendarPage extends Component {
       { color: "default-color", title: "Activity", dark: false },
       { color: "primary-color", title: "Appointment", dark: false },
       { color: "info-color", title: "Class", dark: true },
-
     ];
 
     return (
@@ -226,7 +218,7 @@ class CalendarPage extends Component {
         colors={arrOfObjects}
         tasks={this.state.tasks}
         btnSizes="sm"
-        // onChange={this.populate}
+        onChange={this.onChange}
       />
     );
   }
