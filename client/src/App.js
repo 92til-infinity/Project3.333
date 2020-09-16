@@ -40,7 +40,7 @@ function App() {
   });
 
   useEffect(() => {
-    console.log('Using effect...');
+    // console.log('Using effect...');
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }

@@ -12,11 +12,11 @@ const User = require("../../models/User");
 // @desc    Get user information
 // @access  Public
 router.get("/", auth, async (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   try {
     // Send back user information except for the password
     const user = await User.findById(req.user.id).select("-password");
-    console.log(user);
+    // console.log(user);
     res.json(user);
   } catch (err) {
     console.error(err.message);
