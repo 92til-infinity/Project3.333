@@ -1,17 +1,17 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
-import "./style.css";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
+import './style.css';
 
 const SignUpForm = () => {
   const [userData, setUserData] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
   });
-
+  const history = useHistory();
   const { firstname, lastname, email, password } = userData;
 
   const onUserChange = (e) =>
@@ -29,73 +29,76 @@ const SignUpForm = () => {
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       };
       setUserData({
         ...userData,
       });
       const body = JSON.stringify(user);
+
       await axios.post("/api/users", body, config).then((res) => {
         // console.log(res);
+
       });
     } catch (error) {
       console.error(error.response.data);
     }
-
+    return history.push('/dash');
   };
 
   return (
     <MDBContainer>
-      <MDBRow className="text-left">
-        <MDBCol md="12">
+      <MDBRow className='text-left'>
+        <MDBCol md='12'>
           <form onSubmit={(e) => onUserSubmit(e)}>
-            <div className="grey-text">
+            <div className='grey-text'>
               <MDBInput
-                label="Your first name"
-                icon="user"
+                label='Your first name'
+                icon='user'
                 group
-                type="text"
-                name="firstname"
+                type='text'
+                name='firstname'
                 validate
-                error="wrong"
-                success="right"
+                error='wrong'
+                success='right'
                 onChange={(e) => onUserChange(e)}
               />
               <MDBInput
-                label="Your last name"
-                icon="user"
+                label='Your last name'
+                icon='user'
                 group
-                type="text"
-                name="lastname"
+                type='text'
+                name='lastname'
                 validate
-                error="wrong"
-                success="right"
+                error='wrong'
+                success='right'
                 onChange={(e) => onUserChange(e)}
               />
               <MDBInput
-                label="Your email"
-                icon="envelope"
+                label='Your email'
+                icon='envelope'
                 group
-                type="email"
-                name="email"
+                type='email'
+                name='email'
                 validate
-                error="wrong"
-                success="right"
+                error='wrong'
+                success='right'
                 onChange={(e) => onUserChange(e)}
               />
               <MDBInput
-                label="Your password"
-                icon="lock"
+                label='Your password'
+                icon='lock'
                 group
-                type="password"
-                name="password"
+                type='password'
+                name='password'
                 validate
                 onChange={(e) => onUserChange(e)}
+                minLength='6'
               />
             </div>
-            <div className="text-center">
-              <MDBBtn type="submit" color="primary">
+            <div className='text-center'>
+              <MDBBtn type='submit' color='primary'>
                 Register
               </MDBBtn>
             </div>
