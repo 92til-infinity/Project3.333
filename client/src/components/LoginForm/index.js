@@ -7,7 +7,7 @@ import UserContext from "../../utils/UserContext";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
 
 const LoginForm = ({ toggle, isAuthenticated }) => {
-  const { user, setUser } = React.useContext(UserContext);
+  const { setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -55,6 +55,7 @@ const LoginForm = ({ toggle, isAuthenticated }) => {
       console.error(error);
     }
   };
+
   // Redirect if logged in
   const history = useHistory();
   if (formData.isAuthenticated && formData.role === "Admin") {

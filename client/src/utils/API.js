@@ -24,6 +24,10 @@ export default {
     return axios.get("/api/units");
   },
 
+  assignHomework: function(id) {
+    return axios.put("/api/users/homework/" + id);
+  },
+
   setActivities: function(taskArray) {
     return axios.put("/api/users/activities", taskArray);
   },
