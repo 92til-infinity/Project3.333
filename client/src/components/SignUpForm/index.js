@@ -2,8 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
 import "./style.css";
+import UserContext from "../../utils/UserContext";
+import setAuthToken from "../../utils/setAuthToken";
 
-const SignUpForm = () => {
+const SignUpForm = ({ toggle, isAuthenticated }) => {
+  const { setUser } = React.useContext(UserContext);
   const [userData, setUserData] = useState({
     firstname: "",
     lastname: "",
@@ -35,11 +38,23 @@ const SignUpForm = () => {
         ...userData,
       });
       const body = JSON.stringify(user);
-      await axios.post("/api/users", body, config).then((res) => {
-        console.log(res);
+      const res = await axios.post("/api/users", body, config);
+      if (res.data.user.token) {
+        localStorage.setItem("token", res.data.user.token);
+      }
+      setAuthToken(localStorage.token);
+      setUserData({
+        ...userData,
+        isAuthenticated: true,
+        token: localStorage.getItem("token"),
       });
+      setUser(res.data.user);
+      // Closes modal
+      toggle();
     } catch (error) {
-      console.error(error.response.data);
+      localStorage.removeItem("token");
+      setUserData({ ...userData, isAuthenticated: false, token: null });
+      console.error(error);
     }
   };
 
