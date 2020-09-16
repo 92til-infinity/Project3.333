@@ -55,7 +55,13 @@ function Homework(props) {
     } catch (error) {
       console.error(error.response.data);
     }
+    assignHW(unitId);
     resetData();
+  };
+
+  const assignHW = async (classId) => {
+    const userlist = await axios.get(`/api/units/${classId}`);
+    console.log(userlist.data.enrolled);
   };
 
   const isEnabled =

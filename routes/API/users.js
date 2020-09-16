@@ -64,6 +64,7 @@ router.post(
       // See if user exists, send error if true
       let user = await User.findOne({ email });
       if (user) {
+        alert("Email already in use, please use another email or login");
         return res
           .status(400)
           .json({ errors: [{ msg: "User already exists" }] });
@@ -91,14 +92,21 @@ router.post(
           id: user.id,
         },
       };
+      console.log(payload);
 
       jwt.sign(
         payload,
         config.get("jwtSecret"),
         { expiresIn: 3600 },
         (err, token) => {
+          const safeUser = {
+            ...user._doc,
+            password: undefined,
+            token,
+          };
+
           if (err) throw err;
-          res.json({ token });
+          res.json({ user: safeUser });
         }
       );
     } catch (err) {
@@ -176,15 +184,22 @@ router.put("/enroll/:id/:userid", async (req, res) => {
 router.put("/activities", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
-    // user.updateOne(
-    //   { id: user.id },
-    //   { $set: { activities: [] } },
-    //   { overwrite: true }
-    // );
     user.activities = req.body;
-    // user.update({ $pullAll: { activities: {} } });
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
 
-    // user.activities.addToSet(req.body);
+// @route   PUT api/users/homework/:id
+// @desc    Add homework to a user
+// @access  Public
+router.put("/homework/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    user.homework.push(req.body);
     await user.save();
     res.json(user);
   } catch (error) {

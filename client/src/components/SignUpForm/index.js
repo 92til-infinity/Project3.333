@@ -4,13 +4,9 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
 import setAuthToken from "../../utils/setAuthToken";
-import axios from "axios";
-import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from "mdbreact";
-import "./style.css";
 
-const SignUpForm = ({ toggle, isAuthenticated }) => {
+const SignUpForm = ({ toggle }) => {
   const { setUser } = React.useContext(UserContext);
   const [userData, setUserData] = useState({
     firstname: "",
@@ -47,6 +43,8 @@ const SignUpForm = ({ toggle, isAuthenticated }) => {
       if (res.data.user.token) {
         localStorage.setItem("token", res.data.user.token);
       }
+
+      console.log(res.data);
       setAuthToken(localStorage.token);
       setUserData({
         ...userData,
@@ -54,15 +52,18 @@ const SignUpForm = ({ toggle, isAuthenticated }) => {
         token: localStorage.getItem("token"),
       });
       setUser(res.data.user);
-      // Closes modal
+      // // Closes modal
       toggle();
     } catch (error) {
       localStorage.removeItem("token");
       setUserData({ ...userData, isAuthenticated: false, token: null });
       console.error(error);
     }
-    return history.push("/dash");
   };
+  if (userData.isAuthenticated) {
+    history.push("/dash");
+    history.go(0);
+  }
 
   return (
     <MDBContainer>
