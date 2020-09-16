@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CreateUser from "./createUser";
 import CreateClass from "./createClass";
 import Enroll from "./enroll";
+import Homework from "./homework";
 import API from "../../utils/API";
 
 const Admin = () => {
@@ -25,6 +26,8 @@ const Admin = () => {
       return <CreateClass teachers={teachers} />;
     case "Enroll Student":
       return <Enroll students={students} units={units} />;
+    case "Assign Homework":
+      return <Homework units={units} />;
     default:
       break;
   }
