@@ -13,7 +13,7 @@ function TodoPage() {
     }
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
-    console.log(todo);
+    // console.log(todo);
     // above console works
     // below posst works, but the value isnt set in robo3t and the 422 error is thrown from the Api route
     return axios.post('/api/todos', todo);
