@@ -1,5 +1,5 @@
 import React from "react";
-import MDBFullCalendar from "mdb-react-calendar";
+import FullCalendar from "mdb-react-calendar";
 import { addDays } from "date-fns";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
@@ -148,22 +148,20 @@ class CalendarPage extends React.Component {
       { color: "elegant-color", title: "Test", dark: true },
       { color: "danger-color", title: "Homework Due", dark: false },
       { color: "warning-color", title: "Meeting", dark: false },
-      { color: "success-color", title: "Other", dark: false },
       { color: "secondary-color", title: "Lunch", dark: false },
       { color: "default-color", title: "Activity", dark: false },
       { color: "primary-color", title: "Appointment", dark: false },
       { color: "info-color", title: "Class", dark: true },
+      { color: "success-color", title: "Other", dark: false },
     ];
 
     return (
-      <>
-        <MDBFullCalendar
-          colors={arrOfObjects}
-          tasks={this.state.tasks}
-          btnSizes="sm"
-          onChange={this.onChange}
-        />
-      </>
+      <FullCalendar
+        colors={arrOfObjects}
+        tasks={this.state.tasks}
+        btnSizes="sm"
+        onChange={this.onChange}
+      />
     );
   }
 }
