@@ -4,7 +4,6 @@ import TodoPage from "../TodoPage";
 import CalendarPage from "../CalendarPage";
 import BudgetPage from "../BudgetPage";
 import UserContext from "../../utils/UserContext";
-import { BrowserRouter as Router } from "react-router-dom";
 import {
   MDBInput,
   MDBNavbar,
@@ -182,7 +181,6 @@ class Dashboard extends React.Component {
               </div>
             </MDBSideNavItem>
             <MDBSideNavItem
-              iconRegular
               name="Calendar"
               id="instruction-cat"
               icon="calendar"
