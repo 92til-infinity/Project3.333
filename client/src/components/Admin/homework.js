@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import API from "../../utils/API";
 
 function Homework(props) {
   const [hwData, setHwData] = useState({
@@ -49,19 +50,26 @@ function Homework(props) {
       const body = JSON.stringify(hw);
       await axios
         .put(`/api/units/homework/${unitId}`, body, config)
-        .then((res) => {
-          console.log(res);
+        .then(async () => {
+          const userlist = await axios.get(`/api/units/${unitId}`);
+          const enrolled = userlist.data.enrolled;
+          enrolled.forEach((student) => {
+            axios.put(`/api/users/homework/${student}`, body, config);
+          });
         });
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error);
     }
-    assignHW(unitId);
+    // assignHW(unitId);
     resetData();
   };
 
   const assignHW = async (classId) => {
     const userlist = await axios.get(`/api/units/${classId}`);
-    console.log(userlist.data.enrolled);
+    const enrolled = userlist.data.enrolled;
+    enrolled.forEach((student) => {
+      API.assignHomework(student);
+    });
   };
 
   const isEnabled =
