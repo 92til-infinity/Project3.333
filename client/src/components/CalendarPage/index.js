@@ -7,11 +7,14 @@ import API from "../../utils/API";
 class CalendarPage extends Component {
   static contextType = UserContext;
 
-  state = {
-    homework: [],
-    classes: [],
-    tasks: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      homework: [],
+      classes: [],
+      tasks: [],
+    };
+  }
 
   componentDidMount() {
     const { user } = this.context;
