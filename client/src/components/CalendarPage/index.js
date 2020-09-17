@@ -156,12 +156,14 @@ class CalendarPage extends Component {
     ];
 
     return (
-      <MDBFullCalendar
-        colors={arrOfObjects}
-        tasks={this.state.tasks}
-        btnSizes="sm"
-        onChange={this.onChange}
-      />
+      <>
+        <MDBFullCalendar
+          colors={arrOfObjects}
+          tasks={this.state.tasks}
+          btnSizes="sm"
+          onChange={this.onChange}
+        />
+      </>
     );
   }
 }
