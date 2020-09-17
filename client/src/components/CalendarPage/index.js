@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MDBFullCalendar from "mdb-react-calendar";
-import { addHours, addDays, addWeeks, startOfWeek, getDay } from "date-fns";
+import { addDays } from "date-fns";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
 
@@ -27,9 +27,6 @@ class CalendarPage extends Component {
     }
 
     if (this.state.classes !== prevState.classes) {
-      console.log(
-        this.state.classes.length + " vs " + prevState.classes.length
-      );
       this.checkClasses();
     }
   }
