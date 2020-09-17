@@ -1,5 +1,6 @@
 import React from "react";
-import FullCalendar from "mdb-react-calendar";
+// import MDBFullCalendar from "mdb-react-calendar";
+import Calendar from "../Calendar";
 import { addDays } from "date-fns";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
@@ -144,25 +145,7 @@ class CalendarPage extends React.Component {
   };
 
   render() {
-    const arrOfObjects = [
-      { color: "elegant-color", title: "Test", dark: true },
-      { color: "danger-color", title: "Homework Due", dark: false },
-      { color: "warning-color", title: "Meeting", dark: false },
-      { color: "secondary-color", title: "Lunch", dark: false },
-      { color: "default-color", title: "Activity", dark: false },
-      { color: "primary-color", title: "Appointment", dark: false },
-      { color: "info-color", title: "Class", dark: true },
-      { color: "success-color", title: "Other", dark: false },
-    ];
-
-    return (
-      <FullCalendar
-        colors={arrOfObjects}
-        tasks={this.state.tasks}
-        btnSizes="sm"
-        onChange={this.onChange}
-      />
-    );
+    return <Calendar tasks={this.state.tasks} onChange={this.onChange} />;
   }
 }
 

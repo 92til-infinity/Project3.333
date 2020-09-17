@@ -186,7 +186,7 @@ class Dashboard extends React.Component {
               icon="calendar"
               className="sideNavLink"
             >
-              <div name="Calender" onClick={this.handleCalendarClick}>
+              <div name="Calendar" onClick={this.handleCalendarClick}>
                 Calendar
               </div>
             </MDBSideNavItem>
