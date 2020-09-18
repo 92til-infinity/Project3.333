@@ -71,13 +71,15 @@ class LandingPage extends React.Component {
         <div>
           {this.state.showSignUpModal && (
             <SignUpModal
-              toggle={this.onSignUpClick}
+              toggleSignUp={this.onSignUpClick}
+              toggleLogin={this.onLoginClick}
               isOpen={this.state.showSignUpModal}
             />
           )}
           {this.state.showLoginModal && (
             <LoginModal
-              toggle={this.onLoginClick}
+              toggleSignUp={this.onSignUpClick}
+              toggleLogin={this.onLoginClick}
               isOpen={this.state.showLoginModal}
             />
           )}

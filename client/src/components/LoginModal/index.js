@@ -30,7 +30,11 @@ class LoginModal extends Component {
         <MDBModal isOpen={this.state.modal20} centered>
           <MDBModalHeader toggle={this.toggle(20)}>Login</MDBModalHeader>
           <MDBModalBody>
-            <LoginForm toggle={this.props.toggle} />
+            <LoginForm
+              toggleSignUp={this.props.onSignUpClick}
+              toggleLogin={this.props.onLoginClick}
+              showLoginModal={this.props.showLoginModal}
+            />
           </MDBModalBody>
         </MDBModal>
       </MDBContainer>
