@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  toast,
+  ToastContainer,
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -7,8 +9,18 @@ import {
   MDBBtn,
   MDBInput,
 } from 'mdbreact';
+import ContactAlert from '../ContactAlert';
 
 const ContactCard = () => {
+  const [emailAlert, setEmailAlert] = useState(false);
+
+  const handleEmailAlert = () => {
+    setEmailAlert(true);
+    toast.success('Message Received!', {
+      closeButton: false,
+    });
+  };
+
   return (
     <MDBContainer>
       <h2
@@ -24,23 +36,38 @@ const ContactCard = () => {
       </p>
       <MDBRow>
         <MDBCol md='9' className='md-0 mb-5'>
-          <form>
+          <form id='contact-form'>
             <MDBRow>
               <MDBCol md='6'>
                 <div className='md-form mb-0'>
-                  <MDBInput type='text' id='contact-name' label='Your name' />
+                  <MDBInput
+                    type='text'
+                    id='contact-name'
+                    label='Your name'
+                    className='userInput'
+                  />
                 </div>
               </MDBCol>
               <MDBCol md='6'>
                 <div className='md-form mb-0'>
-                  <MDBInput type='text' id='contact-email' label='Your email' />
+                  <MDBInput
+                    type='text'
+                    id='contact-email'
+                    label='Your email'
+                    className='userInput'
+                  />
                 </div>
               </MDBCol>
             </MDBRow>
             <MDBRow>
               <MDBCol md='12'>
                 <div className='md-form mb-0'>
-                  <MDBInput type='text' id='contact-subject' label='Subject' />
+                  <MDBInput
+                    type='text'
+                    id='contact-subject'
+                    label='Subject'
+                    className='userInput'
+                  />
                 </div>
               </MDBCol>
             </MDBRow>
@@ -51,13 +78,14 @@ const ContactCard = () => {
                     type='textarea'
                     id='contact-message'
                     label='Your message'
+                    className='userInput'
                   />
                 </div>
               </MDBCol>
             </MDBRow>
           </form>
           <div className='text-center text-md-left'>
-            <MDBBtn color='primary' size='md'>
+            <MDBBtn color='primary' size='md' onClick={handleEmailAlert}>
               Send
             </MDBBtn>
           </div>
@@ -79,6 +107,7 @@ const ContactCard = () => {
           </ul>
         </MDBCol>
       </MDBRow>
+      {emailAlert && <ContactAlert />}
     </MDBContainer>
   );
 };
