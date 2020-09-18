@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   MDBContainer,
   MDBBtn,
@@ -6,9 +6,9 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
-} from 'mdbreact';
-import './style.css';
-import SignUpForm from '../SignUpForm';
+} from "mdbreact";
+import "./style.css";
+import SignUpForm from "../SignUpForm";
 
 class SignUpModal extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class SignUpModal extends Component {
   }
 
   toggle = (nr) => () => {
-    let modalNumber = 'modal' + nr;
+    let modalNumber = "modal" + nr;
     this.setState({
       [modalNumber]: !this.state[modalNumber],
     });
@@ -31,7 +31,7 @@ class SignUpModal extends Component {
         <MDBModal isOpen={this.state.modal14} toggle={this.toggle(14)} centered>
           <MDBModalHeader toggle={this.toggle(14)}>Sign Up</MDBModalHeader>
           <MDBModalBody>
-            <SignUpForm />
+            <SignUpForm toggle={this.props.toggle} />
           </MDBModalBody>
         </MDBModal>
       </MDBContainer>

@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema(
       type: [String],
     },
     activities: {
-      type: [String],
+      type: [Object],
     },
     budget: {
       type: String,
@@ -36,8 +36,19 @@ const UserSchema = new mongoose.Schema(
     todos: {
       type: [String],
     },
+    social: {
+      type: [Object],
+    },
     homework: [
       {
+        unitId: {
+          type: String,
+          required: true,
+        },
+        unitName: {
+          type: String,
+          required: true,
+        },
         assignment: {
           type: String,
           required: true,
@@ -46,12 +57,8 @@ const UserSchema = new mongoose.Schema(
           type: Date,
           required: true,
         },
-        details: {
+        description: {
           type: String,
-        },
-        completed: {
-          type: Boolean,
-          default: false,
         },
       },
     ],

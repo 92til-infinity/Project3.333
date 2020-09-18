@@ -64,6 +64,7 @@ router.post(
       // See if user exists, send error if true
       let user = await User.findOne({ email });
       if (user) {
+        alert("Email already in use, please use another email or login");
         return res
           .status(400)
           .json({ errors: [{ msg: "User already exists" }] });
@@ -91,14 +92,21 @@ router.post(
           id: user.id,
         },
       };
+      console.log(payload);
 
       jwt.sign(
         payload,
         config.get("jwtSecret"),
         { expiresIn: 3600 },
         (err, token) => {
+          const safeUser = {
+            ...user._doc,
+            password: undefined,
+            token,
+          };
+
           if (err) throw err;
-          res.json({ token });
+          res.json({ user: safeUser });
         }
       );
     } catch (err) {
@@ -145,6 +153,9 @@ router.get("/:search/:id", async (req, res) => {
       case "todos":
         res.json(user.todos);
         break;
+      case "social":
+        res.json(user.social);
+        break;
       default:
         res.json(user);
         break;
@@ -156,12 +167,42 @@ router.get("/:search/:id", async (req, res) => {
 });
 
 // @route   PUT api/users/enroll/:id/:userid
-// @desc    Add a user to a class AND a class to a user
+// @desc    Add a class to a user
 // @access  Private
 router.put("/enroll/:id/:userid", async (req, res) => {
   try {
     const user = await User.findById(req.params.userid);
     user.classes.push(req.params.id);
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   PUT api/users/activities
+// @desc    Rewrite a user's activities
+// @access  Private
+router.put("/activities", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    user.activities = req.body;
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   PUT api/users/homework/:id
+// @desc    Add homework to a user
+// @access  Public
+router.put("/homework/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    user.homework.push(req.body);
     await user.save();
     res.json(user);
   } catch (error) {

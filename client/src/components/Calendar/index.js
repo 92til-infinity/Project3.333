@@ -1,12 +1,25 @@
 import React from "react";
-import ReactCalendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import MDBFullCalendar from "mdb-react-calendar";
 
 function Calendar(props) {
+  const arrOfObjects = [
+    { color: "elegant-color", title: "Test", dark: true },
+    { color: "danger-color", title: "Homework Due", dark: false },
+    { color: "warning-color", title: "Meeting", dark: false },
+    { color: "secondary-color", title: "Lunch", dark: false },
+    { color: "default-color", title: "Activity", dark: false },
+    { color: "primary-color", title: "Appointment", dark: false },
+    { color: "info-color", title: "Class", dark: true },
+    { color: "success-color", title: "Other", dark: false },
+  ];
+
   return (
-    <div>
-      <ReactCalendar onClickDay={props.onClickDay} value={props.date} />
-    </div>
+    <MDBFullCalendar
+      colors={arrOfObjects}
+      onChange={props.onChange}
+      tasks={props.tasks}
+      btnSizes="sm"
+    />
   );
 }
 
