@@ -37,3 +37,8 @@
 #apppage h6 {
   line-height: 1.7;
 }
+
+#apppage .responsive {
+  max-width: 100% !important;
+  height: auto !important;
+}

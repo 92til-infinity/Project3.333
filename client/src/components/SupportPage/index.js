@@ -14,48 +14,42 @@ import {
   MDBBtn,
   MDBView,
   MDBContainer,
-  MDBAnimation,
-  MDBSmoothScroll,
 } from "mdbreact";
+import ContactCard from "../ContactCard";
+import GettingStartedAccordion from "../GettingStartedAccordion";
+import FAQAccordion from "../FAQAccordion";
 import "../../assets/font/stylesheet.css";
 import logoWhite from "../../assets/images/logo-white.png";
 import correctWhite from "../../assets/images/correct-white.png";
 import SupportPanels from "../SupportPanels";
 import SignUpModal from "../SignUpModal/index";
 import LoginModal from "../LoginModal/index";
-
 class SupportPage extends React.Component {
   state = {
     collapsed: false,
     showSignUpModal: false,
     showLoginModal: false,
   };
-
   handleTogglerClick = () => {
     const { collapsed } = this.state;
     this.setState({
       collapsed: !collapsed,
     });
   };
-
   onSignUpClick = () => {
     this.setState({ showSignUpModal: !this.state.showSignUpModal });
   };
   onLoginClick = () => {
     this.setState({ showLoginModal: !this.state.showLoginModal });
   };
-
   componentDidMount() {
     document.querySelector("nav").style.height = "65px";
   }
-
   componentWillUnmount() {
     document.querySelector("nav").style.height = "auto";
   }
-
   render() {
     const { collapsed } = this.state;
-
     const overlay = (
       <div
         id="sidenav-overlay"
@@ -134,7 +128,6 @@ class SupportPage extends React.Component {
                     >
                       Log In
                     </MDBBtn>
-
                     <MDBBtn
                       color="white"
                       style={{ fontFamily: "kollektifregular" }}
@@ -149,7 +142,6 @@ class SupportPage extends React.Component {
           </MDBNavbar>
           {collapsed && overlay}
         </div>
-
         <MDBView>
           <MDBMask className="white-text gradient" style={{ height: "40%" }} />
           <MDBContainer
@@ -167,7 +159,6 @@ class SupportPage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
-
           <MDBContainer>
             <MDBRow>
               <MDBCol md="12" className="text-center pt-4 pb-lg-n5 mt-lg-5">
@@ -182,7 +173,31 @@ class SupportPage extends React.Component {
             </MDBRow>
           </MDBContainer>
         </MDBView>
-
+        <MDBContainer>
+          <MDBRow className="py-5">
+            <MDBCol md="12" className="text-center">
+              <h3 id="gettingStarted">Getting Started</h3>
+              <br />
+              <GettingStartedAccordion />
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+        <MDBContainer>
+          <MDBRow className="py-5">
+            <MDBCol md="12" className="text-center">
+              <h3 id="faqs">Frequently Asked Questions</h3>
+              <br />
+              <FAQAccordion />
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+        <MDBContainer>
+          <MDBRow className="py-5">
+            <MDBCol md="12" className="text-center">
+              <ContactCard />
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
         <div
           className="footer-copyright text-center text-white py-3"
           style={{ backgroundColor: "#4285f4", fontFamily: "kollektifregular" }}
@@ -200,5 +215,4 @@ class SupportPage extends React.Component {
     );
   }
 }
-
 export default SupportPage;
