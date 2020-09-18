@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -20,7 +20,7 @@ import {
 import '../../assets/font/stylesheet.css';
 import logoWhite from '../../assets/images/logo-white.png';
 import correctWhite from '../../assets/images/correct-white.png';
-import AboutSection from '../AboutSection';
+import TeamSection from '../TeamSection';
 import SignUpModal from '../SignUpModal/index';
 import LoginModal from '../LoginModal/index';
 
@@ -82,11 +82,13 @@ class AboutPage extends React.Component {
           >
             <MDBContainer>
               <MDBNavbarBrand>
-                <img
-                  src={correctWhite}
-                  alt='checkmark'
-                  style={{ width: '45px', height: '45px' }}
-                />
+                <Link to='/'>
+                  <img
+                    src={correctWhite}
+                    alt='checkmark'
+                    style={{ width: '45px', height: '45px' }}
+                  />
+                </Link>
               </MDBNavbarBrand>
               <MDBNavbarToggler onClick={this.handleTogglerClick} />
               <MDBCollapse isOpen={collapsed} navbar>
@@ -163,7 +165,19 @@ class AboutPage extends React.Component {
           <MDBContainer>
             <MDBRow>
               <MDBCol md='12' className='text-center py-5'>
-                {/* <AboutSection /> */}
+                <h4 className='text-center mx-5 px-5'>
+                  StudyCheck is a free, easy way for you to organize your life
+                  as a student. Founded by a team of four talented individuals,
+                  we wanted to create an app that lets you budget, track your
+                  expenses, schedule, and keep important reminders all in one.
+                </h4>
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
+          <MDBContainer>
+            <MDBRow>
+              <MDBCol md='12' className='text-center py-5'>
+                {/* <TeamSection /> */}
               </MDBCol>
             </MDBRow>
           </MDBContainer>

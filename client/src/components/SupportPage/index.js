@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -82,11 +82,13 @@ class SupportPage extends React.Component {
           >
             <MDBContainer>
               <MDBNavbarBrand>
-                <img
-                  src={correctWhite}
-                  alt='checkmark'
-                  style={{ width: '45px', height: '45px' }}
-                />
+                <Link to='/'>
+                  <img
+                    src={correctWhite}
+                    alt='checkmark'
+                    style={{ width: '45px', height: '45px' }}
+                  />
+                </Link>
               </MDBNavbarBrand>
               <MDBNavbarToggler onClick={this.handleTogglerClick} />
               <MDBCollapse isOpen={collapsed} navbar>
@@ -162,7 +164,7 @@ class SupportPage extends React.Component {
 
           <MDBContainer>
             <MDBRow>
-              <MDBCol md='12' className='text-center py-5'>
+              <MDBCol md='12' className='text-center pt-4 pb-lg-n5 mt-lg-5'>
                 <h3 className='h3-responsive text-center my-4 pb-5'>
                   <span className='font-weight-bold'>
                     Click on a topic below

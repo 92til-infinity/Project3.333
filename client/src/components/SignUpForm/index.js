@@ -6,6 +6,7 @@ import UserContext from "../../utils/UserContext";
 import setAuthToken from "../../utils/setAuthToken";
 import { Redirect, useHistory } from "react-router-dom";
 
+
 const SignUpForm = ({ toggle }) => {
   const { setUser } = React.useContext(UserContext);
   const [userData, setUserData] = useState({
@@ -44,12 +45,14 @@ const SignUpForm = ({ toggle }) => {
         localStorage.setItem("token", res.data.user.token);
       }
 
+
       console.log(res.data);
       setAuthToken(localStorage.token);
       setUserData({
         ...userData,
         isAuthenticated: true,
         token: localStorage.getItem("token"),
+
       });
       setUser(res.data.user);
       // // Closes modal
