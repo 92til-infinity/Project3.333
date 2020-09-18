@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -88,11 +87,13 @@ class LandingPage extends React.Component {
           >
             <MDBContainer>
               <MDBNavbarBrand>
-                <img
-                  src={correctWhite}
-                  alt='checkmark'
-                  style={{ width: '45px', height: '45px' }}
-                />
+                <Link to='/'>
+                  <img
+                    src={correctWhite}
+                    alt='checkmark'
+                    style={{ width: '45px', height: '45px' }}
+                  />
+                </Link>
               </MDBNavbarBrand>
               <MDBNavbarToggler onClick={this.handleTogglerClick} />
               <MDBCollapse isOpen={collapsed} navbar>

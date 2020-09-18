@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import './style.css';
 
@@ -37,9 +37,8 @@ const SignUpForm = () => {
       });
       const body = JSON.stringify(user);
 
-      await axios.post("/api/users", body, config).then((res) => {
+      await axios.post('/api/users', body, config).then((res) => {
         // console.log(res);
-
       });
     } catch (error) {
       console.error(error.response.data);

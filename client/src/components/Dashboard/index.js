@@ -151,7 +151,7 @@ class Dashboard extends React.Component {
               </li>
               <li>
                 <a href='#!'>
-                  <MDBIcon fab icon='google-plus-g' />
+                  <MDBIcon fab icon='github' />
                 </a>
               </li>
               <li>
