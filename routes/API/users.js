@@ -153,6 +153,9 @@ router.get("/:search/:id", async (req, res) => {
       case "todos":
         res.json(user.todos);
         break;
+      case "social":
+        res.json(user.social);
+        break;
       default:
         res.json(user);
         break;

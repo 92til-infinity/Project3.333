@@ -1,142 +1,48 @@
-// import React, { useContext, useState, useEffect } from "react";
-// import API from "../../utils/API";
-// import Calendar from "../Calendar";
-// import Day from "../Day";
-// import convertDay from "../../utils/dateConversions";
-// import UserContext from "../../utils/UserContext";
-// import "./style.css";
-
-// function CalendarPage() {
-//   const [date, setDate] = useState({
-//     date: new Date(),
-//     day: convertDay(new Date().getDay()),
-//   });
-//   const [daySchedule, setDaySchedule] = useState({
-//     date: "",
-//     schedule: [],
-//   });
-//   const [userClasses, setUserClasses] = useState({});
-
-//   const todayArray = [];
-
-//   const { user } = useContext(UserContext);
-
-//   useEffect(() => {
-//     console.log("UseEFFECT");
-//     setUserClasses(getClassInfo(user.classes));
-//     isToday(date, userClasses);
-//   }, []);
-
-//   const onClickDay = (date) => {
-//     const dateArray = date.toString().split(" ");
-//     const dayInt = convertDay(dateArray[0]);
-//     setDate({ date, day: dayInt });
-//     isToday(date, userClasses);
-//   };
-
-//   // Load classes and store in hook to avoid constant API calls
-//   const getClassInfo = (unitList) => {
-//     const classArray = [];
-//     unitList.forEach(async (unit) => {
-//       const unitInfo = await API.getUnit(unit);
-//       classArray.push(unitInfo.data);
-//     });
-//     return classArray;
-//   };
-
-//   const isToday = async (date, unitList) => {
-//     const dateArray = date.toString().split(" ");
-//     const today = convertDay(dateArray[0]);
-//     console.log(
-//       `${today} is today's number, and the number of units is ${
-//         unitList.length
-//       }`
-//     );
-
-//     for (let i = 0; i < unitList.length; i++) {
-//       const unit = unitList[i];
-//       // Make sure selected date falls between start and end dates of class
-//       if (
-//         Date.parse(date) >= Date.parse(unit.startdate) &&
-//         Date.parse(date) <= Date.parse(unit.enddate)
-//       ) {
-//         // For each class, dig through days array to find a match
-//         unit.days.forEach((day) => {
-//           if (day === today) {
-//             // If match is found, do this:
-//             todayArray.push(unit);
-//             console.log(`${day} is a match`);
-//           }
-//         });
-//       }
-//     }
-//     // Logging array of classes that take place today
-//     console.log(todayArray);
-//     setDaySchedule({ schedule: todayArray });
-//   };
-
-//   return (
-//     <div className="cal-display">
-//       <h1>Hello {user.firstname}</h1>
-//       <Day date={date.date} />
-//       <Calendar date={date.date} onClickDay={onClickDay} />
-//       <br />
-//       <input
-//         type="button"
-//         className="btn Ripple-parent btn-outline-black add-item"
-//         value="Add Calendar Item"
-//       />
-//       <br />
-
-//       {daySchedule.schedule.map((appt) => (
-//         <div key={appt._id}>
-//           <h4>{appt.title}</h4>
-//           <p>Taught by {appt.teacher}</p>
-//           <p>
-//             <span>{appt.starttime}</span> - <span>{appt.endtime}</span>
-//           </p>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-import React, { Component } from "react";
+import React from "react";
 import MDBFullCalendar from "mdb-react-calendar";
-import { addHours, addDays, addWeeks, startOfWeek, getDay } from "date-fns";
+import { addDays } from "date-fns";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
 
-class CalendarPage extends Component {
+class CalendarPage extends React.Component {
   static contextType = UserContext;
 
-  state = {
-    classes: [],
-    tasks: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      homework: [],
+      classes: [],
+      tasks: [],
+    };
+  }
 
   componentDidMount() {
-    const user = this.context;
-    this.getClassInfo(user.user.classes);
+    const { user } = this.context;
+    // Load the state with homework, class info, and tasks
+    this.setState({ tasks: user.activities });
+    this.setState({ homework: user.homework });
+    this.getClassInfo(user.classes);
   }
 
   componentDidUpdate(_, prevState) {
-    let user = this.context;
+    if (this.state.homework !== prevState.homework) {
+      this.checkHomework();
+    }
+
     if (this.state.classes !== prevState.classes) {
-      if (user.user.activities.length === 0) {
-        this.populate();
-      } else if (user.user.activities.length > 0) {
-        this.setState({ tasks: user.user.activities });
-      }
+      this.checkClasses();
     }
   }
 
   onChange = async (e) => {
-    let user = this.context;
+    let { user, setUser } = this.context;
+    this.setState({ tasks: user.activities });
     // Setting new task list (e) to state, context, and database
-    user.setUser({ ...user, activities: e });
-    this.setState({ tasks: e });
-    await API.setActivities(e);
+    if (e.length !== this.state.tasks.length) {
+      setUser({ ...user, activities: e });
+      this.setState({ tasks: e });
+      await API.setActivities(e);
+    }
   };
 
   // Load classes and store in state to avoid constant API calls
@@ -152,56 +58,89 @@ class CalendarPage extends Component {
     });
   };
 
-  populate = () => {
-    let start, end;
-    let classContainer = [];
-    const classes = this.state.classes;
-
-    // For every class...
-    for (let i = 0; i < classes.length; i++) {
-      let startArray = classes[i].startdate.split("T");
-      let endArray = classes[i].enddate.split("T");
-      start = addDays(new Date(startArray[0]), 1);
-      end = addDays(new Date(endArray[0]), 1);
-
-      // For each day of the week
-      for (let x = 0; x < 7; x++) {
-        const dayInt = start.getDay();
-
-        // For each day in the class days array
-        for (let j = 0; j < classes[i].days.length; j++) {
-          // If matched, create a class instance for every repeating
-          // day within the class start/end dates
-          if (dayInt === classes[i].days[j]) {
-            let repeat = start;
-            while (repeat < end) {
-              const startInts = classes[i].starttime.split(":");
-              const endInts = classes[i].endtime.split(":");
-              const classInstance = {
-                id: classes[i]._id,
-                title: classes[i].title,
-                startDate: new Date(repeat).setHours(
-                  startInts[0],
-                  startInts[1],
-                  0
-                ),
-                endDate: new Date(repeat).setHours(endInts[0], endInts[1], 0),
-                color: "info",
-                dark: true,
-                link: true,
-                to: "test",
-              };
-              classContainer.push(classInstance);
-              repeat = addDays(repeat, 7);
-            }
-          }
-        }
-        // If none matched, change startdate to one day later and
-        // run through array again
-        start = addDays(start, 1);
+  checkClasses = () => {
+    for (let i = 0; i < this.state.classes.length; i++) {
+      const classes = this.state.classes[i];
+      if (this.state.tasks.some((task) => task.id === classes._id)) {
+        // Do nothing, but if/else statement is necessary
+      } else {
+        this.populate(classes);
       }
     }
+  };
+
+  checkHomework = () => {
+    for (let i = 0; i < this.state.homework.length; i++) {
+      const homework = this.state.homework[i];
+      if (this.state.tasks.some((hw) => hw.id === homework._id)) {
+        // Do nothing, but if/else statement is necessary
+      } else {
+        this.addHomework(homework);
+      }
+    }
+  };
+
+  addHomework = async (homework) => {
+    let homeworkContainer = this.state.tasks;
+
+    const hwInstance = {
+      id: homework._id,
+      title: homework.assignment,
+      startDate: new Date(homework.duedate).setHours(0, 0, 0),
+      endDate: new Date(homework.duedate).setHours(23, 59, 59),
+      color: "danger",
+      dark: true,
+    };
+    homeworkContainer.push(hwInstance);
+    this.setState({ tasks: homeworkContainer });
+    await API.setActivities(homeworkContainer);
+  };
+
+  populate = async (unit) => {
+    let start, end;
+    let classContainer = this.state.tasks;
+    let startArray = unit.startdate.split("T");
+    let endArray = unit.enddate.split("T");
+
+    start = addDays(new Date(startArray[0]), 1);
+    end = addDays(new Date(endArray[0]), 1);
+
+    // For each day of the week
+    for (let x = 0; x < 7; x++) {
+      const dayInt = start.getDay();
+
+      // For each day in the class days array
+      for (let j = 0; j < unit.days.length; j++) {
+        // If matched, create a class instance for every repeating
+        // day within the class start/end dates
+        if (dayInt === unit.days[j]) {
+          let repeat = start;
+          while (repeat < end) {
+            const startInts = unit.starttime.split(":");
+            const endInts = unit.endtime.split(":");
+            const classInstance = {
+              id: unit._id,
+              title: unit.title,
+              startDate: new Date(repeat).setHours(
+                startInts[0],
+                startInts[1],
+                0
+              ),
+              endDate: new Date(repeat).setHours(endInts[0], endInts[1], 0),
+              color: "info",
+              dark: true,
+            };
+            classContainer.push(classInstance);
+            repeat = addDays(repeat, 7);
+          }
+        }
+      }
+      // If none matched, change startdate to one day later and
+      // run through array again
+      start = addDays(start, 1);
+    }
     this.setState({ tasks: classContainer });
+    await API.setActivities(classContainer);
   };
 
   render() {
@@ -209,11 +148,11 @@ class CalendarPage extends Component {
       { color: "elegant-color", title: "Test", dark: true },
       { color: "danger-color", title: "Homework Due", dark: false },
       { color: "warning-color", title: "Meeting", dark: false },
-      { color: "success-color", title: "Other", dark: false },
       { color: "secondary-color", title: "Lunch", dark: false },
       { color: "default-color", title: "Activity", dark: false },
       { color: "primary-color", title: "Appointment", dark: false },
       { color: "info-color", title: "Class", dark: true },
+      { color: "success-color", title: "Other", dark: false },
     ];
 
     return (

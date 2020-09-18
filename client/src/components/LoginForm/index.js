@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-import setAuthToken from '../../utils/setAuthToken';
-import UserContext from '../../utils/UserContext';
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import setAuthToken from "../../utils/setAuthToken";
+import UserContext from "../../utils/UserContext";
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
 
 const LoginForm = ({ toggle, isAuthenticated }) => {
   const { setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const { email, password } = formData;
@@ -30,68 +30,73 @@ const LoginForm = ({ toggle, isAuthenticated }) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       };
       const body = JSON.stringify(user);
 
-      const res = await axios.post('/api/auth', body, config);
+      const res = await axios.post("/api/auth", body, config);
       if (res.data.user.token) {
-        localStorage.setItem('token', res.data.user.token);
+        localStorage.setItem("token", res.data.user.token);
       }
       setAuthToken(localStorage.token);
       setFormData({
         ...formData,
         isAuthenticated: true,
-        token: localStorage.getItem('token'),
+        role: res.data.user.role,
+        token: localStorage.getItem("token"),
       });
       setUser(res.data.user);
       // Closes modal
       toggle();
     } catch (error) {
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       setFormData({ ...formData, isAuthenticated: false, token: null });
       console.error(error);
     }
   };
+
   // Redirect if logged in
   const history = useHistory();
-  if (formData.isAuthenticated) {
-    history.push('/dash');
+  if (formData.isAuthenticated && formData.role === "Admin") {
+    history.push("/admin");
+    history.go(0);
+  } else if (formData.isAuthenticated) {
+    history.push("/dash");
     history.go(0);
   }
 
   return (
     <MDBContainer>
-      <MDBRow className='text-left'>
-        <MDBCol md='12'>
-          <form className='form' onSubmit={(e) => onSubmit(e)}>
-            <div className='grey-text'>
+      <MDBRow className="text-left">
+        <MDBCol md="12">
+          <form className="form" onSubmit={(e) => onSubmit(e)}>
+            <div className="grey-text">
               <MDBInput
-                label='Type your email'
-                icon='envelope'
+                label="Type your email"
+                icon="envelope"
                 group
                 validate
-                error='wrong'
-                success='right'
-                name='email'
+                error="wrong"
+                success="right"
+                name="email"
                 value={email}
                 onChange={(e) => onChange(e)}
               />
               <MDBInput
-                label='Type your password'
-                icon='lock'
+                label="Type your password"
+                icon="lock"
                 group
-                type='password'
+                type="password"
                 validate
-                name='password'
+                name="password"
                 value={password}
                 onChange={(e) => onChange(e)}
-                minLength='6'
+                minLength="6"
               />
             </div>
-            <div className='text-center'>
-              <MDBBtn type='submit' value='Login'>
+            <div className="text-center">
+              <MDBBtn type="submit" value="Login">
                 Login
               </MDBBtn>
             </div>
