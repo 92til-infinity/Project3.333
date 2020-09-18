@@ -104,6 +104,7 @@ class Dashboard extends React.Component {
     localStorage.removeItem("token");
   };
 
+
   render() {
     const { user } = this.context;
 

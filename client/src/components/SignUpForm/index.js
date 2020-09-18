@@ -5,10 +5,11 @@ import "./style.css";
 import UserContext from "../../utils/UserContext";
 import setAuthToken from "../../utils/setAuthToken";
 import { Redirect, useHistory } from "react-router-dom";
+import LoginModal from "../LoginModal/index";
 
-
-const SignUpForm = ({ toggle }) => {
+const SignUpForm = ({ toggleLogin, toggleSignUp, showSignUpModal, showLoginModal }) => {
   const { setUser } = React.useContext(UserContext);
+  const [isRegistered, setIsRegistered] = useState(false);
   const [userData, setUserData] = useState({
     firstname: "",
     lastname: "",
@@ -20,6 +21,12 @@ const SignUpForm = ({ toggle }) => {
 
   const onUserChange = (e) =>
     setUserData({ ...userData, [e.target.name]: e.target.value });
+
+
+  const onLoginClick = () => {
+    toggleSignUp();
+    toggleLogin();
+  };
 
   const onUserSubmit = async (e) => {
     e.preventDefault();
@@ -56,11 +63,12 @@ const SignUpForm = ({ toggle }) => {
       });
       setUser(res.data.user);
       // // Closes modal
-      toggle();
+      toggleSignUp();
     } catch (error) {
       localStorage.removeItem("token");
       setUserData({ ...userData, isAuthenticated: false, token: null });
       console.error(error);
+      setIsRegistered(true);
     }
   };
   if (userData.isAuthenticated) {
@@ -119,11 +127,16 @@ const SignUpForm = ({ toggle }) => {
               />
             </div>
             <div className="text-center">
+              {isRegistered && <div><h3 style={{ color: "red" }}>User already registered! Click<a onClick={onLoginClick}> Here </a> to login!</h3></div>}
               <MDBBtn type="submit" color="primary">
                 Register
               </MDBBtn>
             </div>
           </form>
+          {showLoginModal && <LoginModal
+            // toggleLogin={toggleLogin}
+            isOpen={showLoginModal}
+          />}
         </MDBCol>
       </MDBRow>
     </MDBContainer>
