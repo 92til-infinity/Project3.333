@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -23,39 +23,32 @@ import correctWhite from '../../assets/images/correct-white.png';
 import SupportPanels from '../SupportPanels';
 import SignUpModal from '../SignUpModal/index';
 import LoginModal from '../LoginModal/index';
-
 class SupportPage extends React.Component {
   state = {
     collapsed: false,
     showSignUpModal: false,
     showLoginModal: false,
   };
-
   handleTogglerClick = () => {
     const { collapsed } = this.state;
     this.setState({
       collapsed: !collapsed,
     });
   };
-
   onSignUpClick = () => {
     this.setState({ showSignUpModal: !this.state.showSignUpModal });
   };
   onLoginClick = () => {
     this.setState({ showLoginModal: !this.state.showLoginModal });
   };
-
   componentDidMount() {
     document.querySelector('nav').style.height = '65px';
   }
-
   componentWillUnmount() {
     document.querySelector('nav').style.height = 'auto';
   }
-
   render() {
     const { collapsed } = this.state;
-
     const overlay = (
       <div
         id='sidenav-overlay'
@@ -65,84 +58,83 @@ class SupportPage extends React.Component {
     );
     return (
       <div id='apppage'>
-        <Router>
-          <div>
-            {this.state.showSignUpModal && (
-              <SignUpModal toggle={this.state.showSignUpModal} />
-            )}
-            {this.state.showLoginModal && (
-              <LoginModal toggle={this.state.showLoginModal} />
-            )}
-            <MDBNavbar
-              color='primary-color'
-              dark
-              expand='md'
-              fixed='top'
-              scrolling
-              transparent
-            >
-              <MDBContainer>
-                <MDBNavbarBrand>
+        <div>
+          {this.state.showSignUpModal && (
+            <SignUpModal toggle={this.state.showSignUpModal} />
+          )}
+          {this.state.showLoginModal && (
+            <LoginModal toggle={this.state.showLoginModal} />
+          )}
+          <MDBNavbar
+            color='primary-color'
+            dark
+            expand='md'
+            fixed='top'
+            scrolling
+            transparent
+          >
+            <MDBContainer>
+              <MDBNavbarBrand>
+                <Link to='/'>
                   <img
                     src={correctWhite}
                     alt='checkmark'
                     style={{ width: '45px', height: '45px' }}
                   />
-                </MDBNavbarBrand>
-                <MDBNavbarToggler onClick={this.handleTogglerClick} />
-                <MDBCollapse isOpen={collapsed} navbar>
-                  <MDBNavbarNav left>
-                    <MDBNavItem>
-                      <MDBNavLink
-                        to='/'
-                        style={{ fontFamily: 'kollektifregular' }}
-                      >
-                        Home
-                      </MDBNavLink>
-                    </MDBNavItem>
-                    <MDBNavItem>
-                      <MDBNavLink
-                        to='/about'
-                        style={{ fontFamily: 'kollektifregular' }}
-                      >
-                        About
-                      </MDBNavLink>
-                    </MDBNavItem>
-                    <MDBNavItem active>
-                      <MDBNavLink
-                        to='/support'
-                        style={{ fontFamily: 'kollektifregular' }}
-                      >
-                        Support
-                      </MDBNavLink>
-                    </MDBNavItem>
-                  </MDBNavbarNav>
-                  <MDBNavbarNav right>
-                    <MDBNavItem>
-                      <MDBBtn
-                        outline
-                        color='white'
-                        style={{ fontFamily: 'kollektifregular' }}
-                        onClick={this.onLoginClick}
-                      >
-                        Log In
-                      </MDBBtn>
-
-                      <MDBBtn
-                        color='white'
-                        style={{ fontFamily: 'kollektifregular' }}
-                        onClick={this.onSignUpClick}
-                      >
-                        Sign Up
-                      </MDBBtn>
-                    </MDBNavItem>
-                  </MDBNavbarNav>
-                </MDBCollapse>
-              </MDBContainer>
-            </MDBNavbar>
-            {collapsed && overlay}
-          </div>
-        </Router>
+                </Link>
+              </MDBNavbarBrand>
+              <MDBNavbarToggler onClick={this.handleTogglerClick} />
+              <MDBCollapse isOpen={collapsed} navbar>
+                <MDBNavbarNav left>
+                  <MDBNavItem>
+                    <MDBNavLink
+                      to='/'
+                      style={{ fontFamily: 'kollektifregular' }}
+                    >
+                      Home
+                    </MDBNavLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBNavLink
+                      to='/about'
+                      style={{ fontFamily: 'kollektifregular' }}
+                    >
+                      About
+                    </MDBNavLink>
+                  </MDBNavItem>
+                  <MDBNavItem active>
+                    <MDBNavLink
+                      to='/support'
+                      style={{ fontFamily: 'kollektifregular' }}
+                    >
+                      Support
+                    </MDBNavLink>
+                  </MDBNavItem>
+                </MDBNavbarNav>
+                <MDBNavbarNav right>
+                  <MDBNavItem>
+                    <MDBBtn
+                      outline
+                      color='white'
+                      style={{ fontFamily: 'kollektifregular' }}
+                      onClick={this.onLoginClick}
+                    >
+                      Log In
+                    </MDBBtn>
+                    <MDBBtn
+                      color='white'
+                      style={{ fontFamily: 'kollektifregular' }}
+                      onClick={this.onSignUpClick}
+                    >
+                      Sign Up
+                    </MDBBtn>
+                  </MDBNavItem>
+                </MDBNavbarNav>
+              </MDBCollapse>
+            </MDBContainer>
+          </MDBNavbar>
+          {collapsed && overlay}
+        </div>
         <MDBView>
           <MDBMask className='white-text gradient' style={{ height: '40%' }} />
           <MDBContainer
@@ -160,7 +152,6 @@ class SupportPage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
-
           <MDBContainer>
             <MDBRow>
               <MDBCol md='12' className='text-center pt-4 pb-lg-n5 mt-lg-5'>
@@ -175,7 +166,6 @@ class SupportPage extends React.Component {
             </MDBRow>
           </MDBContainer>
         </MDBView>
-
         <div
           className='footer-copyright text-center text-white py-3'
           style={{ backgroundColor: '#4285f4', fontFamily: 'kollektifregular' }}
@@ -193,5 +183,4 @@ class SupportPage extends React.Component {
     );
   }
 }
-
 export default SupportPage;

@@ -52,12 +52,14 @@ const SignUpForm = ({ toggleLogin, toggleSignUp, showSignUpModal, showLoginModal
         localStorage.setItem("token", res.data.user.token);
       }
 
+
       console.log(res.data);
       setAuthToken(localStorage.token);
       setUserData({
         ...userData,
         isAuthenticated: true,
         token: localStorage.getItem("token"),
+
       });
       setUser(res.data.user);
       // // Closes modal
