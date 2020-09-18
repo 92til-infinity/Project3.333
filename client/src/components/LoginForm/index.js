@@ -6,7 +6,7 @@ import setAuthToken from "../../utils/setAuthToken";
 import UserContext from "../../utils/UserContext";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
 
-const LoginForm = ({ toggle, isAuthenticated }) => {
+const LoginForm = ({ toggleLogin, isAuthenticated }) => {
   const { setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
@@ -48,7 +48,7 @@ const LoginForm = ({ toggle, isAuthenticated }) => {
       });
       setUser(res.data.user);
       // Closes modal
-      toggle();
+      toggleLogin();
     } catch (error) {
       localStorage.removeItem("token");
       setFormData({ ...formData, isAuthenticated: false, token: null });

@@ -1,7 +1,7 @@
 import React from "react";
 import ChatPage from "../ChatPage";
 import TodoPage from "../TodoPage";
-import CalendarPage from "../CalendarPage";
+import Calendar from "../Calendar";
 import BudgetPage from "../BudgetPage";
 import UserContext from "../../utils/UserContext";
 import {
@@ -104,7 +104,6 @@ class Dashboard extends React.Component {
     localStorage.removeItem("token");
   };
 
-
   render() {
     const { user } = this.context;
 
@@ -150,10 +149,8 @@ class Dashboard extends React.Component {
                 </a>
               </li>
               <li>
-
-                <a href='#!'>
-                  <MDBIcon fab icon='github' />
-
+                <a href="#!">
+                  <MDBIcon fab icon="github" />
                 </a>
               </li>
               <li>
@@ -289,7 +286,7 @@ class Dashboard extends React.Component {
 
             {this.state.showTodo && <TodoPage />}
 
-            {this.state.showCalendar && <CalendarPage />}
+            {this.state.showCalendar && <Calendar />}
 
             {this.state.showBudget && <BudgetPage />}
           </MDBContainer>

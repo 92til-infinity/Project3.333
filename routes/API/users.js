@@ -130,7 +130,7 @@ router.get("/id/:id", async (req, res) => {
 });
 
 // @route   GET api/users/:search/:id
-// @desc    Get a user's homework, classes, budget, todos, or activities by id
+// @desc    Get a user's homework, classes, budget, todos, social or activities by id
 // @access  Public
 router.get("/:search/:id", async (req, res) => {
   try {
@@ -205,6 +205,17 @@ router.put("/homework/:id", async (req, res) => {
     user.homework.push(req.body);
     await user.save();
     res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   PUT api/users/:id
+// @desc    Update a user's profile
+// @access  Private
+router.put("/:id", auth, async (req, res) => {
+  try {
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
