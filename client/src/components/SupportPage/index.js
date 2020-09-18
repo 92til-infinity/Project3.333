@@ -14,9 +14,10 @@ import {
   MDBBtn,
   MDBView,
   MDBContainer,
-  MDBAnimation,
-  MDBSmoothScroll,
 } from 'mdbreact';
+import ContactCard from '../ContactCard';
+import GettingStartedAccordion from '../GettingStartedAccordion';
+import FAQAccordion from '../FAQAccordion';
 import '../../assets/font/stylesheet.css';
 import logoWhite from '../../assets/images/logo-white.png';
 import correctWhite from '../../assets/images/correct-white.png';
@@ -166,6 +167,31 @@ class SupportPage extends React.Component {
             </MDBRow>
           </MDBContainer>
         </MDBView>
+        <MDBContainer>
+          <MDBRow className='py-5'>
+            <MDBCol md='12' className='text-center'>
+              <h3 id='gettingStarted'>Getting Started</h3>
+              <br />
+              <GettingStartedAccordion />
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+        <MDBContainer>
+          <MDBRow className='py-5'>
+            <MDBCol md='12' className='text-center'>
+              <h3 id='faqs'>Frequently Asked Questions</h3>
+              <br />
+              <FAQAccordion />
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+        <MDBContainer>
+          <MDBRow className='py-5'>
+            <MDBCol md='12' className='text-center'>
+              <ContactCard />
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
         <div
           className='footer-copyright text-center text-white py-3'
           style={{ backgroundColor: '#4285f4', fontFamily: 'kollektifregular' }}
