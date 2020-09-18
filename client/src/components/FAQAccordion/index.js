@@ -14,7 +14,7 @@ import './style.css';
 
 class FAQAccordion extends Component {
   state = {
-    collapseID: 'collapse1',
+    collapseID: '',
   };
 
   toggleCollapse = (collapseID) => () =>
