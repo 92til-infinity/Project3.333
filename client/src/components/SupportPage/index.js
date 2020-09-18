@@ -163,7 +163,7 @@ class SupportPage extends React.Component {
 
           <MDBContainer>
             <MDBRow>
-              <MDBCol md='12' className='text-center pt-5 pb-lg-n5 mt-lg-5'>
+              <MDBCol md='12' className='text-center pt-4 pb-lg-n5 mt-lg-5'>
                 <h3 className='h3-responsive text-center my-4 pb-5'>
                   <span className='font-weight-bold'>
                     Click on a topic below

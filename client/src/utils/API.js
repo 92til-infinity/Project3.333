@@ -24,8 +24,8 @@ export default {
     return axios.get("/api/units");
   },
 
-  getUnitsBetween: function(date) {
-    return axios.get("/api/units/between", date);
+  setActivities: function(taskArray) {
+    return axios.put("/api/users/activities", taskArray);
   },
 
   enrollClass: function(classId, userId) {

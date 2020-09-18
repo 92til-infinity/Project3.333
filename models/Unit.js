@@ -38,6 +38,14 @@ const UnitSchema = new mongoose.Schema(
     },
     homework: [
       {
+        unitId: {
+          type: String,
+          required: true,
+        },
+        unitName: {
+          type: String,
+          required: true,
+        },
         assignment: {
           type: String,
           required: true,
@@ -46,7 +54,7 @@ const UnitSchema = new mongoose.Schema(
           type: Date,
           required: true,
         },
-        details: {
+        description: {
           type: String,
         },
       },
