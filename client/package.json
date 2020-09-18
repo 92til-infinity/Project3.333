@@ -9,9 +9,6 @@
     "npm": "6.14.4"
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "date-fns": "^2.16.1",
     "mdb-react-calendar": "file:package",

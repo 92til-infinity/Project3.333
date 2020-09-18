@@ -14,7 +14,7 @@ class SignUpModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal14: props.toggle,
+      modal14: props.isOpen,
     };
   }
 
