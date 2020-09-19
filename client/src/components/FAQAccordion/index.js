@@ -33,9 +33,7 @@ class FAQAccordion extends Component {
               onClick={this.toggleCollapse('collapse1')}
               className='z-depth-1'
             >
-              <span className='white-text font-weight-bold'>
-                I am the first title of accordion
-              </span>
+              <span className='white-text font-weight-bold'>Question</span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse1' isOpen={collapseID}>
               <MDBCardBody>
@@ -74,9 +72,7 @@ class FAQAccordion extends Component {
               onClick={this.toggleCollapse('collapse2')}
               className='z-depth-1'
             >
-              <span className='white-text font-weight-bold'>
-                I am the second title of accordion
-              </span>
+              <span className='white-text font-weight-bold'>Question</span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse2' isOpen={collapseID}>
               <MDBCardBody>
@@ -115,9 +111,7 @@ class FAQAccordion extends Component {
               onClick={this.toggleCollapse('collapse3')}
               className='z-depth-1'
             >
-              <span className='white-text font-weight-bold'>
-                I am the third title of accordion
-              </span>
+              <span className='white-text font-weight-bold'>Question</span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse3' isOpen={collapseID}>
               <MDBCardBody>
