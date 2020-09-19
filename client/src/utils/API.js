@@ -12,6 +12,10 @@ export default {
     return axios.get("/api/budgets");
   },
 
+  getTodos: function () {
+    return axios.get("/api/todos");
+  },
+
   getUser: function (id) {
     return axios.get("/api/users/id/" + id);
   },

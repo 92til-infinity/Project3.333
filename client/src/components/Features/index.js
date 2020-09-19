@@ -4,6 +4,7 @@ import '../../assets/font/stylesheet.css';
 import money from '../../assets/images/money.png';
 import studying from '../../assets/images/studying.png';
 import talk from '../../assets/images/talk.png';
+import "./style.css";
 
 const Features = () => {
   return (

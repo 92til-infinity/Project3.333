@@ -10,6 +10,7 @@ function TodoCompleted({ completedTodos, removeCompletedTodo, revertCompletedTod
         <div
             className={todo.isComplete ? 'todo-row complete' : 'todo-row'}
             key={index}
+            id="completedDiv"
         >
             <div key={todo.id} onClick={() => revertCompletedTodo(todo.id, todo)}>
                 {todo.text}

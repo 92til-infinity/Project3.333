@@ -41,10 +41,24 @@
   font-family: "kollektifregular" !important;
 }
 
-i {
+i,
+.fa,
+.far,
+.fas {
   font-family: "Font Awesome 5 Free" !important;
 }
 
 .fab {
   font-family: "Font Awesome 5 Brands" !important;
+}
+
+.light-blue-skin .btn-primary:not([disabled]):not(.disabled):active,
+.light-blue-skin .btn-primary:not([disabled]):not(.disabled).active,
+.show > .light-blue-skin .btn-primary.dropdown-toggle {
+  background-color: #0b51c5 !important;
+}
+
+.light-blue-skin .btn-primary {
+  color: #fff;
+  background-color: #4285f4 !important;
 }

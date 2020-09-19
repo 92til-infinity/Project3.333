@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoForm from '../TodoForm';
 import Todo from '../Todo';
 import TodoCompleted from "../TodoCompleted";
 import axios from 'axios';
 import '../Todo/style.css';
+import API from "../../utils/API";
 import {
   MDBCard,
   MDBCardBody,
@@ -25,6 +26,19 @@ function TodoPage() {
     setTodos(newTodos);
     return axios.post('/api/todos', todo);
   };
+
+  useEffect(() => {
+    API.getTodos().then((todo) => {
+      const newTodos = [...todo.data, todos]
+      // console.log(newTodos);
+      if (newTodos.length <= 1) {
+        console.log("not enough todos")
+      } else {
+        setTodos(newTodos);
+      }
+
+    })
+  }, [])
 
   const updateTodo = (todoId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
@@ -82,11 +96,12 @@ function TodoPage() {
         <MDBContainer>
           <MDBCardGroup deck>
             <MDBCard>
-              <MDBCardTitle tag='h5' className="p-4">
+              <MDBCardTitle tag='h5' className="pt-4">
                 Todos
             </MDBCardTitle>
+              <hr />
               <MDBCardBody
-                className="align-self-center"
+                className="align-self-left"
               >
                 <Todo
                   todos={todos}
@@ -99,10 +114,11 @@ function TodoPage() {
             </MDBCard>
 
             <MDBCard>
-              <MDBCardTitle tag='h5' className="p-4">
+              <MDBCardTitle tag='h5' className="pt-4">
                 Completed Todos
             </MDBCardTitle>
-              <MDBCardBody className="align-self-center">
+              <hr />
+              <MDBCardBody className="align-self-left">
                 <TodoCompleted
                   completedTodos={completedTodos}
                   revertCompletedTodo={revertCompletedTodo}
