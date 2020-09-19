@@ -3,7 +3,10 @@ import { MDBRow, MDBCol } from 'mdbreact';
 import '../../assets/font/stylesheet.css';
 import money from '../../assets/images/money.png';
 import studying from '../../assets/images/studying.png';
-import talk from '../../assets/images/talk.png';
+import "./style.css";
+
+import manual from '../../assets/images/manual.png';
+
 
 const Features = () => {
   return (
@@ -19,9 +22,9 @@ const Features = () => {
         className='lead grey-text w-responsive mx-auto mb-5'
         style={{ fontFamily: 'kollektifregular' }}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam.
+        We bring together all of your budgeting, expenses, schedules and todos,
+        so you can conveniently get your student life in check from one
+        dashboard.
       </p>
       <MDBRow>
         <MDBCol md='4'>
@@ -40,8 +43,8 @@ const Features = () => {
             className='grey-text mb-md-0 mb-5'
             style={{ fontFamily: 'kollektifregular' }}
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Reprehenderit maiores aperiam minima assumenda deleniti hic.
+            Easily manage your money by creating budgets and logging your
+            spending with our management system.
           </p>
         </MDBCol>
         <MDBCol md='4'>
@@ -60,13 +63,13 @@ const Features = () => {
             className='grey-text mb-md-0 mb-5'
             style={{ fontFamily: 'kollektifregular' }}
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Reprehenderit maiores aperiam minima assumenda deleniti hic.
+            With our calendar and to-do lists, you can efficiently add events
+            and tasks to keep you on track.
           </p>
         </MDBCol>
         <MDBCol md='4'>
           <img
-            src={talk}
+            src={manual}
             alt='chat icon'
             style={{ width: '55px', height: '55px' }}
           />
@@ -74,14 +77,14 @@ const Features = () => {
             className='font-weight-bold my-4'
             style={{ fontFamily: 'kollektifregular' }}
           >
-            Chat
+            Support
           </h5>
           <p
             className='grey-text mb-md-0 mb-5'
             style={{ fontFamily: 'kollektifregular' }}
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Reprehenderit maiores aperiam minima assumenda deleniti hic.
+            StudyCheck makes it easy for you to get all the help you need. You
+            can access support via your dashboard or the Support Page.
           </p>
         </MDBCol>
       </MDBRow>

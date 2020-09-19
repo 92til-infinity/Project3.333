@@ -29,4 +29,13 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
+router.get("/", auth, async (req, res) => {
+  db.Todo.find()
+    .then((todo) => res.json(todo))
+    .catch((err) => {
+      console.log(err);
+      res.status(422).end();
+    });
+});
+
 module.exports = router;

@@ -13,15 +13,15 @@ const Budget = () => {
       <AtlasDisplay />
       <div className='row'>
         <div className='col-lg-4'>
-          <h2>Budget Input</h2>
+          <h2>New Budget</h2>
           <InputBudget />
-          <h2>Expense Input</h2>
+          <h2>New Expense</h2>
           <InputExpenses />
         </div>
         <div className='col-lg-8'>
-          <h2>Display Budget</h2>
+          <h2>Budget</h2>
           <BudgetDisplay />
-          <h2>Display Expenses</h2>
+          <h2>Expenses</h2>
           <ExpenseDisplay />
         </div>
       </div>

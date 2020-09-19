@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { BudgetConsumer } from '../../utils/BudgetContext';
 import API from '../../utils/API';
 class ExpenseDisplay extends Component {
-
   state = {
-    expenses: []
-  }
+    expenses: [],
+  };
 
   componentDidMount() {
     API.getExpense().then((expenses) => {
       console.log(expenses.data);
       this.setState({ expenses: expenses.data });
-
-
     });
-  };
+  }
   currentList = () => {
     const currentList =
       this.state.expenses.length > 0 ? (
@@ -28,22 +26,22 @@ class ExpenseDisplay extends Component {
           );
         })
       ) : (
-          <tr></tr>
-        );
+        <tr></tr>
+      );
     return currentList;
-  }
+  };
 
   render() {
     return (
-      <div className='card mt-5'>
-        <table className='table-bordered'>
-          <thead>
-            <tr>
-              <th>title</th>
-              <th>amount</th>
-              <th>category</th>
+      <div>
+        <MDBTable>
+          <MDBTableHead color='primary-color' textWhite>
+            <tr style={{ backgroundColor: '#4285f4' }}>
+              <th>Title</th>
+              <th>Amount</th>
+              <th>Category</th>
             </tr>
-          </thead>
+          </MDBTableHead>
           <BudgetConsumer>
             {(value) => {
               // console.log(value.expenses);
@@ -59,13 +57,18 @@ class ExpenseDisplay extends Component {
                     );
                   })
                 ) : (
-                    <tr></tr>
-                  );
-              return <tbody>{this.currentList()}{expensesList}</tbody>;
+                  <tr></tr>
+                );
+              return (
+                <MDBTableBody>
+                  {this.currentList()}
+                  {expensesList}
+                </MDBTableBody>
+              );
             }}
           </BudgetConsumer>
-          <tbody></tbody>
-        </table>
+          <MDBTableBody></MDBTableBody>
+        </MDBTable>
       </div>
     );
   }
