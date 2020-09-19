@@ -3,7 +3,10 @@ import { MDBRow, MDBCol } from 'mdbreact';
 import '../../assets/font/stylesheet.css';
 import money from '../../assets/images/money.png';
 import studying from '../../assets/images/studying.png';
+import "./style.css";
+
 import manual from '../../assets/images/manual.png';
+
 
 const Features = () => {
   return (

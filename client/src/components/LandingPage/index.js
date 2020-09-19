@@ -135,7 +135,7 @@ class LandingPage extends React.Component {
                     <MDBBtn
                       outline
                       color="white"
-                      style={{ fontFamily: "kollektifregular" }}
+                      style={{ fontFamily: "kollektifregular !important" }}
                       onClick={this.onLoginClick}
                     >
                       Log In
@@ -143,7 +143,7 @@ class LandingPage extends React.Component {
 
                     <MDBBtn
                       color="white"
-                      style={{ fontFamily: "kollektifregular" }}
+                      style={{ fontFamily: "kollektifregular !important" }}
                       onClick={this.onSignUpClick}
                     >
                       Sign Up

@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoForm from '../TodoForm';
 import Todo from '../Todo';
+import TodoCompleted from "../TodoCompleted";
 import axios from 'axios';
 import '../Todo/style.css';
+import API from "../../utils/API";
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardGroup,
+  MDBContainer,
+} from 'mdbreact';
 
 function TodoPage() {
   const [todos, setTodos] = useState([]);
+  const [completedTodos, setCompletedTodos] = useState([]);
+  const [isComplete, setIsComplete] = useState(false);
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -13,11 +24,21 @@ function TodoPage() {
     }
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
-    // console.log(todo);
-    // above console works
-    // below posst works, but the value isnt set in robo3t and the 422 error is thrown from the Api route
     return axios.post('/api/todos', todo);
   };
+
+  useEffect(() => {
+    API.getTodos().then((todo) => {
+      const newTodos = [...todo.data, todos]
+      // console.log(newTodos);
+      if (newTodos.length <= 1) {
+        console.log("not enough todos")
+      } else {
+        setTodos(newTodos);
+      }
+
+    })
+  }, [])
 
   const updateTodo = (todoId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
@@ -34,28 +55,80 @@ function TodoPage() {
     setTodos(removeArr);
   };
 
-  const completeTodo = (id) => {
-    let updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        todo.isComplete = !todo.isComplete;
-      }
-      return todo;
-    });
-
-    setTodos(updatedTodos);
+  const removeCompletedTodo = (id) => {
+    const removeArr = [...completedTodos].filter((todo) => todo.id !== id);
+    setCompletedTodos(removeArr);
   };
+
+  const completeTodo = (id, todo) => {
+    // let updatedTodos = todos.map((todo) => {
+    //   if (todo.id === id) {
+    //     todo.isComplete = !todo.isComplete;
+    //   }
+    //   return todo;
+    // });
+    const newCompletedTodos = [todo, ...completedTodos];
+    if (todo.id === id) {
+      setIsComplete({ isComplete: !todo.isComplete })
+    }
+    setCompletedTodos(newCompletedTodos);
+    // setTodos(updatedTodos);
+    removeTodo(id);
+  };
+
+  const revertCompletedTodo = (id, todo) => {
+    console.log("reverting completed todo");
+    const removeCompletedTodos = [todo, ...todos];
+    if (todo.id === id) {
+      setIsComplete({ isComplete: !todo.isComplete })
+    }
+    setTodos(removeCompletedTodos, ...todos);
+    console.log(todos);
+    removeTodo(id);
+  }
 
   return (
     <div className="body">
       <div>
         <h1 style={{ color: "black" }}>What's the plan today?</h1>
         <TodoForm onSubmit={addTodo} />
-        <Todo
-          todos={todos}
-          completeTodo={completeTodo}
-          removeTodo={removeTodo}
-          updateTodo={updateTodo}
-        />
+
+        <MDBContainer>
+          <MDBCardGroup deck>
+            <MDBCard>
+              <MDBCardTitle tag='h5' className="pt-4">
+                Todos
+            </MDBCardTitle>
+              <hr />
+              <MDBCardBody
+                className="align-self-left"
+              >
+                <Todo
+                  todos={todos}
+                  completeTodo={completeTodo}
+                  removeTodo={removeTodo}
+                  updateTodo={updateTodo}
+                />
+
+              </MDBCardBody>
+            </MDBCard>
+
+            <MDBCard>
+              <MDBCardTitle tag='h5' className="pt-4">
+                Completed Todos
+            </MDBCardTitle>
+              <hr />
+              <MDBCardBody className="align-self-left">
+                <TodoCompleted
+                  completedTodos={completedTodos}
+                  revertCompletedTodo={revertCompletedTodo}
+                  removeCompletedTodo={removeCompletedTodo}
+                />
+              </MDBCardBody>
+            </MDBCard>
+
+          </MDBCardGroup>
+        </MDBContainer>
       </div>
     </div>
   );

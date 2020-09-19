@@ -32,7 +32,7 @@ class CalendarModal extends Component {
             <MDBBtn color='secondary' onClick={this.props.toggle}>
               Close
             </MDBBtn>
-            <MDBBtn color='primary'>Save changes</MDBBtn>
+            <MDBBtn color='primary' onClick={this.props.toggle}>Save changes</MDBBtn>
           </MDBModalFooter>
         </MDBModal>
       </MDBContainer>

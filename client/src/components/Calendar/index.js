@@ -16,6 +16,7 @@ class Calendar extends React.Component {
     super(props);
     this.state = {
       showCalendarModal: false,
+
       homework: [],
       classes: [],
       currentEvents: [],

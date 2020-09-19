@@ -101,6 +101,10 @@ h1 {
   width: 100%;
 }
 
+#completedDiv {
+  border: 2px solid #d33f57;
+}
+
 .icons {
   display: flex;
   align-items: center;

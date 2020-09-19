@@ -1,4 +1,8 @@
 .card-header {
   background-color: #4285f4 !important;
-  font-family: 'kollektifregular' !important;
+  font-family: "kollektifregular" !important;
+}
+
+#apppage .view {
+  min-height: auto;
 }
