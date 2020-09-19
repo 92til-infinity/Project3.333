@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
       breakWidth: 1300,
       windowWidth: 0,
       showChat: false,
-      showTodo: false,
+      showTodo: true,
       showCalendar: false,
       showBudget: false,
       showProfile: false,
