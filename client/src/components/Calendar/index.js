@@ -15,6 +15,7 @@ class Calendar extends React.Component {
     super(props);
     this.state = {
       showCalendarModal: false,
+
       homework: [],
       classes: [],
       currentEvents: [],
@@ -149,6 +150,12 @@ class Calendar extends React.Component {
       currentEvents: events,
     });
   };
+
+  toggle = () => {
+    this.setState({
+      showCalendarModal: !this.state.showCalendarModal
+    })
+  }
 
   render() {
     const { user } = this.context;

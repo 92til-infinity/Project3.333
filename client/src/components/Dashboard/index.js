@@ -176,7 +176,7 @@ class Dashboard extends React.Component {
               icon="dollar-sign"
               className="sideNavLink"
             >
-              <div name="Budget" onClick={this.handleBudgetClick}>
+              <div name="Budget" onClick={this.handleBudgetClick} style={{ fontSize: "17px" }} >
                 Budget
               </div>
             </MDBSideNavItem>
@@ -186,7 +186,7 @@ class Dashboard extends React.Component {
               icon="calendar"
               className="sideNavLink"
             >
-              <div name="Calendar" onClick={this.handleCalendarClick}>
+              <div name="Calendar" onClick={this.handleCalendarClick} style={{ fontSize: "17px" }}>
                 Calendar
               </div>
             </MDBSideNavItem>
@@ -196,7 +196,7 @@ class Dashboard extends React.Component {
               icon="list"
               className="sideNavLink"
             >
-              <div name="Todo" onClick={this.handleTodoClick}>
+              <div name="Todo" onClick={this.handleTodoClick} style={{ fontSize: "17px" }} >
                 Todo
               </div>
             </MDBSideNavItem>
@@ -207,8 +207,8 @@ class Dashboard extends React.Component {
               icon="comment"
               className="sideNavLink"
             >
-              <div name="Chat" onClick={this.handleChatClick}>
-                Chat
+              <div name="Chat" style={{ fontSize: "17px" }}>
+                Chat (<em>Coming Soon!</em>)
               </div>
             </MDBSideNavItem>
           </MDBSideNavNav>

@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+* {
+  font-family: "kollektifregular" !important;
+}
+
+i {
+  font-family: "Font Awesome 5 Free" !important;
+}
+
+.fab {
+  font-family: "Font Awesome 5 Brands" !important;
+}

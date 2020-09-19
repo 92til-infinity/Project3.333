@@ -42,17 +42,14 @@ class GettingStartedAccordion extends Component {
                 <MDBRow className='my-4'>
                   <MDBCol md='8'>
                     <h2 className='font-weight-bold mb-3 black-text'>
-                      Hi! I am the first one.
+                      Manage your money.
                     </h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris
+                      With our Budgets and Expenses management system, you can easily keep track
+                      of your expenses and fulfil your budgeting strategy.
                     </p>
                     <p className='mb-0 '>
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur.
+                      Here is a short video demonstrating our unique features on Budgets and Expenses.
                     </p>
                   </MDBCol>
                   <MDBCol md='4' className='mt-3 pt-2'>
@@ -75,7 +72,7 @@ class GettingStartedAccordion extends Component {
               className='z-depth-1'
             >
               <span className='white-text font-weight-bold'>
-                Calendar and Tasks
+                Event Calendar
               </span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse2' isOpen={collapseID}>
@@ -83,24 +80,21 @@ class GettingStartedAccordion extends Component {
                 <MDBRow className='my-4'>
                   <MDBCol md='8'>
                     <h2 className='font-weight-bold mb-3 black-text'>
-                      Hi! I am the second one.
+                      Stay on track.
                     </h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris
+                      With our Calendar Events management system, you can efficently add events/tasks to your
+                      calendar to keep you on track.
                     </p>
                     <p className='mb-0 '>
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur.
+                      Here is a short video demonstrating our unique features on our Event Calendar.
                     </p>
                   </MDBCol>
                   <MDBCol md='4' className='mt-3 pt-2'>
                     <MDBView className='z-depth-1'>
                       <MDBCardImage
                         className='img-fluid'
-                        src='https://mdbootstrap.com/img/Photos/Others/nature.jpeg'
+                        src=''
                         alt=''
                       />
                     </MDBView>
@@ -116,7 +110,7 @@ class GettingStartedAccordion extends Component {
               className='z-depth-1'
             >
               <span className='white-text font-weight-bold'>
-                Daily Todo's
+                Daily Todos'
               </span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse3' isOpen={collapseID}>
@@ -124,24 +118,21 @@ class GettingStartedAccordion extends Component {
                 <MDBRow className='my-4'>
                   <MDBCol md='8'>
                     <h2 className='font-weight-bold mb-3 black-text'>
-                      Hi! I am the third one.
+                      Stay organized.
                     </h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris
+                      With our Daily Todos' management system, you can easily organize your
+                      day-to-day responsibilities to keep your organized.
                     </p>
                     <p className='mb-0 '>
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur.
+                      Here is a short video demonstrating our unique features on Daily Todo's.
                     </p>
                   </MDBCol>
                   <MDBCol md='4' className='mt-3 pt-2'>
                     <MDBView className='z-depth-1'>
                       <MDBCardImage
                         className='img-fluid'
-                        src='https://mdbootstrap.com/img/Photos/Others/nature.jpeg'
+                        src=''
                         alt=''
                       />
                     </MDBView>

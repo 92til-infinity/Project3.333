@@ -151,7 +151,7 @@ class SupportPage extends React.Component {
             <MDBRow>
               <MDBCol md="12" className="text-center mb-5">
                 <h1
-                  className="h1-responsive text-center font-weight-bold"
+                  className="h1-responsive text-center"
                   style={{ color: "#ffffff" }}
                 >
                   What can we help you with?
