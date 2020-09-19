@@ -33,8 +33,8 @@ class FAQAccordion extends Component {
               onClick={this.toggleCollapse('collapse1')}
               className='z-depth-1'
             >
-              <span className='white-text font-weight-bold'>
-                I am the first title of accordion
+              <span className='white-text'>
+                Coming Soon!
               </span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse1' isOpen={collapseID}>
@@ -42,7 +42,7 @@ class FAQAccordion extends Component {
                 <MDBRow className='my-4'>
                   <MDBCol md='8'>
                     <h2 className='font-weight-bold mb-3 black-text'>
-                      Hi! I am the first one.
+                      Hi!
                     </h2>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -74,8 +74,8 @@ class FAQAccordion extends Component {
               onClick={this.toggleCollapse('collapse2')}
               className='z-depth-1'
             >
-              <span className='white-text font-weight-bold'>
-                I am the second title of accordion
+              <span className='white-text'>
+                Coming Soon!
               </span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse2' isOpen={collapseID}>
@@ -83,7 +83,7 @@ class FAQAccordion extends Component {
                 <MDBRow className='my-4'>
                   <MDBCol md='8'>
                     <h2 className='font-weight-bold mb-3 black-text'>
-                      Hi! I am the second one.
+                      Hi!
                     </h2>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -115,8 +115,8 @@ class FAQAccordion extends Component {
               onClick={this.toggleCollapse('collapse3')}
               className='z-depth-1'
             >
-              <span className='white-text font-weight-bold'>
-                I am the third title of accordion
+              <span className='white-text'>
+                Coming Soon!
               </span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse3' isOpen={collapseID}>
@@ -124,7 +124,7 @@ class FAQAccordion extends Component {
                 <MDBRow className='my-4'>
                   <MDBCol md='8'>
                     <h2 className='font-weight-bold mb-3 black-text'>
-                      Hi! I am the third one.
+                      Hi!
                     </h2>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit,
