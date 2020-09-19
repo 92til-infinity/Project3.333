@@ -33,7 +33,7 @@ class GettingStartedAccordion extends Component {
               onClick={this.toggleCollapse('collapse1')}
               className='z-depth-1'
             >
-              <span className='white-text font-weight-bold'>
+              <span className='white-text'>
                 Budgets and Expenses
               </span>
             </MDBCollapseHeader>
@@ -71,7 +71,7 @@ class GettingStartedAccordion extends Component {
               onClick={this.toggleCollapse('collapse2')}
               className='z-depth-1'
             >
-              <span className='white-text font-weight-bold'>
+              <span className='white-text'>
                 Event Calendar
               </span>
             </MDBCollapseHeader>
@@ -109,7 +109,7 @@ class GettingStartedAccordion extends Component {
               onClick={this.toggleCollapse('collapse3')}
               className='z-depth-1'
             >
-              <span className='white-text font-weight-bold'>
+              <span className='white-text'>
                 Daily Todos'
               </span>
             </MDBCollapseHeader>
