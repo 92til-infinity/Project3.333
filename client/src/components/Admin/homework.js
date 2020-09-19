@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Homework(props) {
   const [hwData, setHwData] = useState({
@@ -102,7 +103,7 @@ function Homework(props) {
           <label>Assignment Title: </label>
           <input
             type="assignment"
-            placeholder="Last Name"
+            placeholder="Assignment"
             name="assignment"
             value={assignment}
             onChange={(e) => onChange(e)}
@@ -137,6 +138,12 @@ function Homework(props) {
           value="Assign Homework"
         />
       </form>
+      <button
+        className="btn btn-primary"
+        onClick={() => window.location.reload(false)}
+      >
+        Back
+      </button>
     </>
   );
 }

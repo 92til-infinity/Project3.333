@@ -93,7 +93,7 @@ class Calendar extends React.Component {
     const hwInstance = {
       id: homework._id,
       title: `Homework Due: ${homework.assignment}`,
-      start: homework.duedate,
+      start: addDays(homework.duedate, 1),
       allDay: true,
       backgroundColor: "red",
       textColor: "white",

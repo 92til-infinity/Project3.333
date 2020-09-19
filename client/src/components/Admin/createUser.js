@@ -128,6 +128,12 @@ function CreateUser() {
           value="Add User"
         />
       </form>
+      <button
+        className="btn btn-primary"
+        onClick={() => window.location.reload(false)}
+      >
+        Back
+      </button>
     </>
   );
 }
