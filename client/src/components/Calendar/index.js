@@ -14,6 +14,7 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showCalendarModal: false,
       homework: [],
       classes: [],
       currentEvents: [],
@@ -141,6 +142,7 @@ class Calendar extends React.Component {
 
   handleDateClick = (e) => {
     console.log(e.dateStr);
+    this.setState({ showCalendarModal: !this.state.showCalendarModal });
   };
 
   handleEvents = (events) => {
@@ -152,26 +154,46 @@ class Calendar extends React.Component {
   render() {
     const { user } = this.context;
     return (
-      <FullCalendar
-        plugins={[
-          dayGridPlugin,
-          timeGridPlugin,
-          interactionPlugin,
-          bootstrapPlugin,
-        ]}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        initialView="dayGridMonth"
-        themeSystem="bootstrap"
-        editable={true}
-        selectable={true}
-        dateClick={this.handleDateClick}
-        eventsSet={this.handleEvents}
-        events={user.activities}
-      />
+      <div>
+        {this.state.showCalendarModal && (
+          <CalendarModal
+            toggle={this.toggle}
+            isOpen={this.state.showCalendarModal}
+          />
+        )}
+        <FullCalendar
+          plugins={[
+            dayGridPlugin,
+            timeGridPlugin,
+            interactionPlugin,
+            bootstrapPlugin,
+          ]}
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          initialView="dayGridMonth"
+          editable={true}
+          selectable={true}
+          dateClick={this.handleDateClick}
+          // initialEvents={[
+          //   {
+          //     id: "5f6255f68cae2321cc818fcd",
+          //     title: "Facebook Cleanup",
+          //     start: "2020-09-25",
+          //   },
+          //   {
+          //     id: "fjk3489fjkdls",
+          //     title: "Test2",
+          //     start: "2020-09-23",
+          //   },
+          // ]}
+          themeSystem="bootstrap"
+          eventsSet={this.handleEvents}
+          events={user.activities}
+        />
+      </div>
     );
   }
 }
