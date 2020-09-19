@@ -29,8 +29,8 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.get("/", auth, async (req, res) => {
-  db.Todo.find()
+router.get("/:id", auth, async (req, res) => {
+  db.Todo.find({ user: req.params.id })
     .then((todo) => res.json(todo))
     .catch((err) => {
       console.log(err);

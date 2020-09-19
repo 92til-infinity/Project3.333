@@ -11,10 +11,13 @@ const todoSchema = new Schema(
       type: Number,
       required: true,
     },
-    //  string
     text: {
       type: String,
       default: "",
+    },
+    complete: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
