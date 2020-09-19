@@ -39,18 +39,23 @@ const UserSchema = new mongoose.Schema(
     social: {
       github: {
         type: String,
+        default: "Github URL",
       },
       twitter: {
         type: String,
+        default: "Twitter URL",
       },
       facebook: {
         type: String,
+        default: "Facebook URL",
       },
       pinterest: {
         type: String,
+        default: "Pinterest URL",
       },
       linkedin: {
         type: String,
+        default: "LinkedIn URL",
       },
     },
     homework: [
