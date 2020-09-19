@@ -1,11 +1,12 @@
-import React from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import UserContext from "../../utils/UserContext";
-import API from "../../utils/API";
-import { addDays } from "date-fns";
+import React from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import UserContext from '../../utils/UserContext';
+import CalendarModal from '../CalendarModal';
+import API from '../../utils/API';
+import { addDays } from 'date-fns';
 
 class Calendar extends React.Component {
   static contextType = UserContext;
@@ -13,6 +14,7 @@ class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showCalendarModal: false,
       homework: [],
       classes: [],
       currentEvents: [],
@@ -91,8 +93,8 @@ class Calendar extends React.Component {
       title: `Homework: ${homework.assignment}`,
       start: homework.duedate,
       allDay: true,
-      backgroundColor: "red",
-      textColor: "white",
+      backgroundColor: 'red',
+      textColor: 'white',
     };
     homeworkContainer.push(hwInstance);
     this.setState({ currentEvents: homeworkContainer });
@@ -117,7 +119,7 @@ class Calendar extends React.Component {
           let repeat = start;
 
           while (repeat < end) {
-            const ISOrepeat = repeat.toISOString().replace(/T.*$/, "");
+            const ISOrepeat = repeat.toISOString().replace(/T.*$/, '');
             const classInstance = {
               id: unit._id,
               title: unit.title,
@@ -139,6 +141,7 @@ class Calendar extends React.Component {
 
   handleDateClick = (e) => {
     console.log(e.dateStr);
+    this.setState({ showCalendarModal: !this.state.showCalendarModal });
   };
 
   handleEvents = (events) => {
@@ -150,32 +153,40 @@ class Calendar extends React.Component {
   render() {
     const { user } = this.context;
     return (
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth, timeGridWeek, timeGridDay",
-        }}
-        initialView="dayGridMonth"
-        editable={true}
-        selectable={true}
-        dateClick={this.handleDateClick}
-        // initialEvents={[
-        //   {
-        //     id: "5f6255f68cae2321cc818fcd",
-        //     title: "Facebook Cleanup",
-        //     start: "2020-09-25",
-        //   },
-        //   {
-        //     id: "fjk3489fjkdls",
-        //     title: "Test2",
-        //     start: "2020-09-23",
-        //   },
-        // ]}
-        eventsSet={this.handleEvents}
-        events={user.activities}
-      />
+      <div>
+        {this.state.showCalendarModal && (
+          <CalendarModal
+            toggle={this.toggle}
+            isOpen={this.state.showCalendarModal}
+          />
+        )}
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth, timeGridWeek, timeGridDay',
+          }}
+          initialView='dayGridMonth'
+          editable={true}
+          selectable={true}
+          dateClick={this.handleDateClick}
+          // initialEvents={[
+          //   {
+          //     id: "5f6255f68cae2321cc818fcd",
+          //     title: "Facebook Cleanup",
+          //     start: "2020-09-25",
+          //   },
+          //   {
+          //     id: "fjk3489fjkdls",
+          //     title: "Test2",
+          //     start: "2020-09-23",
+          //   },
+          // ]}
+          eventsSet={this.handleEvents}
+          events={user.activities}
+        />
+      </div>
     );
   }
 }
