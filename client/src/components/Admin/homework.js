@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import API from "../../utils/API";
 
 function Homework(props) {
   const [hwData, setHwData] = useState({
@@ -60,16 +59,7 @@ function Homework(props) {
     } catch (error) {
       console.error(error);
     }
-    // assignHW(unitId);
     resetData();
-  };
-
-  const assignHW = async (classId) => {
-    const userlist = await axios.get(`/api/units/${classId}`);
-    const enrolled = userlist.data.enrolled;
-    enrolled.forEach((student) => {
-      API.assignHomework(student);
-    });
   };
 
   const isEnabled =

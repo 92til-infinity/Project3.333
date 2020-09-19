@@ -13,7 +13,7 @@ import SupportPage from "./components/SupportPage";
 import AboutPage from "./components/AboutPage";
 import Dashboard from "./components/Dashboard";
 import BudgetPage from "./components/BudgetPage";
-import CalendarPage from "./components/CalendarPage";
+import Calendar from "./components/Calendar";
 import TodoPage from "./components/TodoPage";
 import ChatPage from "./components/ChatPage";
 import Admin from "./components/Admin";
@@ -58,7 +58,7 @@ function App() {
             <Route path="/about" component={AboutPage} />
             <Route path="/support" component={SupportPage} />
             <Route path="/budget" component={BudgetPage} />
-            <Route path="/schedule" component={CalendarPage} />
+            <Route path="/schedule" component={Calendar} />
             <Route path="/todo" component={TodoPage} />
             <Route path="/chat" component={ChatPage} />
             <Route path="/admin" component={Admin} />
