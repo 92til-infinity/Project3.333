@@ -1,15 +1,14 @@
-import axios from "axios";
-import { RiEjectFill } from "react-icons/ri";
+import axios from 'axios';
 
 // The getRecipes method retrieves recipes from the server
 // It accepts a "query" or term to search the recipe api for
 export default {
   addExpense: function (expenses) {
-    return axios.post("/api/budgets", expenses);
+    return axios.post('/api/budgets', expenses);
   },
 
   getExpense: function () {
-    return axios.get("/api/budgets");
+    return axios.get('/api/budgets');
   },
 
   getTodos: function () {
@@ -17,27 +16,27 @@ export default {
   },
 
   getUser: function (id) {
-    return axios.get("/api/users/id/" + id);
+    return axios.get('/api/users/id/' + id);
   },
 
   getUsers: function (role) {
-    return axios.get("/api/users/" + role);
+    return axios.get('/api/users/' + role);
   },
 
   getUnit: function (id) {
-    return axios.get("/api/units/" + id);
+    return axios.get('/api/units/' + id);
   },
 
   getUnits: function () {
-    return axios.get("/api/units");
+    return axios.get('/api/units');
   },
 
   assignHomework: function (id) {
-    return axios.put("/api/users/homework/" + id);
+    return axios.put('/api/users/homework/' + id);
   },
 
   setActivities: function (taskArray) {
-    return axios.put("/api/users/activities", taskArray);
+    return axios.put('/api/users/activities', taskArray);
   },
 
   enrollClass: function (classId, userId) {
