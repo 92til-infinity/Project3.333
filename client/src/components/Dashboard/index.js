@@ -1,11 +1,10 @@
-import React from "react";
-import ChatPage from "../ChatPage";
-import TodoPage from "../TodoPage";
-import Calendar from "../Calendar";
-import BudgetPage from "../BudgetPage";
-import UserContext from "../../utils/UserContext";
+import React from 'react';
+import ChatPage from '../ChatPage';
+import TodoPage from '../TodoPage';
+import Calendar from '../Calendar';
+import BudgetPage from '../BudgetPage';
+import UserContext from '../../utils/UserContext';
 import {
-  MDBInput,
   MDBNavbar,
   MDBNavbarNav,
   MDBNavItem,
@@ -16,13 +15,12 @@ import {
   MDBDropdownItem,
   MDBIcon,
   MDBSideNavItem,
-  MDBSideNavCat,
   MDBSideNavNav,
   MDBSideNav,
   MDBContainer,
-} from "mdbreact";
-import logoWhite from "../../assets/images/logo-white.png";
-import "./style.css";
+} from 'mdbreact';
+import logoWhite from '../../assets/images/logo-white.png';
+import './style.css';
 
 class Dashboard extends React.Component {
   static contextType = UserContext;
@@ -42,11 +40,11 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.handleResize();
-    window.addEventListener("resize", this.handleResize);
+    window.addEventListener('resize', this.handleResize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener('resize', this.handleResize);
   }
 
   handleResize = () =>
@@ -61,7 +59,7 @@ class Dashboard extends React.Component {
   };
 
   handleChatClick = () => {
-    console.log("working from nav cat");
+    console.log('working from nav cat');
     this.setState({
       showChat: true,
       showBudget: false,
@@ -71,7 +69,7 @@ class Dashboard extends React.Component {
   };
 
   handleTodoClick = () => {
-    console.log("working from nav cat");
+    console.log('working from nav cat');
     this.setState({
       showChat: false,
       showBudget: false,
@@ -81,7 +79,7 @@ class Dashboard extends React.Component {
   };
 
   handleCalendarClick = () => {
-    console.log("working from nav cat");
+    console.log('working from nav cat');
     this.setState({
       showChat: false,
       showBudget: false,
@@ -91,7 +89,7 @@ class Dashboard extends React.Component {
   };
 
   handleBudgetClick = () => {
-    console.log("working from nav cat");
+    console.log('working from nav cat');
     this.setState({
       showChat: false,
       showBudget: true,
@@ -101,7 +99,7 @@ class Dashboard extends React.Component {
   };
 
   handleSignOutClick = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
   };
 
   render() {
@@ -109,53 +107,53 @@ class Dashboard extends React.Component {
 
     const navStyle = {
       paddingLeft:
-        this.state.windowWidth > this.state.breakWidth ? "210px" : "16px",
-      backgroundColor: "#4285f4",
-      fontFamily: "kollektifregular",
+        this.state.windowWidth > this.state.breakWidth ? '210px' : '16px',
+      backgroundColor: '#4285f4',
+      fontFamily: 'kollektifregular',
     };
 
     const mainStyle = {
-      margin: "0 6%",
-      paddingTop: "5.5rem",
+      margin: '0 6%',
+      paddingTop: '5.5rem',
       paddingLeft:
-        this.state.windowWidth > this.state.breakWidth ? "240px" : "0",
+        this.state.windowWidth > this.state.breakWidth ? '240px' : '0',
     };
 
     const specialCaseNavbarStyles = {
-      WebkitBoxOrient: "horizontal",
-      flexDirection: "row",
+      WebkitBoxOrient: 'horizontal',
+      flexDirection: 'row',
     };
 
     return (
-      <div className="fixed-sn light-blue-skin">
+      <div className='fixed-sn light-blue-skin'>
         <MDBSideNav
           logo={logoWhite}
           triggerOpening={this.state.toggleStateA}
           breakWidth={this.state.breakWidth}
-          className="gradient"
-          mask="strong"
+          className='gradient'
+          mask='strong'
           fixed
         >
           <li>
-            <ul className="social">
+            <ul className='social'>
               <li>
-                <a href="#!">
-                  <MDBIcon fab icon="facebook-f" />
+                <a href='#!'>
+                  <MDBIcon fab icon='facebook-f' />
                 </a>
               </li>
               <li>
-                <a href="#!">
-                  <MDBIcon fab icon="pinterest" />
+                <a href='#!'>
+                  <MDBIcon fab icon='pinterest' />
                 </a>
               </li>
               <li>
-                <a href="#!">
-                  <MDBIcon fab icon="github" />
+                <a href='#!'>
+                  <MDBIcon fab icon='github' />
                 </a>
               </li>
               <li>
-                <a href="#!">
-                  <MDBIcon fab icon="twitter" />
+                <a href='#!'>
+                  <MDBIcon fab icon='twitter' />
                 </a>
               </li>
             </ul>
@@ -171,65 +169,65 @@ class Dashboard extends React.Component {
             /> */}
           <MDBSideNavNav>
             <MDBSideNavItem
-              name="Budget"
-              id="submit-blog-cat"
-              icon="dollar-sign"
-              className="sideNavLink"
+              name='Budget'
+              id='submit-blog-cat'
+              icon='dollar-sign'
+              className='sideNavLink'
             >
-              <div name="Budget" onClick={this.handleBudgetClick}>
+              <div name='Budget' onClick={this.handleBudgetClick}>
                 Budget
               </div>
             </MDBSideNavItem>
             <MDBSideNavItem
-              name="Calendar"
-              id="instruction-cat"
-              icon="calendar"
-              className="sideNavLink"
+              name='Calendar'
+              id='instruction-cat'
+              icon='calendar'
+              className='sideNavLink'
             >
-              <div name="Calendar" onClick={this.handleCalendarClick}>
+              <div name='Calendar' onClick={this.handleCalendarClick}>
                 Calendar
               </div>
             </MDBSideNavItem>
             <MDBSideNavItem
-              name="To Do"
-              id="about-cat"
-              icon="list"
-              className="sideNavLink"
+              name='To Do'
+              id='about-cat'
+              icon='list'
+              className='sideNavLink'
             >
-              <div name="Todo" onClick={this.handleTodoClick}>
+              <div name='Todo' onClick={this.handleTodoClick}>
                 Todo
               </div>
             </MDBSideNavItem>
 
             <MDBSideNavItem
-              name="Chat"
-              id="contact-me-cat"
-              icon="comment"
-              className="sideNavLink"
+              name='Chat'
+              id='contact-me-cat'
+              icon='comment'
+              className='sideNavLink'
             >
-              <div name="Chat" onClick={this.handleChatClick}>
+              <div name='Chat' onClick={this.handleChatClick}>
                 Chat
               </div>
             </MDBSideNavItem>
           </MDBSideNavNav>
         </MDBSideNav>
-        <MDBNavbar style={navStyle} double expand="md" fixed="top" scrolling>
+        <MDBNavbar style={navStyle} double expand='md' fixed='top' scrolling>
           <MDBNavbarNav left>
             <MDBNavItem>
               <div
                 onClick={this.handleToggleClickA}
-                key="sideNavToggleA"
+                key='sideNavToggleA'
                 style={{
-                  lineHeight: "32px",
-                  marginRight: "1em",
-                  verticalAlign: "middle",
+                  lineHeight: '32px',
+                  marginRight: '1em',
+                  verticalAlign: 'middle',
                 }}
               >
-                <MDBIcon icon="bars" color="white" size="2x" />
+                <MDBIcon icon='bars' color='white' size='2x' />
               </div>
             </MDBNavItem>
             <MDBNavItem
-              className="d-none d-md-inline"
+              className='d-none d-md-inline'
               style={{ paddingTop: 5 }}
             >
               {/* Student Dashboard */}
@@ -244,9 +242,9 @@ class Dashboard extends React.Component {
                 </MDBNavLink>
               </MDBNavItem> */}
             <MDBNavItem>
-              <MDBNavLink to="#!">
-                <MDBIcon far icon="comments" className="d-inline-inline" />{" "}
-                <div className="d-none d-md-inline">Support</div>
+              <MDBNavLink to='#!'>
+                <MDBIcon far icon='comments' className='d-inline-inline' />{' '}
+                <div className='d-none d-md-inline'>Support</div>
               </MDBNavLink>
             </MDBNavItem>
             {/* <MDBNavItem>
@@ -258,13 +256,13 @@ class Dashboard extends React.Component {
             <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
-                  <MDBIcon icon="user" className="d-inline-inline" />{" "}
-                  <div className="d-none d-md-inline">Account</div>
+                  <MDBIcon icon='user' className='d-inline-inline' />{' '}
+                  <div className='d-none d-md-inline'>Account</div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu right>
-                  <MDBDropdownItem href="#!">Profile</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
-                  <MDBDropdownItem href="/" onClick={this.handleSignOutClick}>
+                  <MDBDropdownItem href='#!'>Profile</MDBDropdownItem>
+                  <MDBDropdownItem href='#!'>Settings</MDBDropdownItem>
+                  <MDBDropdownItem href='/' onClick={this.handleSignOutClick}>
                     Sign Out
                   </MDBDropdownItem>
                   {/* <MDBDropdownItem href='#!'>
@@ -278,8 +276,8 @@ class Dashboard extends React.Component {
         <main style={mainStyle}>
           <MDBContainer
             fluid
-            style={{ height: 800, width: "100%" }}
-            className="m-0"
+            style={{ height: 800, width: '100%' }}
+            className='m-0'
           >
             {/* {this.state.showChat && <ChatPage />} */}
             {this.state.showChat && <ChatPage />}
