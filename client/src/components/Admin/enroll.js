@@ -62,6 +62,12 @@ function Enroll(props) {
         </div>
         <input type="submit" className="btn btn-primary" value="Enroll" />
       </form>
+      <button
+        className="btn btn-primary"
+        onClick={() => window.location.reload(false)}
+      >
+        Back
+      </button>
     </>
   );
 }

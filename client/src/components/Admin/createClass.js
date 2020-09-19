@@ -175,6 +175,12 @@ function CreateClass(props) {
           value="Add Class"
         />
       </form>
+      <button
+        className="btn btn-primary"
+        onClick={() => window.location.reload(false)}
+      >
+        Back
+      </button>
     </>
   );
 }
