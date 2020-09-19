@@ -51,8 +51,8 @@ class EventCategoryButtons extends Component {
           id='radio5'
         />
         <MDBInput
-          onClick={this.onClick(2)}
-          checked={this.state.radio === 1 ? true : false}
+          onClick={this.onClick(7)}
+          checked={this.state.radio === 7 ? true : false}
           label='Misc'
           type='radio'
           id='radio6'
