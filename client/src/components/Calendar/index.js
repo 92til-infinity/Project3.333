@@ -6,6 +6,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
 import { addDays, subDays } from "date-fns";
+import CalendarModal from "../CalendarModal";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
 
 class Calendar extends React.Component {
