@@ -152,6 +152,10 @@ class Calendar extends React.Component {
     });
   };
 
+  toggle = () => {
+    this.setState({ showCalendarModal: !this.state.showCalendarModal });
+  };
+
   render() {
     const { user } = this.context;
     return (
