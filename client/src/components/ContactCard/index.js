@@ -22,16 +22,11 @@ const ContactCard = () => {
 
   return (
     <MDBContainer>
-      <h2
-        className='h1-responsive font-weight-bold text-center my-5'
-        id='contactUs'
-      >
+      <h3 className='h3-responsive text-center' id='contactUs'>
         Contact us
-      </h2>
+      </h3>
       <p className='text-center w-responsive mx-auto pb-5'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error
-        amet numquam iure provident voluptate esse quasi, veritatis totam
-        voluptas nostrum quisquam eum porro a pariatur veniam.
+        Comments? Questions? Concerns? We'd love to hear from you.
       </p>
       <MDBRow>
         <MDBCol md='9' className='md-0 mb-5'>
@@ -93,15 +88,15 @@ const ContactCard = () => {
           <ul className='list-unstyled mb-0'>
             <li>
               <MDBIcon icon='map-marker-alt' size='2x' className='blue-text' />
-              <p>San Francisco, CA 94126, USA</p>
+              <p>Sacramento, CA, USA</p>
             </li>
             <li>
               <MDBIcon icon='phone' size='2x' className='blue-text mt-4' />
-              <p>+ 01 234 567 89</p>
+              <p>555-555-5555</p>
             </li>
             <li>
               <MDBIcon icon='envelope' size='2x' className='blue-text mt-4' />
-              <p>contact@example.com</p>
+              <p>info@studycheck.com</p>
             </li>
           </ul>
         </MDBCol>

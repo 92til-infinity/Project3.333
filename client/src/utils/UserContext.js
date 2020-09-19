@@ -9,6 +9,7 @@ const UserContext = React.createContext({
     role: "",
     date: "",
     token: "",
+    social: {},
     todos: [],
     classes: [],
     activities: [],

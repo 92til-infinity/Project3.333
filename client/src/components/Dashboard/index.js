@@ -1,8 +1,8 @@
 import React from 'react';
-import ChatPage from '../ChatPage';
 import TodoPage from '../TodoPage';
 import Calendar from '../Calendar';
 import BudgetPage from '../BudgetPage';
+import Profile from '../Profile';
 import UserContext from '../../utils/UserContext';
 import {
   MDBNavbar,
@@ -35,6 +35,7 @@ class Dashboard extends React.Component {
       showTodo: false,
       showCalendar: false,
       showBudget: false,
+      showProfile: false,
     };
   }
 
@@ -65,6 +66,7 @@ class Dashboard extends React.Component {
       showBudget: false,
       showCalendar: false,
       showTodo: false,
+      showProfile: false,
     });
   };
 
@@ -75,6 +77,7 @@ class Dashboard extends React.Component {
       showBudget: false,
       showCalendar: false,
       showTodo: true,
+      showProfile: false,
     });
   };
 
@@ -85,6 +88,7 @@ class Dashboard extends React.Component {
       showBudget: false,
       showCalendar: true,
       showTodo: false,
+      showProfile: false,
     });
   };
 
@@ -95,6 +99,17 @@ class Dashboard extends React.Component {
       showBudget: true,
       showCalendar: false,
       showTodo: false,
+      showProfile: false,
+    });
+  };
+
+  handleProfileClick = () => {
+    this.setState({
+      showChat: false,
+      showBudget: false,
+      showCalendar: false,
+      showTodo: false,
+      showProfile: true,
     });
   };
 
@@ -235,24 +250,13 @@ class Dashboard extends React.Component {
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right style={specialCaseNavbarStyles}>
-            {/* <MDBNavItem active>
-                <MDBNavLink to='#!'>
-                  <MDBIcon icon='envelope' className='d-inline-inline' />{' '}
-                  <div className='d-none d-md-inline'>Contact</div>
-                </MDBNavLink>
-              </MDBNavItem> */}
             <MDBNavItem>
               <MDBNavLink to='#!'>
                 <MDBIcon far icon='comments' className='d-inline-inline' />{' '}
                 <div className='d-none d-md-inline'>Support</div>
               </MDBNavLink>
             </MDBNavItem>
-            {/* <MDBNavItem>
-                <MDBNavLink to='#!'>
-                  <MDBIcon icon='user' className='d-inline-inline' />{' '}
-                  <div className='d-none d-md-inline'>Account</div>
-                </MDBNavLink>
-              </MDBNavItem> */}
+
             <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
@@ -260,14 +264,13 @@ class Dashboard extends React.Component {
                   <div className='d-none d-md-inline'>Account</div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu right>
-                  <MDBDropdownItem href='#!'>Profile</MDBDropdownItem>
+                  <MDBDropdownItem onClick={this.handleProfileClick}>
+                    Profile
+                  </MDBDropdownItem>
                   <MDBDropdownItem href='#!'>Settings</MDBDropdownItem>
                   <MDBDropdownItem href='/' onClick={this.handleSignOutClick}>
                     Sign Out
                   </MDBDropdownItem>
-                  {/* <MDBDropdownItem href='#!'>
-                      Something else here
-                    </MDBDropdownItem> */}
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>
@@ -279,14 +282,13 @@ class Dashboard extends React.Component {
             style={{ height: 800, width: '100%' }}
             className='m-0'
           >
-            {/* {this.state.showChat && <ChatPage />} */}
-            {this.state.showChat && <ChatPage />}
-
             {this.state.showTodo && <TodoPage />}
 
             {this.state.showCalendar && <Calendar />}
 
             {this.state.showBudget && <BudgetPage />}
+
+            {this.state.showProfile && <Profile />}
           </MDBContainer>
         </main>
       </div>

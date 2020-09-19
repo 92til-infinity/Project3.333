@@ -1,12 +1,13 @@
-import React from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import UserContext from '../../utils/UserContext';
-import CalendarModal from '../CalendarModal';
-import API from '../../utils/API';
-import { addDays } from 'date-fns';
+import React from "react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import UserContext from "../../utils/UserContext";
+import API from "../../utils/API";
+import { addDays, subDays } from "date-fns";
+import CalendarModal from "../CalendarModal";
+import bootstrapPlugin from "@fullcalendar/bootstrap";
 
 class Calendar extends React.Component {
   static contextType = UserContext;
@@ -47,6 +48,7 @@ class Calendar extends React.Component {
       setUser({ ...user, activities: e });
       this.setState({ currentEvents: e });
       await API.setActivities(e);
+      this.checkClasses();
     }
   };
 
@@ -90,11 +92,11 @@ class Calendar extends React.Component {
 
     const hwInstance = {
       id: homework._id,
-      title: `Homework: ${homework.assignment}`,
+      title: `Homework Due: ${homework.assignment}`,
       start: homework.duedate,
       allDay: true,
-      backgroundColor: 'red',
-      textColor: 'white',
+      backgroundColor: "red",
+      textColor: "white",
     };
     homeworkContainer.push(hwInstance);
     this.setState({ currentEvents: homeworkContainer });
@@ -105,8 +107,8 @@ class Calendar extends React.Component {
     let start, end;
     let classContainer = this.state.currentEvents;
 
-    start = new Date(unit.startdate);
-    end = new Date(unit.enddate);
+    start = addDays(new Date(unit.startdate), 1);
+    end = addDays(new Date(unit.enddate), 1);
 
     // For each day of the week
     for (let x = 0; x < 7; x++) {
@@ -116,10 +118,10 @@ class Calendar extends React.Component {
         // If matched, create a class instance for every repeating
         // day within the class start/end dates
         if (dayInt === unit.days[j]) {
-          let repeat = start;
+          let repeat = subDays(start, 1);
 
           while (repeat < end) {
-            const ISOrepeat = repeat.toISOString().replace(/T.*$/, '');
+            const ISOrepeat = repeat.toISOString().replace(/T.*$/, "");
             const classInstance = {
               id: unit._id,
               title: unit.title,
@@ -150,6 +152,10 @@ class Calendar extends React.Component {
     });
   };
 
+  toggle = () => {
+    this.setState({ showCalendarModal: !this.state.showCalendarModal });
+  };
+
   render() {
     const { user } = this.context;
     return (
@@ -161,28 +167,22 @@ class Calendar extends React.Component {
           />
         )}
         <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          plugins={[
+            dayGridPlugin,
+            timeGridPlugin,
+            interactionPlugin,
+            bootstrapPlugin,
+          ]}
           headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth, timeGridWeek, timeGridDay',
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
           }}
-          initialView='dayGridMonth'
+          initialView="dayGridMonth"
           editable={true}
           selectable={true}
           dateClick={this.handleDateClick}
-          // initialEvents={[
-          //   {
-          //     id: "5f6255f68cae2321cc818fcd",
-          //     title: "Facebook Cleanup",
-          //     start: "2020-09-25",
-          //   },
-          //   {
-          //     id: "fjk3489fjkdls",
-          //     title: "Test2",
-          //     start: "2020-09-23",
-          //   },
-          // ]}
+          themeSystem="bootstrap"
           eventsSet={this.handleEvents}
           events={user.activities}
         />
