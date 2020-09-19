@@ -5,7 +5,8 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
-import { addDays } from "date-fns";
+import { addDays, subDays } from "date-fns";
+import bootstrapPlugin from "@fullcalendar/bootstrap";
 
 class Calendar extends React.Component {
   static contextType = UserContext;
@@ -45,6 +46,7 @@ class Calendar extends React.Component {
       setUser({ ...user, activities: e });
       this.setState({ currentEvents: e });
       await API.setActivities(e);
+      this.checkClasses();
     }
   };
 
@@ -88,7 +90,7 @@ class Calendar extends React.Component {
 
     const hwInstance = {
       id: homework._id,
-      title: `Homework: ${homework.assignment}`,
+      title: `Homework Due: ${homework.assignment}`,
       start: homework.duedate,
       allDay: true,
       backgroundColor: "red",
@@ -103,8 +105,8 @@ class Calendar extends React.Component {
     let start, end;
     let classContainer = this.state.currentEvents;
 
-    start = new Date(unit.startdate);
-    end = new Date(unit.enddate);
+    start = addDays(new Date(unit.startdate), 1);
+    end = addDays(new Date(unit.enddate), 1);
 
     // For each day of the week
     for (let x = 0; x < 7; x++) {
@@ -114,7 +116,7 @@ class Calendar extends React.Component {
         // If matched, create a class instance for every repeating
         // day within the class start/end dates
         if (dayInt === unit.days[j]) {
-          let repeat = start;
+          let repeat = subDays(start, 1);
 
           while (repeat < end) {
             const ISOrepeat = repeat.toISOString().replace(/T.*$/, "");
@@ -133,8 +135,8 @@ class Calendar extends React.Component {
       // run through array again
       start = addDays(start, 1);
     }
-    this.setState({ currentEvents: classContainer });
-    await API.setActivities(classContainer);
+    // this.setState({ currentEvents: classContainer });
+    // await API.setActivities(classContainer);
   };
 
   handleDateClick = (e) => {
@@ -151,28 +153,22 @@ class Calendar extends React.Component {
     const { user } = this.context;
     return (
       <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        plugins={[
+          dayGridPlugin,
+          timeGridPlugin,
+          interactionPlugin,
+          bootstrapPlugin,
+        ]}
         headerToolbar={{
           left: "prev,next today",
           center: "title",
-          right: "dayGridMonth, timeGridWeek, timeGridDay",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
         initialView="dayGridMonth"
+        themeSystem="bootstrap"
         editable={true}
         selectable={true}
         dateClick={this.handleDateClick}
-        // initialEvents={[
-        //   {
-        //     id: "5f6255f68cae2321cc818fcd",
-        //     title: "Facebook Cleanup",
-        //     start: "2020-09-25",
-        //   },
-        //   {
-        //     id: "fjk3489fjkdls",
-        //     title: "Test2",
-        //     start: "2020-09-23",
-        //   },
-        // ]}
         eventsSet={this.handleEvents}
         events={user.activities}
       />

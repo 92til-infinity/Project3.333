@@ -37,7 +37,21 @@ const UserSchema = new mongoose.Schema(
       type: [String],
     },
     social: {
-      type: [Object],
+      github: {
+        type: String,
+      },
+      twitter: {
+        type: String,
+      },
+      facebook: {
+        type: String,
+      },
+      pinterest: {
+        type: String,
+      },
+      linkedin: {
+        type: String,
+      },
     },
     homework: [
       {
