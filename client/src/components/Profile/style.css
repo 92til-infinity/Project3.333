@@ -1,0 +1,13 @@
+.social {
+  color: #0275d8;
+  display: inline-block;
+}
+
+.user {
+  color: #0275d8;
+  font-size: 40px;
+}
+.social-text {
+  vertical-align: super;
+  display: inline-block;
+}

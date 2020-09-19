@@ -30,26 +30,31 @@ class SupportPage extends React.Component {
     showSignUpModal: false,
     showLoginModal: false,
   };
+
   handleTogglerClick = () => {
     const { collapsed } = this.state;
     this.setState({
       collapsed: !collapsed,
     });
   };
+
   onSignUpClick = () => {
     this.setState({ showSignUpModal: !this.state.showSignUpModal });
   };
   onLoginClick = () => {
     this.setState({ showLoginModal: !this.state.showLoginModal });
   };
+
   componentDidMount() {
     document.querySelector("nav").style.height = "65px";
   }
+
   componentWillUnmount() {
     document.querySelector("nav").style.height = "auto";
   }
   render() {
     const { collapsed } = this.state;
+
     const overlay = (
       <div
         id="sidenav-overlay"
@@ -62,14 +67,18 @@ class SupportPage extends React.Component {
         <div>
           {this.state.showSignUpModal && (
             <SignUpModal
-              toggle={this.onSignUpClick}
-              isOpen={this.state.showSignUpModal}
+              toggleSignUp={this.onSignUpClick}
+              toggleLogin={this.onLoginClick}
+              isOpenSignUp={this.state.showSignUpModal}
+              isOpenLogin={this.state.showLoginModal}
             />
           )}
           {this.state.showLoginModal && (
             <LoginModal
-              toggle={this.onLoginClick}
-              isOpen={this.state.showLoginModal}
+              toggleSignUp={this.onSignUpClick}
+              toggleLogin={this.onLoginClick}
+              isOpenSignUp={this.state.showSignUpModal}
+              isOpenLogin={this.state.showLoginModal}
             />
           )}
           <MDBNavbar
