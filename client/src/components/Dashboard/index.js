@@ -1,11 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ChatPage from "../ChatPage";
-import TodoPage from "../TodoPage";
-import Calendar from "../Calendar";
-import BudgetPage from "../BudgetPage";
-import Profile from "../Profile";
-import UserContext from "../../utils/UserContext";
+import React from 'react';
+import TodoPage from '../TodoPage';
+import Calendar from '../Calendar';
+import BudgetPage from '../BudgetPage';
+import Profile from '../Profile';
+import UserContext from '../../utils/UserContext';
 import {
   MDBNavbar,
   MDBNavbarNav,
@@ -252,24 +250,13 @@ class Dashboard extends React.Component {
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right style={specialCaseNavbarStyles}>
-            {/* <MDBNavItem active>
-                <MDBNavLink to='#!'>
-                  <MDBIcon icon='envelope' className='d-inline-inline' />{' '}
-                  <div className='d-none d-md-inline'>Contact</div>
-                </MDBNavLink>
-              </MDBNavItem> */}
             <MDBNavItem>
               <MDBNavLink to='#!'>
                 <MDBIcon far icon='comments' className='d-inline-inline' />{' '}
                 <div className='d-none d-md-inline'>Support</div>
               </MDBNavLink>
             </MDBNavItem>
-            {/* <MDBNavItem>
-                <MDBNavLink to='#!'>
-                  <MDBIcon icon='user' className='d-inline-inline' />{' '}
-                  <div className='d-none d-md-inline'>Account</div>
-                </MDBNavLink>
-              </MDBNavItem> */}
+
             <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
@@ -277,13 +264,11 @@ class Dashboard extends React.Component {
                   <div className='d-none d-md-inline'>Account</div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu right>
-
                   <MDBDropdownItem onClick={this.handleProfileClick}>
                     Profile
                   </MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
-                  <MDBDropdownItem href="/" onClick={this.handleSignOutClick}>
-
+                  <MDBDropdownItem href='#!'>Settings</MDBDropdownItem>
+                  <MDBDropdownItem href='/' onClick={this.handleSignOutClick}>
                     Sign Out
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
