@@ -48,15 +48,15 @@ class GettingStartedAccordion extends Component {
                       With our Budgets and Expenses management system, you can easily keep track
                       of your expenses and fulfil your budgeting strategy.
                     </p>
-                    <p className='mb-0 '>
+                    {/* <p className='mb-0 '>
                       Here is a short video demonstrating our unique features on Budgets and Expenses.
-                    </p>
+                    </p> */}
                   </MDBCol>
                   <MDBCol md='4' className='mt-3 pt-2'>
                     <MDBView className='z-depth-1'>
                       <MDBCardImage
                         className='img-fluid z-depth-1'
-                        src='https://mdbootstrap.com/img/Photos/Others/nature.jpeg'
+                        src='https://i.imgur.com/31AuVwK.png'
                         alt=''
                       />
                     </MDBView>
@@ -86,15 +86,15 @@ class GettingStartedAccordion extends Component {
                       With our Calendar Events management system, you can efficently add events/tasks to your
                       calendar to keep you on track.
                     </p>
-                    <p className='mb-0 '>
+                    {/* <p className='mb-0 '>
                       Here is a short video demonstrating our unique features on our Event Calendar.
-                    </p>
+                    </p> */}
                   </MDBCol>
                   <MDBCol md='4' className='mt-3 pt-2'>
                     <MDBView className='z-depth-1'>
                       <MDBCardImage
                         className='img-fluid'
-                        src=''
+                        src='https://i.imgur.com/VQFiVfO.png'
                         alt=''
                       />
                     </MDBView>
@@ -124,15 +124,15 @@ class GettingStartedAccordion extends Component {
                       With our Daily Todos' management system, you can easily organize your
                       day-to-day responsibilities to keep your organized.
                     </p>
-                    <p className='mb-0 '>
+                    {/* <p className='mb-0 '>
                       Here is a short video demonstrating our unique features on Daily Todo's.
-                    </p>
+                    </p> */}
                   </MDBCol>
                   <MDBCol md='4' className='mt-3 pt-2'>
                     <MDBView className='z-depth-1'>
                       <MDBCardImage
                         className='img-fluid'
-                        src=''
+                        src='https://i.imgur.com/5j915sZ.png'
                         alt=''
                       />
                     </MDBView>
