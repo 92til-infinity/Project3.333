@@ -67,9 +67,11 @@ const Profile = ({}) => {
       };
 
       const body = JSON.stringify(social);
-      const res = await axios.put(`/api/users/${user.id}`, body, config);
+      const res = await axios.put(`/api/users/${user._id}`, body, config);
       console.log(res.data);
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -87,7 +89,7 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder="Facebook URL"
+                placeholder={user.social.facebook}
                 name="facebook"
                 value={facebook}
                 onChange={onChange}
@@ -99,7 +101,7 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder="Pinterest URL"
+                placeholder={user.social.pinterest}
                 name="pinterest"
                 value={pinterest}
                 onChange={onChange}
@@ -111,7 +113,7 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder="Github URL"
+                placeholder={user.social.github}
                 name="github"
                 value={github}
                 onChange={onChange}
@@ -123,7 +125,7 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder="Twitter URL"
+                placeholder={user.social.twitter}
                 name="twitter"
                 value={twitter}
                 onChange={onChange}

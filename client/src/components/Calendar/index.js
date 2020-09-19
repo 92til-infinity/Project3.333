@@ -137,8 +137,8 @@ class Calendar extends React.Component {
       // run through array again
       start = addDays(start, 1);
     }
-    // this.setState({ currentEvents: classContainer });
-    // await API.setActivities(classContainer);
+    this.setState({ currentEvents: classContainer });
+    await API.setActivities(classContainer);
   };
 
   handleDateClick = (e) => {
@@ -178,18 +178,6 @@ class Calendar extends React.Component {
           editable={true}
           selectable={true}
           dateClick={this.handleDateClick}
-          // initialEvents={[
-          //   {
-          //     id: "5f6255f68cae2321cc818fcd",
-          //     title: "Facebook Cleanup",
-          //     start: "2020-09-25",
-          //   },
-          //   {
-          //     id: "fjk3489fjkdls",
-          //     title: "Test2",
-          //     start: "2020-09-23",
-          //   },
-          // ]}
           themeSystem="bootstrap"
           eventsSet={this.handleEvents}
           events={user.activities}
