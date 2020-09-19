@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ChatPage from "../ChatPage";
 import TodoPage from "../TodoPage";
 import Calendar from "../Calendar";
 import BudgetPage from "../BudgetPage";
+import Profile from "../Profile";
 import UserContext from "../../utils/UserContext";
 import {
   MDBInput,
@@ -37,6 +39,7 @@ class Dashboard extends React.Component {
       showTodo: false,
       showCalendar: false,
       showBudget: false,
+      showProfile: false,
     };
   }
 
@@ -67,6 +70,7 @@ class Dashboard extends React.Component {
       showBudget: false,
       showCalendar: false,
       showTodo: false,
+      showProfile: false,
     });
   };
 
@@ -77,6 +81,7 @@ class Dashboard extends React.Component {
       showBudget: false,
       showCalendar: false,
       showTodo: true,
+      showProfile: false,
     });
   };
 
@@ -87,6 +92,7 @@ class Dashboard extends React.Component {
       showBudget: false,
       showCalendar: true,
       showTodo: false,
+      showProfile: false,
     });
   };
 
@@ -97,6 +103,17 @@ class Dashboard extends React.Component {
       showBudget: true,
       showCalendar: false,
       showTodo: false,
+      showProfile: false,
+    });
+  };
+
+  handleProfileClick = () => {
+    this.setState({
+      showChat: false,
+      showBudget: false,
+      showCalendar: false,
+      showTodo: false,
+      showProfile: true,
     });
   };
 
@@ -262,7 +279,9 @@ class Dashboard extends React.Component {
                   <div className="d-none d-md-inline">Account</div>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu right>
-                  <MDBDropdownItem href="#!">Profile</MDBDropdownItem>
+                  <MDBDropdownItem onClick={this.handleProfileClick}>
+                    Profile
+                  </MDBDropdownItem>
                   <MDBDropdownItem href="#!">Settings</MDBDropdownItem>
                   <MDBDropdownItem href="/" onClick={this.handleSignOutClick}>
                     Sign Out
@@ -289,6 +308,8 @@ class Dashboard extends React.Component {
             {this.state.showCalendar && <Calendar />}
 
             {this.state.showBudget && <BudgetPage />}
+
+            {this.state.showProfile && <Profile />}
           </MDBContainer>
         </main>
       </div>

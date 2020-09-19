@@ -216,6 +216,10 @@ router.put("/homework/:id", async (req, res) => {
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
   try {
+    const user = await User.findById(req.params.id);
+    user.social = req.body;
+    await user.save();
+    res.json(user);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
