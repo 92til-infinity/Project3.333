@@ -34,7 +34,7 @@ class GettingStartedAccordion extends Component {
               className='z-depth-1'
             >
               <span className='white-text font-weight-bold'>
-                I am the first title of accordion
+                Budgets and Expenses
               </span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse1' isOpen={collapseID}>
@@ -75,7 +75,7 @@ class GettingStartedAccordion extends Component {
               className='z-depth-1'
             >
               <span className='white-text font-weight-bold'>
-                I am the second title of accordion
+                Calendar and Tasks
               </span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse2' isOpen={collapseID}>
@@ -116,7 +116,7 @@ class GettingStartedAccordion extends Component {
               className='z-depth-1'
             >
               <span className='white-text font-weight-bold'>
-                I am the third title of accordion
+                Daily Todo's
               </span>
             </MDBCollapseHeader>
             <MDBCollapse id='collapse3' isOpen={collapseID}>

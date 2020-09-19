@@ -4,7 +4,7 @@ import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 import './style.css';
 
-function Todo({ todos, completeTodo, removeTodo, updateTodo, date }) {
+function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
   const [edit, setEdit] = useState({
     id: null,
     value: '',
@@ -27,8 +27,8 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo, date }) {
       className={todo.isComplete ? 'todo-row complete' : 'todo-row'}
       key={index}
     >
-      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-        {todo.text} {JSON.stringify((todo.date.startDate).toDateString())}
+      <div key={todo.id} onClick={() => completeTodo(todo.id, todo)}>
+        {todo.text}
       </div>
       <div className='icons'>
         <RiCloseCircleLine

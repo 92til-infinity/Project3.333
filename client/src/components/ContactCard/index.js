@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   toast,
-  ToastContainer,
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -13,12 +12,29 @@ import ContactAlert from '../ContactAlert';
 
 const ContactCard = () => {
   const [emailAlert, setEmailAlert] = useState(false);
+  const [formInputs, setFormInputs] = useState({
+    contactEmail: "",
+    contactMessage: "",
+    contactName: "",
+    contactSubject: ""
+  });
+
+  const onChange = e =>
+    setFormInputs({ value: e.target.value });
+
 
   const handleEmailAlert = () => {
     setEmailAlert(true);
     toast.success('Message Received!', {
       closeButton: false,
     });
+    setFormInputs({
+      contactEmail: "",
+      contactMessage: "",
+      contactName: "",
+      contactSubject: ""
+
+    })
   };
 
   return (
@@ -45,6 +61,8 @@ const ContactCard = () => {
                     id='contact-name'
                     label='Your name'
                     className='userInput'
+                    value={formInputs.contactName}
+                    onChange={(e) => onChange(e)}
                   />
                 </div>
               </MDBCol>
@@ -55,6 +73,7 @@ const ContactCard = () => {
                     id='contact-email'
                     label='Your email'
                     className='userInput'
+                    value={formInputs.contactEmail}
                   />
                 </div>
               </MDBCol>
@@ -67,6 +86,7 @@ const ContactCard = () => {
                     id='contact-subject'
                     label='Subject'
                     className='userInput'
+                    value={formInputs.contactSubject}
                   />
                 </div>
               </MDBCol>
@@ -79,6 +99,7 @@ const ContactCard = () => {
                     id='contact-message'
                     label='Your message'
                     className='userInput'
+                    value={formInputs.contactMessage}
                   />
                 </div>
               </MDBCol>
