@@ -8,7 +8,6 @@ import {
   MDBNavbar,
   MDBNavbarNav,
   MDBNavItem,
-  MDBNavLink,
   MDBDropdown,
   MDBDropdownToggle,
   MDBDropdownMenu,
@@ -173,15 +172,7 @@ class Dashboard extends React.Component {
               </li>
             </ul>
           </li>
-          {/* <MDBInput
-              type='text'
-              hint='Search'
-              style={{
-                color: '#fff',
-                padding: '0 10px 8px 30px',
-                boxSizing: 'border-box',
-              }}
-            /> */}
+
           <MDBSideNavNav>
             <MDBSideNavItem
               name='Budget'
@@ -189,9 +180,11 @@ class Dashboard extends React.Component {
               icon='dollar-sign'
               className='sideNavLink'
             >
-
-              <div name="Budget" onClick={this.handleBudgetClick} style={{ fontSize: "17px" }} >
-
+              <div
+                name='Budget'
+                onClick={this.handleBudgetClick}
+                style={{ fontSize: '17px' }}
+              >
                 Budget
               </div>
             </MDBSideNavItem>
@@ -201,9 +194,11 @@ class Dashboard extends React.Component {
               icon='calendar'
               className='sideNavLink'
             >
-
-              <div name="Calendar" onClick={this.handleCalendarClick} style={{ fontSize: "17px" }}>
-
+              <div
+                name='Calendar'
+                onClick={this.handleCalendarClick}
+                style={{ fontSize: '17px' }}
+              >
                 Calendar
               </div>
             </MDBSideNavItem>
@@ -213,9 +208,11 @@ class Dashboard extends React.Component {
               icon='list'
               className='sideNavLink'
             >
-
-              <div name="Todo" onClick={this.handleTodoClick} style={{ fontSize: "17px" }} >
-
+              <div
+                name='Todo'
+                onClick={this.handleTodoClick}
+                style={{ fontSize: '17px' }}
+              >
                 Todo
               </div>
             </MDBSideNavItem>
@@ -226,10 +223,8 @@ class Dashboard extends React.Component {
               icon='comment'
               className='sideNavLink'
             >
-
-              <div name="Chat" style={{ fontSize: "17px" }}>
+              <div name='Chat' style={{ fontSize: '17px' }}>
                 Chat (<em>Coming Soon!</em>)
-
               </div>
             </MDBSideNavItem>
           </MDBSideNavNav>
@@ -258,7 +253,6 @@ class Dashboard extends React.Component {
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right style={specialCaseNavbarStyles}>
-
             <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
