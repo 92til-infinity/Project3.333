@@ -19,6 +19,7 @@ import {
 import '../../assets/font/stylesheet.css';
 import logoWhite from '../../assets/images/logo-white.png';
 import correctWhite from '../../assets/images/correct-white.png';
+import './style.css';
 // import TeamSection from '../TeamSection';
 import SignUpModal from '../SignUpModal/index';
 import LoginModal from '../LoginModal/index';
@@ -172,7 +173,7 @@ class AboutPage extends React.Component {
 
           <MDBContainer>
             <MDBRow>
-              <MDBCol md='12' className='text-center py-5'>
+              <MDBCol md='12' className='text-center py-5 mt-5'>
                 <h4 className='text-center mx-5 px-5'>
                   StudyCheck is a free, easy way for you to organize your life
                   as a student. Founded by a team of four talented individuals,
@@ -182,13 +183,7 @@ class AboutPage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
-          <MDBContainer>
-            <MDBRow>
-              <MDBCol md='12' className='text-center py-5'>
-                {/* <TeamSection /> */}
-              </MDBCol>
-            </MDBRow>
-          </MDBContainer>
+          <MDBContainer></MDBContainer>
         </MDBView>
 
         <div
