@@ -16,7 +16,6 @@ class Calendar extends React.Component {
     super(props);
     this.state = {
       showCalendarModal: false,
-
       homework: [],
       classes: [],
       currentEvents: [],
@@ -45,12 +44,12 @@ class Calendar extends React.Component {
     let { user, setUser } = this.context;
     this.setState({ currentEvents: user.activities });
     // Setting new task list (e) to state, context, and database
-    if (e.length !== this.state.currentEvents.length) {
-      setUser({ ...user, activities: e });
-      this.setState({ currentEvents: e });
-      await API.setActivities(e);
-      this.checkClasses();
-    }
+    // if (e.length !== this.state.currentEvents.length) {
+    //   setUser({ ...user, activities: e });
+    //   this.setState({ currentEvents: e });
+    //   await API.setActivities(e);
+    //   this.checkClasses();
+    // }
   };
 
   // Load classes and store in state to avoid constant API calls

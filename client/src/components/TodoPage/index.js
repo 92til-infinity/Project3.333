@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import TodoForm from '../TodoForm';
-import Todo from '../Todo';
+import React, { useState, useEffect } from "react";
+import TodoForm from "../TodoForm";
+import Todo from "../Todo";
 import TodoCompleted from "../TodoCompleted";
-import axios from 'axios';
-import '../Todo/style.css';
+import axios from "axios";
+import "../Todo/style.css";
 import API from "../../utils/API";
 import {
   MDBCard,
@@ -11,12 +11,11 @@ import {
   MDBCardTitle,
   MDBCardGroup,
   MDBContainer,
-} from 'mdbreact';
+} from "mdbreact";
 
 function TodoPage() {
   const [todos, setTodos] = useState([]);
   const [completedTodos, setCompletedTodos] = useState([]);
-  const [isComplete, setIsComplete] = useState(false);
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -24,68 +23,66 @@ function TodoPage() {
     }
     const newTodos = [todo, ...todos];
     setTodos(newTodos);
-    return axios.post('/api/todos', todo);
+    return axios.post("/api/todos", todo);
   };
 
   useEffect(() => {
-    API.getTodos().then((todo) => {
-      const newTodos = [...todo.data, todos]
-      // console.log(newTodos);
-      if (newTodos.length <= 1) {
-        console.log("not enough todos")
-      } else {
-        setTodos(newTodos);
-      }
+    API.getTodoStatus(false).then((todoList) => {
+      setTodos(todoList.data);
+    });
+    API.getTodoStatus(true).then((todoList) => {
+      setCompletedTodos(todoList.data);
+    });
+  }, []);
 
-    })
-  }, [])
-
+  // Update todo text in API and in Hook
   const updateTodo = (todoId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
     }
-    setTodos((prev) =>
-      prev.map((item) => (item.id === todoId ? newValue : item))
+    API.updateTodo(todoId, newValue);
+    setTodos(
+      todos.map((item) => {
+        if (item.id !== todoId) {
+          return item;
+        }
+        return {
+          ...item,
+          text: newValue.text,
+        };
+      })
     );
-    return axios.post('/api/todos', newValue);
   };
 
+  // Delete an in progress Todo, remove from Hook
   const removeTodo = (id) => {
     const removeArr = [...todos].filter((todo) => todo.id !== id);
     setTodos(removeArr);
+    API.deleteTodo(id);
   };
 
+  // Delete a completed Todo, remove from Hook
   const removeCompletedTodo = (id) => {
     const removeArr = [...completedTodos].filter((todo) => todo.id !== id);
     setCompletedTodos(removeArr);
+    API.deleteTodo(id);
   };
 
   const completeTodo = (id, todo) => {
-    // let updatedTodos = todos.map((todo) => {
-    //   if (todo.id === id) {
-    //     todo.isComplete = !todo.isComplete;
-    //   }
-    //   return todo;
-    // });
     const newCompletedTodos = [todo, ...completedTodos];
-    if (todo.id === id) {
-      setIsComplete({ isComplete: !todo.isComplete })
-    }
     setCompletedTodos(newCompletedTodos);
-    // setTodos(updatedTodos);
-    removeTodo(id);
+    const removeArr = [...todos].filter((todo) => todo.id !== id);
+    setTodos(removeArr);
+    API.updateTodo(id, { complete: true });
   };
 
   const revertCompletedTodo = (id, todo) => {
-    console.log("reverting completed todo");
     const removeCompletedTodos = [todo, ...todos];
-    if (todo.id === id) {
-      setIsComplete({ isComplete: !todo.isComplete })
-    }
-    setTodos(removeCompletedTodos, ...todos);
-    console.log(todos);
-    removeTodo(id);
-  }
+    setTodos(removeCompletedTodos);
+    const removeArr = [...completedTodos].filter((todo) => todo.id !== id);
+    setCompletedTodos(removeArr);
+    API.updateTodo(id, { complete: false });
+  };
 
   return (
     <div className="body">
@@ -96,27 +93,24 @@ function TodoPage() {
         <MDBContainer>
           <MDBCardGroup deck>
             <MDBCard>
-              <MDBCardTitle tag='h5' className="pt-4">
+              <MDBCardTitle tag="h5" className="pt-4">
                 Todos
-            </MDBCardTitle>
+              </MDBCardTitle>
               <hr />
-              <MDBCardBody
-                className="align-self-left"
-              >
+              <MDBCardBody className="align-self-left">
                 <Todo
                   todos={todos}
                   completeTodo={completeTodo}
                   removeTodo={removeTodo}
                   updateTodo={updateTodo}
                 />
-
               </MDBCardBody>
             </MDBCard>
 
             <MDBCard>
-              <MDBCardTitle tag='h5' className="pt-4">
+              <MDBCardTitle tag="h5" className="pt-4">
                 Completed Todos
-            </MDBCardTitle>
+              </MDBCardTitle>
               <hr />
               <MDBCardBody className="align-self-left">
                 <TodoCompleted
@@ -126,7 +120,6 @@ function TodoPage() {
                 />
               </MDBCardBody>
             </MDBCard>
-
           </MDBCardGroup>
         </MDBContainer>
       </div>

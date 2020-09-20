@@ -3,20 +3,9 @@ const auth = require("../../config/middleware/auth");
 const db = require("../../models");
 const Todo = require("../../models/todoDB");
 
-// router.route("/todos", auth).post((req, res) => {
-
-//   console.log(req.body);
-//   db.Todo.create(req.body)
-//     .then((todo) => res.json(todo))
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(422).end();
-//     });
-// });
-
-// POST is working fine, need to shore up the model and add routes for
-// DELETE, and PUT
-
+// @route   POST api/todos
+// @desc    Create a new todo
+// @access  Public
 router.post("/", auth, async (req, res) => {
   try {
     const { id, text } = req.body;
@@ -29,8 +18,49 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
+// @route   GET api/todos
+// @desc    Get all todos matching current user ID
+// @access  Private
 router.get("/", auth, async (req, res) => {
-  db.Todo.find()
+  await db.Todo.find({ user: req.user.id })
+    .then((todo) => res.json(todo))
+    .catch((err) => {
+      console.log(err);
+      res.status(422).end();
+    });
+});
+
+// @route   GET api/todos/:desc
+// @desc    Get all complete todos given a true or false value
+// @access  Private
+router.get("/:desc", auth, async (req, res) => {
+  await db.Todo.find({
+    $and: [{ user: req.user.id }, { complete: req.params.desc }],
+  })
+    .then((todo) => res.json(todo))
+    .catch((err) => {
+      console.log(err);
+      res.status(422).end();
+    });
+});
+
+// @route   PUT api/todos/:id
+// @desc    Update an existing todo
+// @access  Public
+router.put("/:id", async (req, res) => {
+  await db.Todo.updateOne({ id: req.params.id }, req.body)
+    .then((todo) => res.json(todo))
+    .catch((err) => {
+      console.log(err);
+      res.status(422).end();
+    });
+});
+
+// @route   DELETE api/todos/:id
+// @desc    Delete todo with matching id
+// @access  Public
+router.delete("/:id", async (req, res) => {
+  await db.Todo.findOneAndDelete({ id: req.params.id })
     .then((todo) => res.json(todo))
     .catch((err) => {
       console.log(err);
