@@ -33,23 +33,6 @@ class ExpenseDisplay extends Component {
   };
 
 
-  // handleSubmit = (dispatch, e) => {
-  //   e.preventDefault();
-  //   dispatch({
-  //     type: 'remove',
-  //     expenses: this.state.expenses,
-  //   });
-  //   dispatch({
-  //     type: 'remove',
-  //     category: this.state.category,
-  //   });
-  //   this.setState({
-  //     [e.target.name]: e.target.value,
-  //   });
-
-  // };
-
-
   currentList = () => {
     const currentList =
       this.state.expenses.length > 0 ? (
