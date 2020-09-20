@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 
 import setAuthToken from "../../utils/setAuthToken";
 import UserContext from "../../utils/UserContext";
+import AuthContext from "../../utils/AuthContext";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
 
 const LoginForm = ({ toggleLogin, isAuthenticated }) => {
   const { setUser } = React.useContext(UserContext);
+  const { authData, setAuth } = React.useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -22,48 +24,46 @@ const LoginForm = ({ toggleLogin, isAuthenticated }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const user = {
-      email,
-      password,
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
+    const body = JSON.stringify({ email, password });
 
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const body = JSON.stringify(user);
-
       const res = await axios.post("/api/auth", body, config);
       if (res.data.user.token) {
         localStorage.setItem("token", res.data.user.token);
       }
       setAuthToken(localStorage.token);
-      setFormData({
-        ...formData,
+      setAuth({
+        ...authData,
         isAuthenticated: true,
+        loading: false,
         role: res.data.user.role,
         token: localStorage.getItem("token"),
       });
       setUser(res.data.user);
       // Closes modal
-      toggleLogin();
+      // toggleLogin();
     } catch (error) {
       localStorage.removeItem("token");
-      setFormData({ ...formData, isAuthenticated: false, token: null });
+      setAuth({ ...authData, isAuthenticated: false, token: null });
       console.error(error);
     }
   };
 
   // Redirect if logged in
-  const history = useHistory();
-  if (formData.isAuthenticated && formData.role === "Admin") {
-    history.push("/admin");
-    history.go(0);
-  } else if (formData.isAuthenticated) {
-    history.push("/dash");
-    history.go(0);
+  // const history = useHistory();
+  if (authData.isAuthenticated && authData.role === "Admin") {
+    return <Redirect to="/admin" />;
+    // history.push("/admin");
+    // history.go(0);
+  } else if (authData.isAuthenticated) {
+    return <Redirect to="/dash" />;
+    // history.push("/dash");
+    // history.go(0);
   }
 
   return (
