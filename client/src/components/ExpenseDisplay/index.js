@@ -6,10 +6,7 @@ class ExpenseDisplay extends Component {
 
   state = {
     expenses: [],
-    _id: 0,
-    expenseTitle: '',
-    amount: '',
-    category: '',
+    _id: 0
   }
 
   componentDidMount() {
