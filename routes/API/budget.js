@@ -22,4 +22,15 @@ router.route("/").get((req, res) => {
     });
 })
 
+router.route("/:id").get((req, res) => {
+  console.log("delete route");
+  const id = req.params.id
+  db.Budget.findByIdAndDelete(id)
+    .then((expense) => res.json(expense))
+    .catch((err) => {
+      console.log(err);
+      res.status(422).end();
+    });
+})
+
 module.exports = router;
