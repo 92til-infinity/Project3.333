@@ -1,11 +1,12 @@
 import React from "react";
-// import MDBFullCalendar from "mdb-react-calendar";
+import MDBFullCalendar from "mdb-react-calendar";
 import Calendar from "../Calendar";
 import { addDays } from "date-fns";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
 
 class CalendarPage extends React.Component {
+
   static contextType = UserContext;
 
   constructor(props) {

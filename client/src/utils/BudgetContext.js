@@ -20,6 +20,16 @@ const reducer = (state, action) => {
                 ...state,
                 category: action.category
             };
+        case "remove":
+            return {
+                ...state,
+                expenses: action.expenses.filter((expenses) => {
+                    return expenses._id !== expenses._id;
+                })
+                // category: state.category.filter((category) => {
+                //     return category._id !== category._id;
+                // }),
+            };
         default:
             return state
     }

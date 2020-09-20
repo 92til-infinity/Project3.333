@@ -12,6 +12,12 @@ export default {
     return axios.get("/api/budgets");
   },
 
+  deleteExpense: function (id) {
+    console.log("delete")
+    return axios.get("/api/budgets/" + id);
+
+  },
+
   getUser: function (id) {
     return axios.get("/api/users/id/" + id);
   },

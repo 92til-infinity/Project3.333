@@ -1,29 +1,73 @@
 import React, { Component } from 'react';
 import { BudgetConsumer } from '../../utils/BudgetContext';
 import API from '../../utils/API';
+
 class ExpenseDisplay extends Component {
 
   state = {
-    expenses: []
+    expenses: [],
+    _id: 0,
+    expenseTitle: '',
+    amount: '',
+    category: '',
   }
 
   componentDidMount() {
     API.getExpense().then((expenses) => {
       console.log(expenses.data);
       this.setState({ expenses: expenses.data });
-
-
     });
+  }
+
+  deleteExpense = (id, dispatch) => {
+    API.deleteExpense(id)
+      .then((data) => {
+        console.log(data.data)
+        this.setState({
+          expenses: data.data,
+        });
+        dispatch({
+          type: 'expenses+',
+          expenses: this.state.expenses,
+        });
+
+      })
+      .catch(err => console.log(err));
   };
+
+
+  // handleSubmit = (dispatch, e) => {
+  //   e.preventDefault();
+  //   dispatch({
+  //     type: 'remove',
+  //     expenses: this.state.expenses,
+  //   });
+  //   dispatch({
+  //     type: 'remove',
+  //     category: this.state.category,
+  //   });
+  //   this.setState({
+  //     [e.target.name]: e.target.value,
+  //   });
+
+  // };
+
+
   currentList = () => {
     const currentList =
       this.state.expenses.length > 0 ? (
         this.state.expenses.map((expense, index) => {
+          const { dispatch } = this.state;
           return (
             <tr key={index}>
               <td>{expense.expenseTitle}</td>
               <td>{expense.amount}</td>
               <td>{expense.category}</td>
+              <td>
+                <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }}>
+                  ✗
+                </span>
+              </td>
             </tr>
           );
         })
@@ -32,6 +76,7 @@ class ExpenseDisplay extends Component {
         );
     return currentList;
   }
+
 
   render() {
     return (
@@ -42,6 +87,7 @@ class ExpenseDisplay extends Component {
               <th>title</th>
               <th>amount</th>
               <th>category</th>
+              <th>remove</th>
             </tr>
           </thead>
           <BudgetConsumer>
@@ -50,11 +96,17 @@ class ExpenseDisplay extends Component {
               const expensesList =
                 value.expenses.length > 0 ? (
                   value.expenses.map((expense, index) => {
+                    const { dispatch } = this.state;
                     return (
                       <tr key={index}>
                         <td>{expense.expenseTitle}</td>
                         <td>{expense.amount}</td>
                         <td>{expense.category}</td>
+                        <td>
+                          <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={() => { this.deleteExpense(this.state._id) }}>
+                            ✗
+                        </span>
+                        </td>
                       </tr>
                     );
                   })

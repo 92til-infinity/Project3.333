@@ -5,6 +5,7 @@ import API from '../../utils/API';
 class InputExpenses extends Component {
   state = {
     expenses: [],
+    _id: 0,
     expenseTitle: '',
     amount: '',
     category: '',
