@@ -11,8 +11,20 @@ export default {
     return axios.get("/api/budgets");
   },
 
-  getTodos: function(id) {
-    return axios.get("/api/todos/" + id);
+  getTodos: function() {
+    return axios.get("/api/todos");
+  },
+
+  deleteTodo: function(id) {
+    return axios.delete("/api/todos/" + id);
+  },
+
+  updateTodo: function(id, value) {
+    return axios.put("/api/todos/" + id, value);
+  },
+
+  getTodoStatus: function(desc) {
+    return axios.get("/api/todos/" + desc);
   },
 
   getUser: function(id) {
