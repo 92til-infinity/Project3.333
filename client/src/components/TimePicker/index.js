@@ -1,23 +1,31 @@
-import React, { Component } from 'react';
-import { MDBTimePicker, MDBCol } from 'mdbreact';
+import React, { Component } from "react";
+import { MDBTimePicker, MDBCol } from "mdbreact";
 
 class TimePicker extends Component {
-  getPickerValue = (value) => {
-    console.log(value);
+  // Get Start time value, and send to state in CalendarModal
+  getStartPickerValue = (value) => {
+    this.props.setTime("start", value);
+  };
+
+  // Get End time value, and send to state in CalendarModal
+  getEndPickerValue = (value) => {
+    this.props.setTime("end", value);
   };
 
   render() {
     return (
-      <MDBCol md='3' className='d-inline'>
+      <MDBCol md="3" className="d-inline">
         <MDBTimePicker
-          id='timePicker'
-          label='Starts'
-          getValue={this.getPickerValue}
+          name="start"
+          id="timePicker"
+          label="Starts"
+          getValue={this.getStartPickerValue}
         />
         <MDBTimePicker
-          id='timePicker'
-          label='Ends'
-          getValue={this.getPickerValue}
+          name="end"
+          id="timePicker"
+          label="Ends"
+          getValue={this.getEndPickerValue}
         />
       </MDBCol>
     );

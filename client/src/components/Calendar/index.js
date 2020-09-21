@@ -152,6 +152,10 @@ class Calendar extends React.Component {
     });
   };
 
+  addEventClick = (e) => {
+    console.log(e);
+  };
+
   toggle = () => {
     this.setState({ showCalendarModal: !this.state.showCalendarModal });
   };
@@ -163,6 +167,7 @@ class Calendar extends React.Component {
         {this.state.showCalendarModal && (
           <CalendarModal
             toggle={this.toggle}
+            addEventClick={this.addEventClick}
             isOpen={this.state.showCalendarModal}
           />
         )}
