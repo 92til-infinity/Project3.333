@@ -5,46 +5,49 @@ import API from '../../utils/API';
 class ExpenseDisplay extends Component {
 
   state = {
-    expenses: [],
-    _id: 0
+    expenses: []
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     API.getExpense().then((expenses) => {
       console.log(expenses.data);
-      this.setState({ expenses: expenses.data });
+      setState({ expenses: expenses.data });
     });
   }
 
-  deleteExpense = (id, dispatch) => {
-    API.deleteExpense(id)
-      .then((data) => {
-        console.log(data.data)
-        this.setState({
-          expenses: data.data,
-        });
-        dispatch({
-          type: 'expenses+',
-          expenses: this.state.expenses,
-        });
+  handleSubmit = (dispatch) => {
+    dispatch({
+      type: 'remove',
+      expenses: state.expenses,
+    })
+    setState({
+      expenses: [
+        ...state.expenses
+      ]
+    });
+    console.log(state.expenses)
+  };
 
-      })
-      .catch(err => console.log(err));
+
+  deleteExpense = (id) => {
+    console.log(id)
+    API.deleteExpense(id)
+
   };
 
 
   currentList = () => {
     const currentList =
-      this.state.expenses.length > 0 ? (
-        this.state.expenses.map((expense, index) => {
-          const { dispatch } = this.state;
+      state.expenses.length > 0 ? (
+        state.expenses.map((expense, index) => {
+          const { dispatch } = state;
           return (
             <tr key={index}>
               <td>{expense.expenseTitle}</td>
               <td>{expense.amount}</td>
               <td>{expense.category}</td>
-              <td>
-                <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }}>
+              <td >
+                <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { deleteExpense(expense._id) }} onSubmit={handleSubmit.bind(this, dispatch)}>
                   ✗
                 </span>
               </td>
@@ -60,7 +63,7 @@ class ExpenseDisplay extends Component {
 
   render() {
     return (
-      <div className='card mt-5'>
+      <div className='card mt-5' >
         <table className='table-bordered'>
           <thead>
             <tr>
@@ -76,14 +79,14 @@ class ExpenseDisplay extends Component {
               const expensesList =
                 value.expenses.length > 0 ? (
                   value.expenses.map((expense, index) => {
-                    const { dispatch } = this.state;
+                    const { dispatch } = state;
                     return (
                       <tr key={index}>
                         <td>{expense.expenseTitle}</td>
                         <td>{expense.amount}</td>
                         <td>{expense.category}</td>
-                        <td>
-                          <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={() => { this.deleteExpense(this.state._id) }}>
+                        <td onSubmit={handleSubmit.bind(this, dispatch)}>
+                          <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { deleteExpense(expense._id) }} onSubmit={handleSubmit.bind(this, dispatch)}>
                             ✗
                         </span>
                         </td>
@@ -93,12 +96,12 @@ class ExpenseDisplay extends Component {
                 ) : (
                     <tr></tr>
                   );
-              return <tbody>{this.currentList()}{expensesList}</tbody>;
+              return <tbody>{currentList()}{expensesList}</tbody>;
             }}
           </BudgetConsumer>
           <tbody></tbody>
         </table>
-      </div>
+      </div >
     );
   }
 }

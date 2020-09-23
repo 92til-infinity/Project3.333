@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const db = require("../../models");
+const mongodb = require("mongodb");
 
 router.route("/").post((req, res) => {
   // Use a regular expression to search titles for req.query.q
@@ -22,10 +23,10 @@ router.route("/").get((req, res) => {
     });
 })
 
-router.route("/:id").get((req, res) => {
+router.route("/:id").delete((req, res) => {
   console.log("delete route");
   const id = req.params.id
-  db.Budget.findByIdAndDelete(id)
+  db.Budget.deleteOne({ _id: new mongodb.ObjectID(id) })
     .then((expense) => res.json(expense))
     .catch((err) => {
       console.log(err);
