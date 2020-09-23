@@ -10,6 +10,7 @@ import {
 } from 'mdbreact';
 import ContactAlert from '../ContactAlert';
 
+
 const ContactCard = () => {
   const [emailAlert, setEmailAlert] = useState(false);
   const [formInputs, setFormInputs] = useState({
@@ -18,6 +19,16 @@ const ContactCard = () => {
     contactName: "",
     contactSubject: ""
   });
+
+  const sgMail = require('@sendgrid/mail');
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const msg = {
+    to: 'donationbuycraft@gmail.com',
+    from: 'admin@study-check.net',
+    subject: 'Sending with Twilio SendGrid is Fun',
+    text: 'and easy to do anywhere, even with Node.js',
+    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+  };
 
   const onChange = e =>
     setFormInputs({ value: e.target.value });
@@ -35,6 +46,7 @@ const ContactCard = () => {
       contactSubject: ""
 
     })
+    sgMail.send(msg);
   };
 
   return (
