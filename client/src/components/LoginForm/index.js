@@ -5,11 +5,13 @@ import { useHistory, Redirect } from "react-router-dom";
 import setAuthToken from "../../utils/setAuthToken";
 import UserContext from "../../utils/UserContext";
 import AuthContext from "../../utils/AuthContext";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
+import { toast, MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
+import ContactAlert from '../ContactAlert';
 
 const LoginForm = ({ toggleLogin, isAuthenticated }) => {
   const { setUser } = React.useContext(UserContext);
   const { authData, setAuth } = React.useContext(AuthContext);
+  const [loginErrorAlert, setLoginErrorAlert] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,9 +19,18 @@ const LoginForm = ({ toggleLogin, isAuthenticated }) => {
 
   const { email, password } = formData;
 
+  const handleLoginErrorAlert = () => {
+    setLoginErrorAlert(true);
+    toast.error("Oops! Looks like we couldn't find that email or password!", {
+      closeButton: false,
+    });
+
+  }
+
   // The e.target.name will take the name assignment from each form input (email, password, etc.)
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +61,7 @@ const LoginForm = ({ toggleLogin, isAuthenticated }) => {
     } catch (error) {
       localStorage.removeItem("token");
       setAuth({ ...authData, isAuthenticated: false, token: null });
-      console.error(error);
+      handleLoginErrorAlert();
     }
   };
 
@@ -99,10 +110,23 @@ const LoginForm = ({ toggleLogin, isAuthenticated }) => {
               <MDBBtn type="submit" value="Login">
                 Login
               </MDBBtn>
+              {loginErrorAlert && (
+                <div>
+                  <h6 style={{ color: "red", paddingTop: "5px" }}>
+                    Looks like we couldn't find that email or password!
+                  </h6>
+                  <h6 style={{ color: "#4285f4" }}>
+                    <a>
+                      Reset Password
+                    </a>
+                  </h6>
+                </div>
+              )}
             </div>
           </form>
         </MDBCol>
       </MDBRow>
+      {loginErrorAlert && <ContactAlert />}
     </MDBContainer>
   );
 };

@@ -156,6 +156,10 @@ class Calendar extends React.Component {
     this.setState({ showCalendarModal: !this.state.showCalendarModal });
   };
 
+  eventMouseEnter = (e) => {
+    console.log("Entered Event");
+  }
+
   render() {
     const { user } = this.context;
     return (
@@ -185,6 +189,7 @@ class Calendar extends React.Component {
           themeSystem="bootstrap"
           eventsSet={this.handleEvents}
           events={user.activities}
+          eventMouseEnter={this.eventMouseEnter}
         />
       </div>
     );
