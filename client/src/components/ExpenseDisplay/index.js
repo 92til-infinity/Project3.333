@@ -5,10 +5,8 @@ import API from '../../utils/API';
 class ExpenseDisplay extends Component {
 
   state = {
-    expenses: [],
-    _id: 0
+    expenses: []
   }
-
   componentDidMount() {
     API.getExpense().then((expenses) => {
       console.log(expenses.data);
@@ -16,21 +14,26 @@ class ExpenseDisplay extends Component {
     });
   }
 
-  deleteExpense = (id, dispatch) => {
-    API.deleteExpense(id)
-      .then((data) => {
-        console.log(data.data)
-        this.setState({
-          expenses: data.data,
-        });
-        dispatch({
-          type: 'expenses+',
-          expenses: this.state.expenses,
-        });
 
-      })
-      .catch(err => console.log(err));
+  handleSubmit = (dispatch) => {
+    dispatch({
+      type: 'remove',
+      expenses: this.state.expenses,
+    })
+    this.setState({
+      expenses: [
+        ...this.state.expenses
+      ]
+    });
+    console.log(this.state.expenses)
   };
+
+
+  deleteExpense = (id) => {
+    API.deleteExpense(id)
+
+  };
+
 
 
   currentList = () => {
@@ -44,7 +47,7 @@ class ExpenseDisplay extends Component {
               <td>{expense.amount}</td>
               <td>{expense.category}</td>
               <td>
-                <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }}>
+                <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }} onSubmit={this.handleSubmit.bind(this, dispatch)}>
                   ✗
                 </span>
               </td>
@@ -57,10 +60,9 @@ class ExpenseDisplay extends Component {
     return currentList;
   }
 
-
   render() {
     return (
-      <div className='card mt-5'>
+      <div className='card mt-5' >
         <table className='table-bordered'>
           <thead>
             <tr>
@@ -83,7 +85,7 @@ class ExpenseDisplay extends Component {
                         <td>{expense.amount}</td>
                         <td>{expense.category}</td>
                         <td>
-                          <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={() => { this.deleteExpense(this.state._id) }}>
+                          <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }} onSubmit={this.handleSubmit.bind(this, dispatch)}>
                             ✗
                         </span>
                         </td>
@@ -98,7 +100,7 @@ class ExpenseDisplay extends Component {
           </BudgetConsumer>
           <tbody></tbody>
         </table>
-      </div>
+      </div >
     );
   }
 }
