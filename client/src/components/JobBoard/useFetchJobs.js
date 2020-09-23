@@ -1,6 +1,6 @@
 import { useReducer, useEffect } from 'react'
 import axios from 'axios'
-
+// job board cors staying in for deployment testing
 const ACTIONS = {
     MAKE_REQUEST: 'make-request',
     GET_DATA: 'get-data',
