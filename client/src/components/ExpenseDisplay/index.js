@@ -7,47 +7,47 @@ class ExpenseDisplay extends Component {
   state = {
     expenses: []
   }
-
-  componentDidMount = () => {
+  componentDidMount() {
     API.getExpense().then((expenses) => {
       console.log(expenses.data);
-      setState({ expenses: expenses.data });
+      this.setState({ expenses: expenses.data });
     });
   }
+
 
   handleSubmit = (dispatch) => {
     dispatch({
       type: 'remove',
-      expenses: state.expenses,
+      expenses: this.state.expenses,
     })
-    setState({
+    this.setState({
       expenses: [
-        ...state.expenses
+        ...this.state.expenses
       ]
     });
-    console.log(state.expenses)
+    console.log(this.state.expenses)
   };
 
 
   deleteExpense = (id) => {
-    console.log(id)
     API.deleteExpense(id)
 
   };
 
 
+
   currentList = () => {
     const currentList =
-      state.expenses.length > 0 ? (
-        state.expenses.map((expense, index) => {
-          const { dispatch } = state;
+      this.state.expenses.length > 0 ? (
+        this.state.expenses.map((expense, index) => {
+          const { dispatch } = this.state;
           return (
             <tr key={index}>
               <td>{expense.expenseTitle}</td>
               <td>{expense.amount}</td>
               <td>{expense.category}</td>
-              <td >
-                <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { deleteExpense(expense._id) }} onSubmit={handleSubmit.bind(this, dispatch)}>
+              <td>
+                <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }} onSubmit={this.handleSubmit.bind(this, dispatch)}>
                   ✗
                 </span>
               </td>
@@ -59,7 +59,6 @@ class ExpenseDisplay extends Component {
         );
     return currentList;
   }
-
 
   render() {
     return (
@@ -79,14 +78,14 @@ class ExpenseDisplay extends Component {
               const expensesList =
                 value.expenses.length > 0 ? (
                   value.expenses.map((expense, index) => {
-                    const { dispatch } = state;
+                    const { dispatch } = this.state;
                     return (
                       <tr key={index}>
                         <td>{expense.expenseTitle}</td>
                         <td>{expense.amount}</td>
                         <td>{expense.category}</td>
-                        <td onSubmit={handleSubmit.bind(this, dispatch)}>
-                          <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { deleteExpense(expense._id) }} onSubmit={handleSubmit.bind(this, dispatch)}>
+                        <td>
+                          <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }} onSubmit={this.handleSubmit.bind(this, dispatch)}>
                             ✗
                         </span>
                         </td>
@@ -96,7 +95,7 @@ class ExpenseDisplay extends Component {
                 ) : (
                     <tr></tr>
                   );
-              return <tbody>{currentList()}{expensesList}</tbody>;
+              return <tbody>{this.currentList()}{expensesList}</tbody>;
             }}
           </BudgetConsumer>
           <tbody></tbody>

@@ -3,6 +3,7 @@ import TodoPage from '../TodoPage';
 import Calendar from '../Calendar';
 import BudgetPage from '../BudgetPage';
 import Profile from '../Profile';
+import JobBoard from '../JobBoard/JobBoard'
 import UserContext from '../../utils/UserContext';
 import {
   MDBNavbar,
@@ -35,6 +36,7 @@ class Dashboard extends React.Component {
       showCalendar: false,
       showBudget: false,
       showProfile: false,
+      showJobBoard: false,
     };
   }
 
@@ -66,6 +68,7 @@ class Dashboard extends React.Component {
       showCalendar: false,
       showTodo: false,
       showProfile: false,
+      showJobBoard: false
     });
   };
 
@@ -77,6 +80,7 @@ class Dashboard extends React.Component {
       showCalendar: false,
       showTodo: true,
       showProfile: false,
+      showJobBoard: false
     });
   };
 
@@ -88,6 +92,7 @@ class Dashboard extends React.Component {
       showCalendar: true,
       showTodo: false,
       showProfile: false,
+      showJobBoard: false
     });
   };
 
@@ -99,6 +104,7 @@ class Dashboard extends React.Component {
       showCalendar: false,
       showTodo: false,
       showProfile: false,
+      showJobBoard: false
     });
   };
 
@@ -109,9 +115,21 @@ class Dashboard extends React.Component {
       showCalendar: false,
       showTodo: false,
       showProfile: true,
+      showJobBoard: false
     });
   };
 
+
+  handleJobBoardClick = () => {
+    this.setState({
+      showChat: false,
+      showBudget: false,
+      showCalendar: false,
+      showTodo: false,
+      showProfile: false,
+      showJobBoard: true,
+    });
+  };
   handleSignOutClick = () => {
     localStorage.removeItem('token');
   };
@@ -218,6 +236,21 @@ class Dashboard extends React.Component {
             </MDBSideNavItem>
 
             <MDBSideNavItem
+              name="Job Board"
+              id="jobBoard-cat"
+              icon="job"
+              className="sideNavLink"
+            >
+              <div
+                name="Job Board"
+                onClick={this.handleJobBoardClick}
+                style={{ fontSize: "17px" }}
+              >
+                Job Board
+              </div>
+            </MDBSideNavItem>
+
+            <MDBSideNavItem
               name='Chat'
               id='contact-me-cat'
               icon='comment'
@@ -285,6 +318,8 @@ class Dashboard extends React.Component {
             {this.state.showBudget && <BudgetPage />}
 
             {this.state.showProfile && <Profile />}
+
+            {this.state.showJobBoard && <JobBoard />}
           </MDBContainer>
         </main>
       </div>
