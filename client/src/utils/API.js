@@ -13,9 +13,8 @@ export default {
 
   deleteExpense: function (id) {
     console.log("delete")
-    return axios.get("/api/budgets/" + id);
+    return axios.delete("/api/budgets/" + id);
   },
-
 
   getTodos: function () {
     return axios.get("/api/todos");
