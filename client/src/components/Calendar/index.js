@@ -19,6 +19,7 @@ class Calendar extends React.Component {
       homework: [],
       classes: [],
       currentEvents: [],
+      date: new Date(),
     };
   }
 
@@ -143,6 +144,7 @@ class Calendar extends React.Component {
 
   handleDateClick = (e) => {
     console.log(e.dateStr);
+    this.setState({ date: e.dateStr });
     this.setState({ showCalendarModal: !this.state.showCalendarModal });
   };
 
@@ -150,6 +152,10 @@ class Calendar extends React.Component {
     this.setState({
       currentEvents: events,
     });
+  };
+
+  addEventClick = (e) => {
+    console.log(e);
   };
 
   toggle = () => {
@@ -162,7 +168,9 @@ class Calendar extends React.Component {
       <div>
         {this.state.showCalendarModal && (
           <CalendarModal
+            date={this.state.date}
             toggle={this.toggle}
+            addEventClick={this.addEventClick}
             isOpen={this.state.showCalendarModal}
           />
         )}
