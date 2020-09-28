@@ -14,7 +14,9 @@ class TimePicker extends Component {
         time.pop();
         time.pop();
         time = time.join("").split(":");
-        time[0] = parseInt(time[0]) + 12;
+        if (time[0] < 12) {
+          time[0] = parseInt(time[0]) + 12;
+        }
         return time.join(":");
     }
   };
@@ -37,6 +39,7 @@ class TimePicker extends Component {
           label="Starts"
           vibrate={true}
           getValue={this.getStartPickerValue}
+          placeholder={this.props.start}
         />
         <MDBTimePicker
           name="end"

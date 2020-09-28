@@ -12,6 +12,7 @@ import {
 import AllDayToggle from "../AllDayToggle";
 import TimePicker from "../TimePicker";
 import EventCategoryButtons from "../EventCategoryButtons";
+import { v4 as uuidv4 } from 'uuid';
 import API from "../../utils/API";
 
 class CalendarModal extends Component {
@@ -38,7 +39,6 @@ class CalendarModal extends Component {
 
   createEvent = () => {
     const { user } = this.context;
-    let eventContainer = user.activities;
     let backgroundColor;
     switch (this.state.category) {
       case "Class":
@@ -63,6 +63,7 @@ class CalendarModal extends Component {
     let { date, title, allDay, start, end, category, notes } = this.state;
 
     const newEvent = {
+      id: uuidv4(),
       date,
       title,
       allDay,
@@ -71,14 +72,13 @@ class CalendarModal extends Component {
       category,
       notes,
       backgroundColor,
+      editable: false
     };
-    eventContainer.push(newEvent);
-    API.setActivities(eventContainer);
+    this.props.addEvent(newEvent);
     this.props.toggle();
   };
 
   render() {
-    const isEnabled = this.state.allDay;
     return (
       <MDBContainer>
         <MDBModal isOpen={this.props.isOpen} centered>
@@ -86,9 +86,9 @@ class CalendarModal extends Component {
             Create an Event
           </MDBModalHeader>
           <MDBModalBody>
-            <MDBInput label="Title" name="title" onChange={this.onChange} />
+            <MDBInput label="Title" name="title" onChange={this.onChange} placeholder={this.props.eventInfo.title} />
             <AllDayToggle setAllDay={this.handleChange} />
-            <TimePicker setTime={this.handleChange} disabled={!isEnabled} />
+            <TimePicker setTime={this.handleChange} />
             <EventCategoryButtons setCategory={this.handleChange} />
             <MDBInput
               type="textarea"
@@ -97,7 +97,7 @@ class CalendarModal extends Component {
               rows="3"
               onChange={this.onChange}
             />
-            ;
+
           </MDBModalBody>
           <MDBModalFooter>
             <MDBBtn color="secondary" onClick={this.props.toggle}>

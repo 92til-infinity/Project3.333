@@ -1,12 +1,14 @@
 import React from "react";
-import FullCalendar from "@fullcalendar/react";
+import FullCalendar, { CalendarApi } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
+import { v4 as uuidv4 } from 'uuid';
 import { addDays, subDays } from "date-fns";
 import CalendarModal from "../CalendarModal";
+import CalEditModal from "../CalEditModal";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
 
 class Calendar extends React.Component {
@@ -16,6 +18,8 @@ class Calendar extends React.Component {
     super(props);
     this.state = {
       showCalendarModal: false,
+      showEventModal: false,
+      eventInfo: {},
       homework: [],
       classes: [],
       currentEvents: [],
@@ -24,34 +28,34 @@ class Calendar extends React.Component {
   }
 
   componentDidMount() {
+    console.log("component mounting...");
     const { user } = this.context;
-    // const startEvents = this.renderEventContent(user.activities);
     this.setState({ currentEvents: user.activities });
     this.setState({ homework: user.homework });
     this.getClassInfo(user.classes);
   }
 
   componentDidUpdate(_, prevState) {
+    const { user } = this.context;
+
     if (this.state.homework !== prevState.homework) {
+      console.log("Homework check..." + this.state.homework.length + ":" + prevState.homework.length);
       this.checkHomework();
     }
 
     if (this.state.classes !== prevState.classes) {
+      console.log("Classes check..." + this.state.classes.length + ":" + prevState.classes.length);
       this.checkClasses();
     }
-  }
 
-  onChange = async (e) => {
-    let { user, setUser } = this.context;
-    this.setState({ currentEvents: user.activities });
-    // Setting new task list (e) to state, context, and database
-    // if (e.length !== this.state.currentEvents.length) {
-    //   setUser({ ...user, activities: e });
-    //   this.setState({ currentEvents: e });
-    //   await API.setActivities(e);
-    //   this.checkClasses();
+    // if (this.state.currentEvents.length !== prevState.currentEvents.length) {
+    //   console.log("Events check..." + this.state.currentEvents.length + ":" + prevState.currentEvents.length);
+    //   this.setState({ currentEvents: user.activities });
     // }
-  };
+    //this.setState({ currentEvents: user.activities });
+    console.log("Component did update...");
+
+  }
 
   // Load classes and store in state to avoid constant API calls
   getClassInfo = (unitList) => {
@@ -67,6 +71,7 @@ class Calendar extends React.Component {
   };
 
   checkClasses = () => {
+    console.log("Checking classes now...");
     for (let i = 0; i < this.state.classes.length; i++) {
       const classes = this.state.classes[i];
       if (this.state.currentEvents.some((event) => event.id === classes._id)) {
@@ -78,6 +83,7 @@ class Calendar extends React.Component {
   };
 
   checkHomework = () => {
+    console.log("Checking homework now...");
     for (let i = 0; i < this.state.homework.length; i++) {
       const homework = this.state.homework[i];
       if (this.state.currentEvents.some((hw) => hw.id === homework._id)) {
@@ -89,27 +95,29 @@ class Calendar extends React.Component {
   };
 
   addHomework = async (homework) => {
-    let homeworkContainer = this.state.currentEvents;
+    console.log("Adding homework " + homework._id);
 
+    // Reformatting homework data to be read by calendar component
     const hwInstance = {
       id: homework._id,
-      title: `Homework Due: ${homework.assignment}`,
-      start: addDays(homework.duedate, 1),
+      title: homework.assignment,
+      start: addDays(new Date(homework.duedate), 1),
       allDay: true,
       backgroundColor: "red",
       textColor: "white",
+      category: "Homework",
+      notes: homework.description,
+      editable: false
     };
-    homeworkContainer.push(hwInstance);
-    this.setState({ currentEvents: homeworkContainer });
-    await API.setActivities(homeworkContainer);
+    this.handleAdd(hwInstance);
   };
 
   populate = async (unit) => {
-    let start, end;
-    let classContainer = this.state.currentEvents;
+    console.log("Populating class " + unit._id);
 
-    start = addDays(new Date(unit.startdate), 1);
-    end = addDays(new Date(unit.enddate), 1);
+    let classContainer = this.state.currentEvents;
+    let start = addDays(new Date(unit.startdate), 1);
+    let end = addDays(new Date(unit.enddate), 1);
 
     // For each day of the week
     for (let x = 0; x < 7; x++) {
@@ -124,10 +132,12 @@ class Calendar extends React.Component {
           while (repeat < end) {
             const ISOrepeat = repeat.toISOString().replace(/T.*$/, "");
             const classInstance = {
-              id: unit._id,
+              id: uuidv4(),
+              classid: unit._id,
               title: unit.title,
               start: `${ISOrepeat}T${unit.starttime}:00`,
               end: `${ISOrepeat}T${unit.endtime}:00`,
+              editable: false
             };
             classContainer.push(classInstance);
             repeat = addDays(repeat, 7);
@@ -142,8 +152,26 @@ class Calendar extends React.Component {
     await API.setActivities(classContainer);
   };
 
+  handleAdd = async (event) => {
+    const { user, setUser } = this.context;
+    let container = this.state.currentEvents;
+    container.push(event);
+    this.setState({ currentEvents: [...container] });
+    setUser({ ...user, activities: [...container] });
+    await API.setActivities(container);
+  }
+
+  handleDelete = async (id) => {
+    const { user, setUser } = this.context;
+    let filteredEvents = this.state.currentEvents.filter(function (event) {
+      return event.id !== id;
+    })
+    this.setState({ currentEvents: [...filteredEvents] });
+    setUser({ ...user, activities: [...filteredEvents] });
+    await API.setActivities(filteredEvents);
+  }
+
   handleDateClick = (e) => {
-    console.log(e.dateStr);
     this.setState({ date: e.dateStr });
     this.setState({ showCalendarModal: !this.state.showCalendarModal });
   };
@@ -154,13 +182,39 @@ class Calendar extends React.Component {
     });
   };
 
-  addEventClick = (e) => {
-    console.log(e);
-  };
+  eventClick = (info) => {
+    const { id, title, allDay, start, end, backgroundColor } = info.event;
+    const { notes, category } = info.event.extendedProps;
+    const radio = this.getRadio(category);
+    this.setState({ eventInfo: { id, title, allDay, start, end, category, radio, notes, backgroundColor } });
+    this.setState({ showEventModal: !this.state.showEventModal });
+  }
 
-  toggle = () => {
+  getRadio = (category) => {
+    switch (category) {
+      case "Class":
+        return 2;
+      case "Homework":
+        return 3;
+      case "Test":
+        return 4;
+      case "Meeting":
+        return 5;
+      case "Appointment":
+        return 6;
+      case "Other":
+        return 7;
+    }
+  }
+
+  toggleCreate = () => {
     this.setState({ showCalendarModal: !this.state.showCalendarModal });
   };
+
+  toggleEdit = () => {
+    this.setState({ showEventModal: !this.state.showEventModal })
+    this.setState({ eventInfo: {} })
+  }
 
   render() {
     const { user } = this.context;
@@ -169,9 +223,19 @@ class Calendar extends React.Component {
         {this.state.showCalendarModal && (
           <CalendarModal
             date={this.state.date}
-            toggle={this.toggle}
-            addEventClick={this.addEventClick}
+            eventInfo={this.state.eventInfo}
+            toggle={this.toggleCreate}
+            addEvent={this.handleAdd}
             isOpen={this.state.showCalendarModal}
+          />
+        )}
+        {this.state.showEventModal && (
+          <CalEditModal
+            eventInfo={this.state.eventInfo}
+            toggle={this.toggleEdit}
+            eventClick={this.editEventClick}
+            isOpen={this.state.showEventModal}
+            deleteEvent={this.handleDelete}
           />
         )}
         <FullCalendar
@@ -191,8 +255,10 @@ class Calendar extends React.Component {
           selectable={true}
           dateClick={this.handleDateClick}
           themeSystem="bootstrap"
-          eventsSet={this.handleEvents}
           events={user.activities}
+          eventClick={this.eventClick}
+        // eventsSet={this.handleEvents}
+        // eventAdd={this.handleAdd}
         />
       </div>
     );

@@ -38,6 +38,7 @@ class Dashboard extends React.Component {
       showBudget: false,
       showProfile: false,
       showJobBoard: false,
+      lastEvent: ""
     };
   }
 
@@ -135,6 +136,10 @@ class Dashboard extends React.Component {
   handleSignOutClick = () => {
     localStorage.removeItem("token");
   };
+
+  handleCalUpdate = (event) => {
+    this.setState({ lastEvent: event })
+  }
 
   render() {
     const { user } = this.context;
@@ -314,7 +319,7 @@ class Dashboard extends React.Component {
           >
             {this.state.showTodo && <TodoPage />}
 
-            {this.state.showCalendar && <Calendar />}
+            {this.state.showCalendar && <Calendar update={this.handleCalUpdate} />}
 
             {this.state.showBudget && <BudgetPage />}
 
