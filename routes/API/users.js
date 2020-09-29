@@ -196,6 +196,25 @@ router.put("/activities", auth, async (req, res) => {
   }
 });
 
+// @route   PUT api/users/activities/:id
+// @desc    Update an event
+// @access  Private
+router.put("/activities/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    const eventID = req.params.id;
+    const selected = User.find({ "_id": req.user.id, "activities.id": req.params.id });
+    //const selected = user.find({ "activities.id": req.params.id });
+    //const selected = user.activities;
+    console.log(selected);
+    // await user.save();
+    // res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+})
+
 // @route   PUT api/users/homework/:id
 // @desc    Add homework to a user
 // @access  Public

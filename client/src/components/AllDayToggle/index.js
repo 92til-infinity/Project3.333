@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class AllDayToggle extends Component {
   state = {
-    switch1: false,
+    switch1: this.props.allDay,
   };
   handleSwitchChange = (nr) => () => {
     let switchNumber = `switch${nr}`;

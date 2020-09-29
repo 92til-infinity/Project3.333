@@ -28,6 +28,10 @@ export default {
     return axios.put("/api/todos/" + id, value);
   },
 
+  updateEvent: function (id, value) {
+    return axios.put("/api/users/activities/" + id, value);
+  },
+
   getTodoStatus: function (desc) {
     return axios.get("/api/todos/" + desc);
   },

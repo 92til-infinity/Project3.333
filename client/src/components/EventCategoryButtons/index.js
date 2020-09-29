@@ -3,8 +3,8 @@ import { MDBContainer, MDBInput } from "mdbreact";
 
 class EventCategoryButtons extends Component {
   state = {
-    category: "Class",
-    radio: 2,
+    category: this.props.class,
+    radio: this.props.radio,
   };
 
   onClick = (nr, category) => () => {
