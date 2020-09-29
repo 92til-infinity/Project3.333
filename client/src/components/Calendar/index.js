@@ -183,10 +183,11 @@ class Calendar extends React.Component {
   };
 
   eventClick = (info) => {
-    const { id, title, allDay, start, end, backgroundColor } = info.event;
+    console.log(info.event);
+    const { id, title, allDay, startStr, endStr, backgroundColor } = info.event;
     const { notes, category } = info.event.extendedProps;
     const radio = this.getRadio(category);
-    this.setState({ eventInfo: { id, title, allDay, start, end, category, radio, notes, backgroundColor } });
+    this.setState({ eventInfo: { id, title, allDay, startStr, endStr, category, radio, notes, backgroundColor } });
     this.setState({ showEventModal: !this.state.showEventModal });
   }
 

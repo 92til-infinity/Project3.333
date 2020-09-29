@@ -13,24 +13,40 @@ import AllDayToggle from "../AllDayToggle";
 import TimePicker from "../TimePicker";
 import EventCategoryButtons from "../EventCategoryButtons";
 import API from "../../utils/API";
-import { getTime } from "date-fns";
 
 class CalEditModal extends Component {
     static contextType = UserContext;
 
     state = {
+        id: this.props.eventInfo.id,
+        date: this.props.eventInfo.date,
         title: this.props.eventInfo.title,
         notes: this.props.eventInfo.notes,
         category: this.props.eventInfo.category,
         radio: this.props.eventInfo.radio,
         allDay: this.props.eventInfo.allDay,
-        start: this.props.eventInfo.start
+        starthour: "",
+        startminute: "",
+        endhour: "",
+        endminute: ""
     };
 
     componentDidMount() {
-        this.setState({ start: this.convertTime(this.propse.eventInfo.start) })
+        let starttime = this.props.eventInfo.startStr.split("T");
+        this.setState({ date: starttime[0] });
 
+        let start = starttime[1].split(":");
+        if (start[1] == "00") {
+            start[1] = 0;
+        }
+        this.setState({ starthour: start[0], startminute: start[1] });
 
+        let endtime = this.props.eventInfo.endStr.split("T");
+        let end = endtime[1].split(":");
+        if (end[1] == "00") {
+            end[1] = 0;
+        }
+        this.setState({ endhour: end[0], endminute: end[1] });
     }
 
     handleChange = (index, value) => {
@@ -45,6 +61,46 @@ class CalEditModal extends Component {
         return (hours + ":" + minutes);
     }
 
+    editEvent = () => {
+        let backgroundColor;
+        switch (this.state.category) {
+            case "Class":
+                backgroundColor = "blue";
+                break;
+            case "Homework":
+                backgroundColor = "red";
+                break;
+            case "Test":
+                backgroundColor = "black";
+                break;
+            case "Meeting":
+                backgroundColor = "orange";
+                break;
+            case "Appointment":
+                backgroundColor = "green";
+                break;
+            case "Other":
+                backgroundColor = "purple";
+                break;
+        }
+
+        let { id, date, title, allDay, start, end, category, notes } = this.state;
+
+        const updatedEvent = {
+            id,
+            date,
+            title,
+            allDay,
+            start: `${date}T${start}`,
+            end: `${date}T${end}`,
+            category,
+            notes,
+            backgroundColor,
+            editable: false
+        };
+        API.updateEvent(this.props.eventInfo.id, updatedEvent);
+    }
+
     deleteEvent = (e) => {
         e.preventDefault();
         this.props.deleteEvent(this.props.eventInfo.id)
@@ -52,7 +108,6 @@ class CalEditModal extends Component {
     }
 
     render() {
-        console.log(this.props.eventInfo);
         return (
             <MDBContainer>
                 <MDBModal isOpen={this.props.isOpen} centered>
@@ -62,7 +117,13 @@ class CalEditModal extends Component {
                     <MDBModalBody>
                         <MDBInput label="Title" name="title" onChange={this.onChange} value={this.state.title} />
                         <AllDayToggle setAllDay={this.handleChange} allDay={this.state.allDay} />
-                        <TimePicker setTime={this.handleChange} end={this.state.end} />
+                        <TimePicker
+                            setTime={this.handleChange}
+                            startHour={this.state.starthour}
+                            startMinute={this.state.startminute}
+                            endHour={this.state.endhour}
+                            endMinute={this.state.endminute}
+                        />
                         <EventCategoryButtons setCategory={this.handleChange} class={this.state.category} radio={this.state.radio} />
                         <MDBInput
                             type="textarea"

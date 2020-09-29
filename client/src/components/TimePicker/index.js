@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { MDBTimePicker, MDBCol } from "mdbreact";
+import { getHours } from "date-fns";
 
 class TimePicker extends Component {
+
+  componentDidMount() {
+
+  }
+
   formatTime = (value) => {
     let time = value.split("");
     const ampm = time[time.length - 2];
@@ -39,7 +45,8 @@ class TimePicker extends Component {
           label="Starts"
           vibrate={true}
           getValue={this.getStartPickerValue}
-          placeholder={this.props.start}
+          hours={parseInt(this.props.startHour)}
+          minutes={parseInt(this.props.startMinute)}
         />
         <MDBTimePicker
           name="end"
@@ -47,6 +54,8 @@ class TimePicker extends Component {
           label="Ends"
           vibrate={true}
           getValue={this.getEndPickerValue}
+          hours={parseInt(this.props.endHour)}
+          minutes={parseInt(this.props.endMinute)}
         />
       </MDBCol>
     );

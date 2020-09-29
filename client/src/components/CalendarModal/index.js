@@ -72,7 +72,6 @@ class CalendarModal extends Component {
       category,
       notes,
       backgroundColor,
-      editable: false
     };
     this.props.addEvent(newEvent);
     this.props.toggle();
