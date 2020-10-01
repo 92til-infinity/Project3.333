@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const budgetSchema = new Schema({
+    user: {
+        type: String,
+        required: true,
+    },
     expenseTitle: {
         type: String,
         required: true
