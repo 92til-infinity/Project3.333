@@ -5,7 +5,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { addDays, subDays } from "date-fns";
 import CalendarModal from "../CalendarModal";
 import CalEditModal from "../CalEditModal";
@@ -36,15 +36,11 @@ class Calendar extends React.Component {
   }
 
   componentDidUpdate(_, prevState) {
-    const { user } = this.context;
-
     if (this.state.homework !== prevState.homework) {
-      console.log("Homework check..." + this.state.homework.length + ":" + prevState.homework.length);
       this.checkHomework();
     }
 
     if (this.state.classes !== prevState.classes) {
-      console.log("Classes check..." + this.state.classes.length + ":" + prevState.classes.length);
       this.checkClasses();
     }
 
@@ -54,7 +50,6 @@ class Calendar extends React.Component {
     // }
     //this.setState({ currentEvents: user.activities });
     console.log("Component did update...");
-
   }
 
   // Load classes and store in state to avoid constant API calls
@@ -74,7 +69,9 @@ class Calendar extends React.Component {
     console.log("Checking classes now...");
     for (let i = 0; i < this.state.classes.length; i++) {
       const classes = this.state.classes[i];
-      if (this.state.currentEvents.some((event) => event.id === classes._id)) {
+      if (
+        this.state.currentEvents.some((event) => event.classid === classes._id)
+      ) {
         // Do nothing, but if/else statement is necessary
       } else {
         this.populate(classes);
@@ -107,13 +104,14 @@ class Calendar extends React.Component {
       textColor: "white",
       category: "Homework",
       notes: homework.description,
-      editable: false
+      editable: false,
     };
     this.handleAdd(hwInstance);
   };
 
   populate = async (unit) => {
     console.log("Populating class " + unit._id);
+    const { user, setUser } = this.context;
 
     let classContainer = this.state.currentEvents;
     let start = addDays(new Date(unit.startdate), 1);
@@ -137,7 +135,9 @@ class Calendar extends React.Component {
               title: unit.title,
               start: `${ISOrepeat}T${unit.starttime}:00`,
               end: `${ISOrepeat}T${unit.endtime}:00`,
-              editable: false
+              editable: false,
+              backgroundColor: "blue",
+              category: "Class",
             };
             classContainer.push(classInstance);
             repeat = addDays(repeat, 7);
@@ -149,6 +149,7 @@ class Calendar extends React.Component {
       start = addDays(start, 1);
     }
     this.setState({ currentEvents: classContainer });
+    setUser({ ...user, activities: [...classContainer] });
     await API.setActivities(classContainer);
   };
 
@@ -159,21 +160,24 @@ class Calendar extends React.Component {
     this.setState({ currentEvents: [...container] });
     setUser({ ...user, activities: [...container] });
     await API.setActivities(container);
-  }
+  };
 
   handleDelete = async (id) => {
     const { user, setUser } = this.context;
-    let filteredEvents = this.state.currentEvents.filter(function (event) {
+    let filteredEvents = this.state.currentEvents.filter(function(event) {
       return event.id !== id;
-    })
+    });
     this.setState({ currentEvents: [...filteredEvents] });
     setUser({ ...user, activities: [...filteredEvents] });
     await API.setActivities(filteredEvents);
-  }
+  };
 
   handleDateClick = (e) => {
-    this.setState({ date: e.dateStr });
-    this.setState({ showCalendarModal: !this.state.showCalendarModal });
+    this.setState({
+      date: e.dateStr,
+      showCalendarModal: !this.state.showCalendarModal,
+    });
+    // this.setState({ showCalendarModal: !this.state.showCalendarModal });
   };
 
   handleEvents = (events) => {
@@ -187,9 +191,21 @@ class Calendar extends React.Component {
     const { id, title, allDay, startStr, endStr, backgroundColor } = info.event;
     const { notes, category } = info.event.extendedProps;
     const radio = this.getRadio(category);
-    this.setState({ eventInfo: { id, title, allDay, startStr, endStr, category, radio, notes, backgroundColor } });
+    this.setState({
+      eventInfo: {
+        id,
+        title,
+        allDay,
+        startStr,
+        endStr,
+        category,
+        radio,
+        notes,
+        backgroundColor,
+      },
+    });
     this.setState({ showEventModal: !this.state.showEventModal });
-  }
+  };
 
   getRadio = (category) => {
     switch (category) {
@@ -206,16 +222,16 @@ class Calendar extends React.Component {
       case "Other":
         return 7;
     }
-  }
+  };
 
   toggleCreate = () => {
     this.setState({ showCalendarModal: !this.state.showCalendarModal });
   };
 
   toggleEdit = () => {
-    this.setState({ showEventModal: !this.state.showEventModal })
-    this.setState({ eventInfo: {} })
-  }
+    this.setState({ showEventModal: !this.state.showEventModal });
+    this.setState({ eventInfo: {} });
+  };
 
   render() {
     const { user } = this.context;
@@ -224,7 +240,6 @@ class Calendar extends React.Component {
         {this.state.showCalendarModal && (
           <CalendarModal
             date={this.state.date}
-            eventInfo={this.state.eventInfo}
             toggle={this.toggleCreate}
             addEvent={this.handleAdd}
             isOpen={this.state.showCalendarModal}
@@ -236,6 +251,7 @@ class Calendar extends React.Component {
             toggle={this.toggleEdit}
             eventClick={this.editEventClick}
             isOpen={this.state.showEventModal}
+            addEvent={this.handleAdd}
             deleteEvent={this.handleDelete}
           />
         )}
@@ -258,8 +274,8 @@ class Calendar extends React.Component {
           themeSystem="bootstrap"
           events={user.activities}
           eventClick={this.eventClick}
-        // eventsSet={this.handleEvents}
-        // eventAdd={this.handleAdd}
+          // eventsSet={this.handleEvents}
+          // eventAdd={this.handleAdd}
         />
       </div>
     );

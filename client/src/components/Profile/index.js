@@ -27,12 +27,12 @@ const Profile = ({}) => {
   const { user, setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
     facebook: "",
-    pinterest: "",
+    linkedin: "",
     github: "",
     twitter: "",
   });
 
-  const { facebook, pinterest, github, twitter } = formData;
+  const { facebook, linkedin, github, twitter } = formData;
 
   useEffect(() => {
     setFormData(user.social);
@@ -48,7 +48,7 @@ const Profile = ({}) => {
       github: formData.github,
       facebook: formData.facebook,
       twitter: formData.twitter,
-      pinterest: formData.pinterest,
+      linkedin: formData.linkedin,
     };
     try {
       const config = {
@@ -81,21 +81,19 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder={user.social.facebook}
                 name="facebook"
-                value={facebook}
+                value={formData.facebook}
                 onChange={onChange}
               />
             </div>
 
             <div className="form-group social-input text-lg-left">
-              <i className="fab fa-pinterest fa-3x social" />
+              <i className="fab fa-linkedin fa-3x social" />
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder={user.social.pinterest}
-                name="pinterest"
-                value={pinterest}
+                name="linkedin"
+                value={formData.linkedin}
                 onChange={onChange}
               />
             </div>
@@ -105,9 +103,8 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder={user.social.github}
                 name="github"
-                value={github}
+                value={formData.github}
                 onChange={onChange}
               />
             </div>
@@ -117,9 +114,8 @@ const Profile = ({}) => {
               <MDBInput
                 className="social-text"
                 type="text"
-                placeholder={user.social.twitter}
                 name="twitter"
-                value={twitter}
+                value={formData.twitter}
                 onChange={onChange}
               />
             </div>

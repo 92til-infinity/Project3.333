@@ -1,10 +1,10 @@
-import React from 'react';
-import TodoPage from '../TodoPage';
-import Calendar from '../Calendar';
-import BudgetPage from '../BudgetPage';
-import Profile from '../Profile';
-import JobBoard from '../JobBoard/JobBoard'
-import UserContext from '../../utils/UserContext';
+import React from "react";
+import TodoPage from "../TodoPage";
+import Calendar from "../Calendar";
+import BudgetPage from "../BudgetPage";
+import Profile from "../Profile";
+import JobBoard from "../JobBoard/JobBoard";
+import UserContext from "../../utils/UserContext";
 import setAuthToken from "../../utils/setAuthToken";
 import {
   MDBNavbar,
@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
       showBudget: false,
       showProfile: false,
       showJobBoard: false,
-      lastEvent: ""
+      lastEvent: "",
     };
   }
 
@@ -71,7 +71,7 @@ class Dashboard extends React.Component {
       showCalendar: false,
       showTodo: false,
       showProfile: false,
-      showJobBoard: false
+      showJobBoard: false,
     });
   };
 
@@ -83,7 +83,7 @@ class Dashboard extends React.Component {
       showCalendar: false,
       showTodo: true,
       showProfile: false,
-      showJobBoard: false
+      showJobBoard: false,
     });
   };
 
@@ -95,7 +95,7 @@ class Dashboard extends React.Component {
       showCalendar: true,
       showTodo: false,
       showProfile: false,
-      showJobBoard: false
+      showJobBoard: false,
     });
   };
 
@@ -107,7 +107,7 @@ class Dashboard extends React.Component {
       showCalendar: false,
       showTodo: false,
       showProfile: false,
-      showJobBoard: false
+      showJobBoard: false,
     });
   };
 
@@ -118,10 +118,9 @@ class Dashboard extends React.Component {
       showCalendar: false,
       showTodo: false,
       showProfile: true,
-      showJobBoard: false
+      showJobBoard: false,
     });
   };
-
 
   handleJobBoardClick = () => {
     this.setState({
@@ -138,8 +137,8 @@ class Dashboard extends React.Component {
   };
 
   handleCalUpdate = (event) => {
-    this.setState({ lastEvent: event })
-  }
+    this.setState({ lastEvent: event });
+  };
 
   render() {
     const { user } = this.context;
@@ -176,22 +175,22 @@ class Dashboard extends React.Component {
           <li>
             <ul className="social">
               <li>
-                <a href="#!">
+                <a href={user.social.facebook}>
                   <MDBIcon fab icon="facebook-f" />
                 </a>
               </li>
               <li>
-                <a href="#!">
-                  <MDBIcon fab icon="pinterest" />
+                <a href={user.social.linkedin}>
+                  <MDBIcon fab icon="linkedin" />
                 </a>
               </li>
               <li>
-                <a href="#!">
+                <a href={user.social.github}>
                   <MDBIcon fab icon="github" />
                 </a>
               </li>
               <li>
-                <a href="#!">
+                <a href={user.social.twitter}>
                   <MDBIcon fab icon="twitter" />
                 </a>
               </li>
@@ -258,10 +257,10 @@ class Dashboard extends React.Component {
             </MDBSideNavItem>
 
             <MDBSideNavItem
-              name='Chat'
-              id='contact-me-cat'
-              icon='comment'
-              className='sideNavLink'
+              name="Chat"
+              id="contact-me-cat"
+              icon="comment"
+              className="sideNavLink"
             >
               <div name="Chat" style={{ fontSize: "17px" }}>
                 Chat (<em>Coming Soon!</em>)
@@ -319,7 +318,9 @@ class Dashboard extends React.Component {
           >
             {this.state.showTodo && <TodoPage />}
 
-            {this.state.showCalendar && <Calendar update={this.handleCalUpdate} />}
+            {this.state.showCalendar && (
+              <Calendar update={this.handleCalUpdate} />
+            )}
 
             {this.state.showBudget && <BudgetPage />}
 
