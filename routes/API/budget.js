@@ -18,7 +18,7 @@ router.post("/", auth, async (req, res) => {
       console.log(err);
       res.status(422).end();
     });
-  console.log(lineItem, "line 15");
+  console.log("line 15");
 
 });
 router.get("/", auth, async (req, res) => {
@@ -28,7 +28,7 @@ router.get("/", auth, async (req, res) => {
       console.log(err);
       res.status(422).end();
     });
-  console.log(lineItem, "line 16");
+  console.log("line 16");
 })
 
 router.route("/:id").delete((req, res) => {
