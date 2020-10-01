@@ -1,26 +1,34 @@
 const router = require("express").Router();
 const db = require("../../models");
+const Budget = require("../../models/budgetDB")
 const mongodb = require("mongodb");
+const auth = require("../../config/middleware/auth");
 
-router.route("/").post((req, res) => {
+router.post("/", auth, async (req, res) => {
   // Use a regular expression to search titles for req.query.q
   // using case insensitive match. https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
   // console.log(db);
-  db.Budget.create(req.body)
+  const { expenseTitle, amount, category } = req.body;
+  lineItem = new Budget({ user: req.user.id, expenseTitle, amount, category });
+  console.log(req.user.id);
+
+  db.Budget.create(lineItem)
     .then((expense) => res.json(expense))
     .catch((err) => {
       console.log(err);
       res.status(422).end();
     });
+  console.log(lineItem, "line 15");
 
 });
-router.route("/").get((req, res) => {
-  db.Budget.find()
+router.get("/", auth, async (req, res) => {
+  db.Budget.find({ user: req.user.id })
     .then((expense) => res.json(expense))
     .catch((err) => {
       console.log(err);
       res.status(422).end();
     });
+  console.log(lineItem, "line 16");
 })
 
 router.route("/:id").delete((req, res) => {

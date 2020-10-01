@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { BudgetConsumer } from '../../utils/BudgetContext';
 import API from '../../utils/API';
+import UserContext from "../../utils/UserContext";
 
 class InputExpenses extends Component {
+  static contextType = UserContext;
+
   state = {
     expenses: [],
     expenseTitle: '',
