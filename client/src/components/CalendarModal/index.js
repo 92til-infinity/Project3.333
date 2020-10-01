@@ -13,7 +13,6 @@ import AllDayToggle from "../AllDayToggle";
 import TimePicker from "../TimePicker";
 import EventCategoryButtons from "../EventCategoryButtons";
 import { v4 as uuidv4 } from "uuid";
-import API from "../../utils/API";
 
 class CalendarModal extends Component {
   static contextType = UserContext;
@@ -42,7 +41,6 @@ class CalendarModal extends Component {
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   createEvent = () => {
-    const { user } = this.context;
     let backgroundColor;
     switch (this.state.category) {
       case "Class":
@@ -62,6 +60,9 @@ class CalendarModal extends Component {
         break;
       case "Other":
         backgroundColor = "purple";
+        break;
+      default:
+        backgroundColor = "yellow";
         break;
     }
     let { date, title, allDay, start, end, category, notes } = this.state;

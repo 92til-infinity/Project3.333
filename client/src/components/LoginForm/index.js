@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import setAuthToken from "../../utils/setAuthToken";
 import UserContext from "../../utils/UserContext";
