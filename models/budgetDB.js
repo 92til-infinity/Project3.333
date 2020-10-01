@@ -16,9 +16,15 @@ const budgetSchema = new Schema({
         type: String,
         default: "",
     },
+    created: {
+        type: Date,
+        default: Date.now
+    }
 
-});
+}, { timestamps: true });
 
+budgetSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 });
+// budgetSchema will expire after 30 days = 2592000 seconds
 const Budget = mongoose.model("budget", budgetSchema);
 
 module.exports = Budget;

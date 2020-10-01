@@ -7,31 +7,24 @@ class ExpenseDisplay extends Component {
   state = {
     expenses: []
   }
+
   componentDidMount() {
+    console.log(this.state.expenses)
     API.getExpense().then((expenses) => {
       console.log(expenses.data);
       this.setState({ expenses: expenses.data });
     });
   }
 
-
-  handleSubmit = (dispatch) => {
-    dispatch({
-      type: 'remove',
-      expenses: this.state.expenses,
-    })
-    this.setState({
-      expenses: [
-        ...this.state.expenses
-      ]
-    });
-    console.log(this.state.expenses)
-  };
-
-
+  // call delete for the API then rerun the get expense API to reset the state
   deleteExpense = (id) => {
-    API.deleteExpense(id)
+    API.deleteExpense(id).then(
 
+      API.getExpense().then((expenses) => {
+        console.log(expenses.data);
+        this.setState({ expenses: expenses.data });
+      })
+    )
   };
 
 
@@ -46,12 +39,13 @@ class ExpenseDisplay extends Component {
               <td>{expense.expenseTitle}</td>
               <td>{expense.amount}</td>
               <td>{expense.category}</td>
-              <td>
-                <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }} onSubmit={this.handleSubmit.bind(this, dispatch)}>
-                  ✗
+              <td >
+                <span>
+                  {/* <button onClick={this.refreshPage}>✗</button> */}
+                  <button id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }}>✗</button>
                 </span>
               </td>
-            </tr>
+            </tr >
           );
         })
       ) : (
@@ -75,19 +69,20 @@ class ExpenseDisplay extends Component {
           <BudgetConsumer>
             {(value) => {
               // console.log(value.expenses);
+              const { dispatch } = this.state;
               const expensesList =
                 value.expenses.length > 0 ? (
                   value.expenses.map((expense, index) => {
-                    const { dispatch } = this.state;
                     return (
                       <tr key={index}>
                         <td>{expense.expenseTitle}</td>
                         <td>{expense.amount}</td>
                         <td>{expense.category}</td>
                         <td>
-                          <span className="delete-btn" role="button" id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }} onSubmit={this.handleSubmit.bind(this, dispatch)}>
-                            ✗
-                        </span>
+                          <span>
+                            {/* <button onClick={this.refreshPage}>✗</button> */}
+                            <button id={expense._id} tabIndex="0" onClick={(e) => { this.deleteExpense(e.currentTarget.id) }}>✗</button>
+                          </span>
                         </td>
                       </tr>
                     );
@@ -95,10 +90,9 @@ class ExpenseDisplay extends Component {
                 ) : (
                     <tr></tr>
                   );
-              return <tbody>{this.currentList()}{expensesList}</tbody>;
+              return <tbody >{this.currentList()}{expensesList}</tbody>
             }}
           </BudgetConsumer>
-          <tbody></tbody>
         </table>
       </div >
     );
