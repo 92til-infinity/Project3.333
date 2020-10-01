@@ -12,7 +12,6 @@ import {
 import AllDayToggle from "../AllDayToggle";
 import TimePicker from "../TimePicker";
 import EventCategoryButtons from "../EventCategoryButtons";
-import API from "../../utils/API";
 
 class CalEditModal extends Component {
   static contextType = UserContext;
@@ -25,28 +24,30 @@ class CalEditModal extends Component {
     category: this.props.eventInfo.category,
     radio: this.props.eventInfo.radio,
     allDay: this.props.eventInfo.allDay,
-    starthour: "",
-    startminute: "",
-    endhour: "",
-    endminute: "",
+    starthour: 12,
+    startminute: 0,
+    endhour: 12,
+    endminute: 0,
   };
 
   componentDidMount() {
-    let starttime = this.props.eventInfo.startStr.split("T");
-    this.setState({ date: starttime[0] });
+    if (this.state.allDay == false) {
+      let starttime = this.props.eventInfo.startStr.split("T");
+      this.setState({ date: starttime[0] });
 
-    let start = starttime[1].split(":");
-    if (start[1] == "00") {
-      start[1] = 0;
-    }
-    this.setState({ starthour: start[0], startminute: start[1] });
+      let start = starttime[1].split(":");
+      if (start[1] == "00") {
+        start[1] = 0;
+      }
+      this.setState({ starthour: start[0], startminute: start[1] });
 
-    let endtime = this.props.eventInfo.endStr.split("T");
-    let end = endtime[1].split(":");
-    if (end[1] == "00") {
-      end[1] = 0;
+      let endtime = this.props.eventInfo.endStr.split("T");
+      let end = endtime[1].split(":");
+      if (end[1] == "00") {
+        end[1] = 0;
+      }
+      this.setState({ endhour: end[0], endminute: end[1] });
     }
-    this.setState({ endhour: end[0], endminute: end[1] });
   }
 
   handleChange = (index, value) => {

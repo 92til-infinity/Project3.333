@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { MDBTimePicker, MDBCol } from "mdbreact";
-import { getHours } from "date-fns";
 
 class TimePicker extends Component {
-
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   formatTime = (value) => {
     let time = value.split("");

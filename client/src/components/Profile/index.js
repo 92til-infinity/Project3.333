@@ -1,41 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {
-  MDBInput,
-  MDBNavbar,
-  MDBNavbarNav,
-  MDBNavItem,
-  MDBNavLink,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBIcon,
-  MDBSideNavItem,
-  MDBSideNavCat,
-  MDBSideNavNav,
-  MDBSideNav,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBBtn,
-} from "mdbreact";
+import { MDBInput, MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import UserContext from "../../utils/UserContext";
 import "./style.css";
 
 const Profile = ({}) => {
   const { user, setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
-    facebook: "",
-    linkedin: "",
-    github: "",
-    twitter: "",
+    facebook: user.social.facebook,
+    linkedin: user.social.linkedin,
+    github: user.social.github,
+    twitter: user.social.twitter,
   });
 
-  const { facebook, linkedin, github, twitter } = formData;
-
   useEffect(() => {
-    setFormData(user.social);
+    // setFormData(user.social);
   }, []);
 
   const onChange = (e) => {
@@ -82,6 +61,7 @@ const Profile = ({}) => {
                 className="social-text"
                 type="text"
                 name="facebook"
+                placeholder="Facebook URL"
                 value={formData.facebook}
                 onChange={onChange}
               />
@@ -93,6 +73,7 @@ const Profile = ({}) => {
                 className="social-text"
                 type="text"
                 name="linkedin"
+                placeholder="LinkedIn URL"
                 value={formData.linkedin}
                 onChange={onChange}
               />
@@ -104,6 +85,7 @@ const Profile = ({}) => {
                 className="social-text"
                 type="text"
                 name="github"
+                placeholder="Github URL"
                 value={formData.github}
                 onChange={onChange}
               />
@@ -115,6 +97,7 @@ const Profile = ({}) => {
                 className="social-text"
                 type="text"
                 name="twitter"
+                placeholder="Twitter URL"
                 value={formData.twitter}
                 onChange={onChange}
               />
