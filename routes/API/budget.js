@@ -5,9 +5,6 @@ const mongodb = require("mongodb");
 const auth = require("../../config/middleware/auth");
 
 router.post("/", auth, async (req, res) => {
-  // Use a regular expression to search titles for req.query.q
-  // using case insensitive match. https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
-  // console.log(db);
   const { expenseTitle, amount, category } = req.body;
   lineItem = new Budget({ user: req.user.id, expenseTitle, amount, category });
   console.log(req.user.id);
